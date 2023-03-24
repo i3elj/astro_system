@@ -7,17 +7,20 @@ table {
     border-collapse: collapse;
 }
 
-tr, td, th {
+tr,
+td,
+th {
     border: 1px solid black;
 }
 
-td, th {
+td,
+th {
     flex: 1;
     text-align: center;
     padding: 4px 1rem;
 }
 
-form {
+p form {
     display: flex;
     flex-direction: column;
     align-items: center;
