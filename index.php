@@ -10,11 +10,11 @@
 function get_custo($nome_do_prato)
 {
     return match ($nome_do_prato) {
-        "Surubim" => 128.50,
-        "Carne de Sol" => 88.79,
-        "Nego D'agua" => 60.00,
-        "Cangaceiro" => 92.50,
-        "Camarao na Moranga" => 210,
+        "Surubim" => 128.50 * $quantidade,
+        "Carne de Sol" => 88.80 * $quantidade,
+        "Nego D'agua" => 60.00 * $quantidade,
+        "Cangaceiro" => 92.50 * $quantidade,
+        "Camarao na Moranga" => 210 * $quantidade,
         default => 0.00,
     };
 }
