@@ -3,6 +3,14 @@
     padding: 0;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    width: 40rem;
+    margin: 20px auto 0px;
+    gap: 20px;
+}
+
 table {
     border-collapse: collapse;
 }
@@ -20,12 +28,12 @@ th {
     padding: 4px 1rem;
 }
 
-p form {
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 500px;
-    margin-top: 1rem;
+    justify-content: center;
+    gap: 20px;
 }
 
 .input-field {
@@ -34,9 +42,14 @@ p form {
     width: 100%;
 }
 
+#quant-field {
+    flex: 1;
+}
+
 .inputs {
     display: flex;
     flex-direction: row;
+    gap: 20px;
 }
 
 button {
