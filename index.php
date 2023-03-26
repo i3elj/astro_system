@@ -37,7 +37,6 @@
         </div>
         <button>Adicionar</button>
     </form>
-    <?php echo "hello" ?>
 </body>
 
 </html>
