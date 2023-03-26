@@ -8,6 +8,15 @@
 
 <?php
 function get_custo($nome_do_prato)
+function dd($value)
+{
+    echo "<pre>";
+    var_dump($value);
+    echo "</pre>";
+
+    die();
+}
+
 {
     return match ($nome_do_prato) {
         "Surubim" => 128.50 * $quantidade,
