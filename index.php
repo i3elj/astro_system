@@ -45,10 +45,10 @@ function get_custo($nome_do_prato, $quantidade)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    array_push($pedidos, [
+    add_pedidos_to_db([
         "nome" => $_POST["nome"],
         "quantidade" => $_POST["quantidade"],
-        "custo" => get_custo($_POST["nome"]),
+        "custo" => get_custo($_POST["nome"], (int)$_POST["quantidade"]),
         "hora" => date("H:i"),
         "status" => "Na fila"
     ]);
