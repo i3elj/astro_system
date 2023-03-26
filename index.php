@@ -44,30 +44,6 @@ function get_custo($nome_do_prato, $quantidade)
     };
 }
 
-$pedidos = [
-    [
-        "nome" => "Surubim",
-        "quantidade" => 1,
-        "custo" => 128.00,
-        "hora" => "12:00",
-        "status" => "Em preparo"
-    ],
-    [
-        "nome" => "Nego d'agua",
-        "quantidade" => 1,
-        "custo" => 60.00,
-        "hora" => "12:00",
-        "status" => "Em preparo"
-    ],
-    [
-        "nome" => "Carne de Sol",
-        "quantidade" => 1,
-        "custo" => 88.00,
-        "hora" => "12:00",
-        "status" => "Em preparo"
-    ]
-];
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     array_push($pedidos, [
         "nome" => $_POST["nome"],
