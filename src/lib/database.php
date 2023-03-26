@@ -1,8 +1,7 @@
 <?php
 function get_db_content()
 {
-    $database = file_get_contents("../db.json");
-    return json_decode($database, true);
+    return json_decode(file_get_contents("../db.json"), true);
 }
 
 function add_pedidos_to_db($pedido)
