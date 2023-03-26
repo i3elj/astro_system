@@ -1,0 +1,39 @@
+{
+    "pedidos": [
+        {
+            "nome": "Surubim",
+            "quantidade": 1,
+            "custo": 128,
+            "hora": "12:00",
+            "status": "Em preparo"
+        },
+        {
+            "nome": "Nego d'agua",
+            "quantidade": 1,
+            "custo": 60,
+            "hora": "12:00",
+            "status": "Em preparo"
+        },
+        {
+            "nome": "Carne de Sol",
+            "quantidade": 1,
+            "custo": 88,
+            "hora": "12:00",
+            "status": "Em preparo"
+        },
+        {
+            "nome": "Camarao na Moranga",
+            "quantidade": "1",
+            "custo": 210,
+            "hora": "18:27",
+            "status": "Na fila"
+        },
+        {
+            "nome": "Cangaceiro",
+            "quantidade": "2",
+            "custo": 92.5,
+            "hora": "18:28",
+            "status": "Na fila"
+        }
+    ]
+}
