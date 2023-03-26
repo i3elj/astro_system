@@ -32,6 +32,7 @@ function add_pedidos_to_db($pedido)
 /**
  * @param string $nome_do_prato
  * @param int $quantidade
+ */
 function get_custo($nome_do_prato, $quantidade)
 {
     return match ($nome_do_prato) {
@@ -53,6 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "status" => "Na fila"
     ]);
 }
+
+$db = get_db_content();
+$pedidos = $db["pedidos"];
 ?>
 
 <body>
