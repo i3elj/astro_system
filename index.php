@@ -7,7 +7,6 @@
 </head>
 
 <?php
-function get_custo($nome_do_prato)
 function dd($value)
 {
     echo "<pre>";
@@ -17,6 +16,10 @@ function dd($value)
     die();
 }
 
+/**
+ * @param string $nome_do_prato
+ * @param int $quantidade
+function get_custo($nome_do_prato, $quantidade)
 {
     return match ($nome_do_prato) {
         "Surubim" => 128.50 * $quantidade,
