@@ -3,7 +3,7 @@
 
 <head>
     <title>Astro System</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../public/style.css">
 </head>
 
 <body>
