@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="../public/style.css">
 </head>
 
+<script type="text/javascript">
+    function test(value) {
+        console.log(value);
+    }
+</script>
+
 <body>
     <main>
         <h1>Mesa 01</h1>
@@ -16,14 +22,16 @@
                 <th>Preço</th>
                 <th>Horário</th>
                 <th>Status</th>
+                <th>Mais Ações</th>
             </tr>
-            <?php foreach ($pedidos as $pedido) : ?>
+            <?php foreach ($pedidos as $i => $pedido) : ?>
                 <tr>
                     <td><?= $pedido["nome"] ?></td>
                     <td><?= $pedido["quantidade"] ?>x</td>
                     <td>R$ <?= $pedido["custo"] ?></td>
                     <td><?= $pedido["hora"] ?></td>
                     <td><?= $pedido["status"] ?></td>
+                    <td><a href="/pedido/editar/<?= $i ?>">Editar</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
