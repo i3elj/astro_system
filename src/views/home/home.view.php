@@ -31,7 +31,7 @@
                     <td>R$ <?= $pedido["custo"] ?></td>
                     <td><?= $pedido["hora"] ?></td>
                     <td><?= $pedido["status"] ?></td>
-                    <td><a href="/pedido/editar/<?= $i ?>">Editar</a></td>
+                    <td><a href="/pedido/editar?id=<?= $i ?>">Editar</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
