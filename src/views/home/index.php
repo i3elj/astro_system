@@ -19,7 +19,9 @@ function get_custo($nome_do_prato, $quantidade)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = get_last_pedido_id();
     add_pedidos_to_db([
+        "id" => is_null($id) ? 0 : (int)$id + 1,
         "nome" => $_POST["nome"],
         "quantidade" => $_POST["quantidade"],
         "custo" => get_custo($_POST["nome"], (int)$_POST["quantidade"]),
