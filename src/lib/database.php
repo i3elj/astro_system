@@ -1,4 +1,5 @@
 <?php
+
 function get_db_content()
 {
     return json_decode(file_get_contents("../db.json"), true);
@@ -11,6 +12,11 @@ function query_by_id(int $id): array | null
     for ($i = 0; $i < sizeof($pedidos); $i++)
         if ((int)($pedidos[$i])["id"] == $id) $found = $pedidos[$i];
     return $found;
+}
+
+function get_last_pedido_id()
+{
+    return end(get_db_content()["pedidos"])["id"];
 }
 
 function add_pedidos_to_db($pedido)
