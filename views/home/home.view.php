@@ -29,12 +29,12 @@
     <form>
       <div class='inputs'>
         <div class='input-field'>
-          <label for='nome'>Nome do Prato:</label>
-          <input id="nome" type='text' name='nome' />
+          <label for='name'>Nome do Prato:</label>
+          <input id="name" type='text' name='name' />
         </div>
         <div id='quant-field' class='input-field'>
-          <label for='quantidade'>Quantidade:</label>
-          <input id="quantidade" type='number' name='quantidade' />
+          <label for='amount'>Quantidade:</label>
+          <input id="amount" type='number' name='amount' />
         </div>
       </div>
       <button type="button" onclick="addItem('nome', 'quantidade')">Adicionar</button>
