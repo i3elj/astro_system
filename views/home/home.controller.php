@@ -1,6 +1,8 @@
 <?php
 
-function HomeController()
+namespace Home;
+
+function Controller()
 {
     match ($_SERVER["REQUEST_METHOD"]) {
         "GET" => build_view(),
