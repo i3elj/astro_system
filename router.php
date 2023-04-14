@@ -10,14 +10,16 @@ $parsed_uri = parse_url($_SERVER["REQUEST_URI"]);
 $path = $parsed_uri['path'];
 $request_method = $_SERVER["REQUEST_METHOD"];
 
-
+// the 'methods' key is there only for documentation purposes.
 $routes = [
   [
     'path' => '/\/ pedido \/ (\d) \/ (nome|hora)? \/?/x',
+    'methods' => ['GET'],
     'controller' => 'PedidoController'
   ],
   [
     'path' => '/\/home \/?/x',
+    'methods' => ['GET'],
     'controller' => 'HomeController'
   ],
 ];
