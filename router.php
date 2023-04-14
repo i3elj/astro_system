@@ -12,17 +12,23 @@ $request_method = $_SERVER["REQUEST_METHOD"];
 // the 'methods' key is there only for documentation purposes.
 $routes = [
   [
-    'path' => '/\/ pedido \/ (\d) \/ (nome|hora)? \/?/x',
+    'path' => '/\/home/x',
     'methods' => ['GET'],
-    'controller' => 'PedidoController'
+    'controller' => 'Home\Controller',
   ],
   [
     'path' => '/\/api\/menu\/?/x',
     'methods' => ['GET'],
     'controller' => 'API\Menu\Controller',
   ],
+  [
+    'path' => '/\/pedido\/(\d)\/(nome|hora)?\/?/x',
+    'methods' => ['GET'],
+    'controller' => 'PedidoController',
+  ],
 ];
 
+if ($path == '/') Home\Controller();
 
 foreach ($routes as $route) {
   if (preg_match($route['path'], $path, $matches)) {
