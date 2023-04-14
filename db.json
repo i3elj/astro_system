@@ -1,4 +1,30 @@
 {
+    "menu": [
+        {
+            "id": 0,
+            "nome": "Surubim",
+            "custo": 128.5,
+            "ingredientes": []
+        },
+        {
+            "id": 1,
+            "nome": "Carne de Sol",
+            "custo": 99,
+            "ingredientes": []
+        },
+        {
+            "id": 2,
+            "nome": "Nego D'agua",
+            "custo": 78.89,
+            "ingredientes": []
+        },
+        {
+            "id": 3,
+            "nome": "Maite",
+            "custo": 134.50,
+            "ingredientes": []
+        }
+    ],
     "pedidos": [
         {
             "id": 0,
