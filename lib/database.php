@@ -1,10 +1,8 @@
 <?php
 
-// function save_db() {}
-
 function load_db()
 {
-    return json_decode(file_get_contents("../db.json"), true);
+    return json_decode(file_get_contents("db.json"), true);
 }
 
 function get_price_list()
@@ -17,7 +15,6 @@ function get_price_list()
     return json_encode($price_list);
 }
 
-// TODO: must be built on the client
 function query_by_id(int $id): array | null
 {
     $pedidos = load_db()["pedidos"];
