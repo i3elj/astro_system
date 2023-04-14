@@ -32,18 +32,4 @@ foreach ($routes as $route) {
   }
 }
 
-// if the path was accepted but not found:
-notfound();
-
-function notfound()
-{
-  http_response_code(404);
-  include 'views/notfound.php';
-  exit();
-}
-
-function badrequest()
-{
-  http_response_code(400);
-  exit();
-}
+notfound();                          // if the path was accepted but not found
