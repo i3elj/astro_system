@@ -14,26 +14,42 @@ async function fetchMenu() {
   }
 }
 
-  async function addItem(nome, quantidade) {
-    // let nomeValue = document.getElementById(nome).value
-    // let quantidadeValue = document.getElementById(quantidade).value
+/**
+ * @param {string} nome
+ * @param {string} quantidade
+ *
+ * @return {void}
+ */
+function addItem(nome, quantidade) {
+  let name = document.getElementById('name').value;
+  let amount = Number(document.getElementById('amount').value);
 
-    const pricelist = await fetch(`${url}/v1/api/pricelist`)
-    console.log(pricelist.json())
+  fetchMenu();
 
-    // addToTable(nomeValue, quantidadeValue, )
-  }
+  const menu = JSON.parse(sessionStorage.getItem('menu'));
 
-  /**
-   * @param {string} name
-   * @param {number} amount
-   * @param {number} price
-   * @param {Date} datetime
-   * @param {string} status
-   */
-  function addToTable(name, amount, price, datetime, status) {
-    let table = document.getElementById('orderList')
-    table.innerHTML += `
+  let dish = {};
+  for (var i = 0; i < menu.length; i++)
+    if (menu[i].name == name) dish = menu[i];
+
+  const price = amount * dish.price;
+  const date = new Date();
+  const datetime = date.getHours();
+  const status = "Na Fila";
+
+  addToTable(name, amount, price, datetime, status);
+}
+
+/**
+ * @param {string} name
+ * @param {number} amount
+ * @param {number} price
+ * @param {Date} datetime
+ * @param {string} status
+ */
+function addToTable(name, amount, price, datetime, status) {
+  let table = document.getElementById('orderList')
+  table.innerHTML += `
     <tr>
       <td>${name}</td>
       <td>${amount}</td>
@@ -42,5 +58,4 @@ async function fetchMenu() {
       <td>${status}</td>
     </tr>
     `
-  }
-
+}
