@@ -1,8 +1,18 @@
+const url = "http://localhost:3000"
+
 /**
-   * @param {string} nome
-   * @param {string} quantidade
-   */
-  const URL = "http://localhost:8080/"
+ * @param {string} nome
+ * @param {string} quantidade
+ *
+ * @return {void}
+ */
+async function fetchMenu() {
+  if (sessionStorage.getItem('menu') == null) {
+    const response = await fetch(`${url}/api/menu`);
+    const menu = await response.json();
+    sessionStorage.setItem('menu', JSON.stringify(menu));
+  }
+}
 
   async function addItem(nome, quantidade) {
     // let nomeValue = document.getElementById(nome).value
