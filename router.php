@@ -4,8 +4,6 @@ require_once 'lib/database.php';
 require_once 'lib/extras.php';
 require_once 'views/home/home.controller.php';
 
-require_style('public/style.css');
-
 $parsed_uri = parse_url($_SERVER["REQUEST_URI"]);
 $path = $parsed_uri['path'];
 $request_method = $_SERVER["REQUEST_METHOD"];
