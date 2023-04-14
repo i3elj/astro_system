@@ -1,9 +1,9 @@
 <?php
 
-function dd($arr_of_value)
+function dd($arr_of_values)
 {
     echo "<pre>";
-    foreach ($arr_of_value as $value) {
+    foreach ($arr_of_values as $value) {
         var_dump($value);
     }
     echo "</pre>";
