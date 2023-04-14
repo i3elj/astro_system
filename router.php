@@ -3,6 +3,7 @@
 require_once 'lib/database.php';
 require_once 'lib/extras.php';
 require_once 'views/home/home.controller.php';
+require_once 'api/menu/menu.php';
 
 $parsed_uri = parse_url($_SERVER["REQUEST_URI"]);
 $path = $parsed_uri['path'];
@@ -16,9 +17,9 @@ $routes = [
     'controller' => 'PedidoController'
   ],
   [
-    'path' => '/\/home \/?/x',
+    'path' => '/\/api\/menu\/?/x',
     'methods' => ['GET'],
-    'controller' => 'HomeController'
+    'controller' => 'API\Menu\Controller',
   ],
 ];
 
