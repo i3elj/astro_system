@@ -23,3 +23,16 @@ function require_script(string $file, string $args = "")
   require_once $file;
   echo '</script>';
 }
+
+function notfound()
+{
+  http_response_code(404);
+  include 'views/notfound.php';
+  exit();
+}
+
+function badrequest()
+{
+  http_response_code(400);
+  exit();
+}
