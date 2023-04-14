@@ -1,0 +1,53 @@
+main {
+    display: flex;
+    flex-direction: column;
+    width: 40rem;
+    margin: 20px auto 0px;
+    gap: 20px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+tr,
+td,
+th {
+    border: 1px solid black;
+}
+
+td,
+th {
+    flex: 1;
+    text-align: center;
+    padding: 4px 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#quant-field {
+    flex: 1;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+button {
+    height: 2rem;
+    width: 10rem;
+}
