@@ -10,16 +10,16 @@ function dd($arr_of_values)
     exit();
 }
 
-function require_once_style(string $file)
+function require_style(string $file)
 {
   echo '<style>';
   require_once $file;
   echo '</style>';
 }
 
-function require_once_script(string $file)
+function require_script(string $file, string $args = "")
 {
-  echo '<script type="text/javascript">';
+  echo '<script type="text/javascript">' . $args;
   require_once $file;
   echo '</script>';
 }
