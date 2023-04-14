@@ -3,7 +3,6 @@
 function HomeController()
 {
     match ($_SERVER["REQUEST_METHOD"]) {
-        "POST" => add_pedido(),
         "GET" => build_view(),
         default => badrequest(),
     };
