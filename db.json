@@ -2,53 +2,27 @@
     "menu": [
         {
             "id": 0,
-            "nome": "Surubim",
-            "custo": 128.5,
-            "ingredientes": []
+            "name": "Surubim",
+            "price": 128.5,
+            "ingredients": []
         },
         {
             "id": 1,
-            "nome": "Carne de Sol",
-            "custo": 99,
-            "ingredientes": []
+            "name": "Carne de Sol",
+            "price": 99,
+            "ingredients": []
         },
         {
             "id": 2,
-            "nome": "Nego D'agua",
-            "custo": 78.89,
-            "ingredientes": []
+            "name": "Nego D'agua",
+            "price": 78.89,
+            "ingredients": []
         },
         {
             "id": 3,
-            "nome": "Maite",
-            "custo": 134.50,
-            "ingredientes": []
-        }
-    ],
-    "pedidos": [
-        {
-            "id": 0,
-            "nome": "Surubim",
-            "quantidade": "1",
-            "custo": 128.5,
-            "hora": "22:42",
-            "status": "Na fila"
-        },
-        {
-            "id": 1,
-            "nome": "Carne de Sol",
-            "quantidade": "1",
-            "custo": 88.8,
-            "hora": "22:42",
-            "status": "Na fila"
-        },
-        {
-            "id": 2,
-            "nome": "Nego D'agua",
-            "quantidade": "1",
-            "custo": 60,
-            "hora": "22:42",
-            "status": "Na fila"
+            "name": "Maite",
+            "price": 134.50,
+            "ingredients": []
         }
     ]
 }
