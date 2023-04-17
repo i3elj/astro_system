@@ -14,16 +14,6 @@
         <th>Status</th>
         <th>Mais Ações</th>
       </tr>
-      <?php foreach ($pedidos as $i => $pedido) : ?>
-        <tr>
-          <td><?= $pedido["nome"] ?></td>
-          <td><?= $pedido["quantidade"] ?>x</td>
-          <td>R$ <?= $pedido["custo"] ?></td>
-          <td><?= $pedido["hora"] ?></td>
-          <td><?= $pedido["status"] ?></td>
-          <td><a href="/pedido/editar?id=<?= $i ?>">Editar</a></td>
-        </tr>
-      <?php endforeach; ?>
     </table>
 
     <form>
@@ -37,7 +27,7 @@
           <input id="amount" type='number' name='amount' />
         </div>
       </div>
-      <button type="button" onclick="addItem('nome', 'quantidade')">Adicionar</button>
+      <button type="button" onclick="OrderList.add_order(1)">Adicionar</button>
     </form>
   </main>
 </body>
