@@ -14,7 +14,7 @@ function build_view()
 {
     $title = "Astro System";
     require_style('views/home/home.style.css');
-    require_script('views/home/home.main.js');
+    require_script('views/home/home.js');
     require_once 'views/home/home.view.php';
     exit();
 }
