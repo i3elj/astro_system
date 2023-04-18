@@ -1,4 +1,28 @@
 class OrderList {
+
+  /**
+   * Initializes the order list of the last session
+   */
+  static init() {
+    const ordersQueue = localStorage.getItem('orders-queue');
+
+    if (ordersQueue) {
+      const orders = JSON.parse(ordersQueue);
+
+      for (let i = 0; i < orders.length; i++) {
+        document.getElementById('orderList').innerHTML += `
+        <tr>
+          <td>${orders[i].name}</td>
+          <td>${orders[i].amount}</td>
+          <td>R$ ${orders[i].price}</td>
+          <td>${orders[i].datetime}</td>
+          <td>${orders[i].status}</td>
+        </tr>
+        `
+      }
+    }
+  }
+
   /**
    * Used to load the menu from the database
    */
