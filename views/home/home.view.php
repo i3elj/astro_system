@@ -16,6 +16,9 @@
       </tr>
     </table>
 
+    <script>
+      OrderList.init()
+    </script>
     <form>
       <div class='inputs'>
         <div class='input-field'>
