@@ -19,6 +19,7 @@
     <script>
       OrderList.init()
     </script>
+
     <form>
       <div class='inputs'>
         <div class='input-field'>
@@ -30,7 +31,7 @@
           <input id="amount" type='number' name='amount' />
         </div>
       </div>
-      <button type="button" onclick="OrderList.add_order(1)">Adicionar</button>
+      <button type="button" onclick="OrderList.addOrder()">Adicionar</button>
     </form>
   </main>
 </body>
