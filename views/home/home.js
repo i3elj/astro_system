@@ -26,7 +26,7 @@ class OrderList {
   /**
    * Used to load the menu from the database
    */
-  async fetch_menu() {
+  static async fetchMenu() {
     if (sessionStorage.getItem('menu') == null) {
       const response = await fetch('http://localhost:3000/api/menu');
       const menu = await response.json();
@@ -37,7 +37,6 @@ class OrderList {
   /**
    * Save the order to the sessionStorage inside a custom json string.
    *
-   * @param {number} table_id The Id of the current selected table
    * @param order             The latest order added to the queue
    * @param order.name        The name of the dish
    * @param order.amount      How many of those the client ordered
@@ -47,15 +46,15 @@ class OrderList {
    *
    * @return void
    */
-  save_order(table_id, order) {
-    let orders_queue = localStorage.getItem('orders-queue')
+  static saveOrder(order) {
+    let ordersQueue = localStorage.getItem('orders-queue')
 
-    if (orders_queue == null) {
+    if (ordersQueue == null) {
       localStorage.setItem('orders-queue', JSON.stringify([order]))
     } else {
-      let orders_queue_json = JSON.parse(orders_queue)
-      orders_queue_json.push(order)
-      localStorage.setItem('orders-queue', JSON.stringify(orders_queue_json))
+      let ordersQueueJson = JSON.parse(ordersQueue)
+      ordersQueueJson.push(order)
+      localStorage.setItem('orders-queue', JSON.stringify(ordersQueueJson))
     }
   }
 
@@ -65,11 +64,11 @@ class OrderList {
    *
    * @return {void}
    */
-  async add_order(table_id) {
+  static async addOrder() {
     let name = document.getElementById('name').value;
     let amount = Number(document.getElementById('amount').value);
 
-    await this.fetch_menu()
+    await this.fetchMenu()
 
     const menu = JSON.parse(sessionStorage.getItem('menu'));
 
@@ -80,7 +79,7 @@ class OrderList {
     const datetime = new Date()
       .toLocaleTimeString('pt-BR', { hour: "numeric", minute: "numeric" });
 
-    this.add_order_to_table(1, {
+    this.addOrderToTable({
       name: name,
       amount: amount,
       price: amount * dish.price,
@@ -90,10 +89,16 @@ class OrderList {
   }
 
   /**
-   * @param {number} table_id
-   * @param {any}    order
-   */
-  add_order_to_table(table_id, order) {
+    * @param order             The latest order added to the queue
+    * @param order.name        The name of the dish
+    * @param order.amount      How many of those the client ordered
+    * @param order.price       Self-explanatory
+    * @param order.datetime    The moment the order was added to the queue
+    * @param order.status      The status of the order regarding the queue
+    *
+    * @return void
+    */
+  static addOrderToTable(order) {
     document.getElementById('orderList').innerHTML += `
     <tr>
       <td>${order.name}</td>
@@ -103,6 +108,6 @@ class OrderList {
       <td>${order.status}</td>
     </tr>
     `
-    this.save_order(table_id, order);
+    this.saveOrder(order);
   }
 }
