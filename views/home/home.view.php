@@ -16,34 +16,46 @@
     </ul>
   </div>
   <main>
-    <h1>Mesa 01</h1>
-    <table id="orderList">
-      <tr>
-        <th>Prato</th>
-        <th>Quant.</th>
-        <th>Preço</th>
-        <th>Horário</th>
-        <th>Status</th>
-        <th>Mais Ações</th>
-      </tr>
-    </table>
+    <?php if ($params != null) : ?>
+      <div>
+        <h1>Mesa <?= $selected_table["id"] ?></h1>
+        <table id="orderList">
+          <tr>
+            <th>Prato</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+            <th>Horário</th>
+            <th>Status</th>
+            <th>Mais Ações</th>
+          </tr>
 
-    <script>
-      OrderList.init()
-    </script>
+          <?php foreach ($selected_table["orders"] as $order) : ?>
+            <tr>
+              <td class="table-dishName"><?= $order["dishName"] ?></td>
+              <td class="table-quantity"><?= $order["quantity"] ?>x</td>
+              <td class="table-price">R$ <?= $order["price"] ?></td>
+              <td class="table-hour"><?= $order["hour"] ?></td>
+              <td class="table-status"><?= $order["status"] ?></td>
+            </tr>
+          <?php endforeach ?>
 
-    <form>
-      <div class='inputs'>
-        <div class='input-field'>
-          <label for='name'>Nome do Prato:</label>
-          <input id="name" type='text' name='name' />
-        </div>
-        <div id='quant-field' class='input-field'>
-          <label for='amount'>Quantidade:</label>
-          <input id="amount" type='number' name='amount' />
-        </div>
+          <tr>
+            <?php $action_url = "/table/" . $selected_table['id']; ?>
+            <form action=<?= $action_url ?> method="POST">
+              <td colspan="2" class="td-input">
+                <input id="name" type='text' name='dishName' />
+              </td>
+              <td colspan="2" class="td-input">
+                <input id="amount" type='number' name='amount' />
+              </td>
+              <td colspan="2" class="td-input">
+                <button type="submit">Adicionar</button>
+              </td>
+          </tr>
+          </form>
+        </table>
       </div>
-      <button type="button" onclick="OrderList.addOrder()">Adicionar</button>
-    </form>
+    <?php endif ?>
+
   </main>
 </body>
