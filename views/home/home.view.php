@@ -3,6 +3,18 @@
 </head>
 
 <body>
+  <div id="tableList">
+    <h3>Mesas</h3>
+    <ul>
+      <?php foreach ($tables as $table) : ?>
+        <li>
+          <a href='/table/<?= $table["id"] ?>'>
+            Mesa <?= $table["id"] ?>
+          </a>
+        </li>
+      <?php endforeach ?>
+    </ul>
+  </div>
   <main>
     <h1>Mesa 01</h1>
     <table id="orderList">
