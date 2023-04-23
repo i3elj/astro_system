@@ -5,11 +5,13 @@ namespace Home;
 function Controller()
 use Database;
 
+function Controller($path)
 {
-    match ($_SERVER["REQUEST_METHOD"]) {
-        "GET" => build_view(),
-        default => badrequest(),
-    };
+  match ($_SERVER["REQUEST_METHOD"]) {
+    "GET" => build_view($path),
+    "POST" => add_order($path),
+    default => badrequest(),
+  };
 }
 
 function build_view()
