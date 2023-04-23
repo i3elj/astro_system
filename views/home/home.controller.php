@@ -3,6 +3,8 @@
 namespace Home;
 
 function Controller()
+use Database;
+
 {
     match ($_SERVER["REQUEST_METHOD"]) {
         "GET" => build_view(),
