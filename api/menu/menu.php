@@ -14,5 +14,5 @@ function response()
 {
     header('Content-Type: application/json');
     echo json_encode(load_db()['menu']);
-    exit();
+    exit(0);
 }
