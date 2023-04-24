@@ -18,7 +18,7 @@
   <main>
     <?php if ($params != null) : ?>
       <div>
-        <h1>Mesa <?= $selected_table["id"] ?></h1>
+        <h1 class="title">Mesa <?= $selected_table["id"] ?></h1>
         <table id="orderList">
           <tr>
             <th>Prato</th>
