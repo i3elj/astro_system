@@ -1,6 +1,5 @@
 <?php
 
-require_once 'lib/database.php';
 require_once 'lib/extras.php';
 require_once 'views/home/home.controller.php';
 
