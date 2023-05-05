@@ -1,7 +1,30 @@
-body {
-  display: flex
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
+.navbar a {
+  text-decoration: none;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 8rem;
+  margin: 4rem 0rem 0rem;
+}
+
+.mainImage {
+  border-radius: 8px;
+  width: 46rem;
+}
+
+/*
 #tableList {
   width: 10rem;
   padding: 3rem;
@@ -78,3 +101,4 @@ button {
   height: 2rem;
   width: 10rem;
 }
+*/
