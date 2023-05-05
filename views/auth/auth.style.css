@@ -1,0 +1,56 @@
+div#loginContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12rem;
+  align-items: center;
+}
+
+div#loginContainer h1 {
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+div#loginContainer form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#emailField, 
+#submitButton,
+#passwordField {
+ background: none;
+ border: 0.5px solid #9b9b9b;
+ border-radius: 8px;
+ padding: 1rem;
+ font-size: 1rem;
+ font-family: monospace;
+ transition: 200ms;
+ cursor: pointer;
+}
+
+#emailField:hover, 
+#passwordField:hover {
+  border: 0.5px solid black;
+}
+
+#emailField:focus, 
+#passwordField:focus {
+  border: 0.5px solid black;
+  outline: 0;
+}
+
+#emailField:not(:placeholder-shown),
+#passwordField:not(:placeholder-shown) {
+  border-color: black;
+}
+
+#submitButton:hover {
+  background-color: #111111;
+  color: white;
+}
+
+#submitButton:focus {
+  border-color: #111111;
+  outline: 0;
+}
