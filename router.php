@@ -11,7 +11,7 @@ $routes = [
   // 'path' => '/\/table\/(\d(.+)?)\/?/x',
   [
     'path' => AuthController::path,
-    'handler' => 'AuthController::Handler'
+    'endpoint' => 'AuthController'
   ]
 ];
 
@@ -23,8 +23,7 @@ foreach ($routes as $route) {
       notfound();
     }
 
-    $route['handler']();
+    $endpoint = new $route['endpoint'];
+    $endpoint->Handler();
   }
 }
-
-badrequest();                         // if the path was accepted but not found
