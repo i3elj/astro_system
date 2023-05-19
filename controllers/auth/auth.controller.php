@@ -6,7 +6,7 @@ class AuthController extends AuthModel
 {
   public const path = '/\/login/';
 
-  static function Handler()
+  function Handler()
   {
     match ($_SERVER["REQUEST_METHOD"]) {
       'GET' => self::build_view(),
@@ -15,13 +15,35 @@ class AuthController extends AuthModel
     };
   }
 
-  static function login()
+  function login()
   {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $email_success = $this->checkEmail($email);
+    if (!$email_success) {
+      header("location: /login?auth_error=email doesn't exist&field=email");
+      exit(0);
+    }
+
+    $pwd_success = $this->checkPassword($password);
+    if (!$pwd_success) {
+      header("location: /login?auth_error=wrong password&field=pwd&email_recovery=$email");
+      exit(0);
+    }
+
+    $this->logUser($email, $password);
+
+    header("location: /");
     exit(0);
   }
 
-  static function build_view()
+  function build_view()
   {
+    $auth_error = isset($_GET["auth_error"]) ? $_GET["auth_error"] : null;
+    $field =  isset($_GET["field"]) ? $_GET["field"] : null;
+    $email_recovery = isset($_GET["email_recovery"]) ? $_GET["email_recovery"] : null;
+
     $title = "Astro System - Login";
     require_style('public/style.css');
     require_style('views/auth/auth.style.css');
