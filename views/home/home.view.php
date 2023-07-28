@@ -3,13 +3,23 @@
 </head>
 
 <body>
-  <nav class="navbar">
-    <h2>Logo</h2>
-    <a href="/login">Login</a>
+  <nav id="Home_navbar">
+    <h2 id="Home_navbar-logo">Logo</h2>
+    <?php if ($uname || $uemail) : ?>
+      <p>Logged in</p>
+    <?php else : ?>
+      <a id="Home_navbar-login" href="/login">Login</a>
+    <?php endif; ?>
   </nav>
-  <main>
-    <h1>Best Restaurant System Ever!</h1>
-    <img src="https://wixplosives.github.io/codux-assets-storage/add-panel/image-placeholder.jpg" class="mainImage" />
+  <main id="Home_main">
+    <div>
+      <h1 id="Home_main-title">Best Restaurant System Ever!</h1>
+      <p id="Home_main-p">Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+        nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <img id="Home_main-img" src="https://wixplosives.github.io/codux-assets-storage/add-panel/image-placeholder.jpg" />
   </main>
 </body>
 
