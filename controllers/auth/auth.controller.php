@@ -34,8 +34,7 @@ class AuthController extends AuthModel
 
     $this->logUser($email, $password);
 
-    header("location: /");
-    exit(0);
+    header("location: controllers/auth/auth.controller.php");
   }
 
   function build_view()
