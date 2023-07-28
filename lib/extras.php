@@ -19,7 +19,7 @@ function require_style(string $file)
 
 function require_script(string $file, string $args = "")
 {
-  echo '<script type="text/javascript">' . $args;
+  echo '<script type="text/javascript" ' . $args . '>';
   require_once $file;
   echo '</script>';
 }
