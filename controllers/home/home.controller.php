@@ -41,6 +41,8 @@ class HomeController extends HomeModel
 
   static function build_view()
   {
+    $uname = isset($_SESSION['uname']) ? $_SESSION['uname'] : null;
+    $uemail = isset($_SESSION['uemail']) ? $_SESSION['uemail'] : null;
     $title = "Astro System";
     require_style('public/style.css');
     require_style('views/home/home.style.css');
