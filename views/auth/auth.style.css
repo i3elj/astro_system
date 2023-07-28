@@ -40,7 +40,7 @@ div#loginContainer form {
 
 .emailField::placeholder,
 .pwdField::placeholder {
-  color: #d0d0d0;
+  color: #909090;
 }
 
 .emailField:hover,
