@@ -1,1 +1,1 @@
-php -S localhost:3000 router.php
+php -S localhost:3000
