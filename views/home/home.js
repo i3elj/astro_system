@@ -1,5 +1,4 @@
 class OrderList {
-
   /**
    * Initializes the order list of the last session
    */
