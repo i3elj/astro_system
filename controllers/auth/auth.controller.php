@@ -44,8 +44,6 @@ class AuthController extends AuthModel
     $email_recovery = isset($_GET["email_recovery"]) ? $_GET["email_recovery"] : null;
 
     $title = "Astro System - Login";
-    require_style('public/style.css');
-    require_style('views/auth/auth.style.css');
     require_once 'views/auth/auth.view.php';
     exit(0);
   }

@@ -4,6 +4,8 @@ require_once "model/home/home.model.php";
 
 class HomeController extends HomeModel
 {
+  public const path = '/\//';
+
   static function Handler()
   {
     match ($_SERVER["REQUEST_METHOD"]) {
@@ -44,9 +46,6 @@ class HomeController extends HomeModel
     $uname = isset($_SESSION['uname']) ? $_SESSION['uname'] : null;
     $uemail = isset($_SESSION['uemail']) ? $_SESSION['uemail'] : null;
     $title = "Astro System";
-    require_style('public/style.css');
-    require_style('views/home/home.style.css');
-    require_script('views/home/home.js');
     require_once 'views/home/home.view.php';
 
     exit(0);

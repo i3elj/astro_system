@@ -1,6 +1,7 @@
-<head>
-  <title><?= $title ?></title>
-</head>
+<!DOCTYPE html>
+<html>
+
+<?= create_head_tag($title, [ "views/home/home.style.css" ]) ?>
 
 <body>
   <nav id="Home_navbar">
@@ -22,28 +23,30 @@
     <img id="Home_main-img" src="https://wixplosives.github.io/codux-assets-storage/add-panel/image-placeholder.jpg" />
   </main>
 </body>
+<script type="text/javascript" src="views/home/home.js"></script>
 
+</html>
 <!-- <div id="tableList">
   <h3>Mesas</h3>
   <ul>
-    <?php // foreach ($tables as $table) : 
+    <?php // foreach ($tables as $table) :
     ?>
       <li>
-        <a href='/table/<?php // $table["id"] 
+        <a href='/table/<?php // $table["id"]
                         ?>'>
-          Mesa <?php // $table["id"] 
+          Mesa <?php // $table["id"]
                 ?>
         </a>
       </li>
-    <?php // endforeach 
+    <?php // endforeach
     ?>
   </ul>
 </div>
 <main>
-  <?php // if ($params != null) : 
+  <?php // if ($params != null) :
   ?>
     <div>
-      <h1 class="title">Mesa <?php // $selected_table["id"] 
+      <h1 class="title">Mesa <?php // $selected_table["id"]
                               ?></h1>
       <table id="orderList">
         <tr>
@@ -55,27 +58,27 @@
           <th>Mais Ações</th>
         </tr>
 
-        <?php // foreach ($selected_table["orders"] as $order) : 
+        <?php // foreach ($selected_table["orders"] as $order) :
         ?>
           <tr>
-            <td class="table-dishName"><?php // $order["dishName"] 
+            <td class="table-dishName"><?php // $order["dishName"]
                                         ?></td>
-            <td class="table-quantity"><?php // $order["quantity"] 
+            <td class="table-quantity"><?php // $order["quantity"]
                                         ?>x</td>
-            <td class="table-price">R$ <?php // $order["price"] 
+            <td class="table-price">R$ <?php // $order["price"]
                                         ?></td>
-            <td class="table-hour"><?php // $order["hour"] 
+            <td class="table-hour"><?php // $order["hour"]
                                     ?></td>
-            <td class="table-status"><?php // $order["status"] 
+            <td class="table-status"><?php // $order["status"]
                                       ?></td>
           </tr>
-        <?php // endforeach 
+        <?php // endforeach
         ?>
 
         <tr>
-          <?php // $action_url = "/table/" . $selected_table['id']; 
+          <?php // $action_url = "/table/" . $selected_table['id'];
           ?>
-          <form action=<?php // $action_url 
+          <form action=<?php // $action_url
                         ?> method="POST">
             <td colspan="2" class="td-input">
               <input id="name" type='text' name='dishName' />
@@ -90,7 +93,7 @@
         </form>
       </table>
     </div>
-  <?php // endif 
+  <?php // endif
   ?>
 
 </main>
