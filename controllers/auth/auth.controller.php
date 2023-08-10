@@ -6,7 +6,7 @@ class AuthController extends AuthModel
 {
   public const path = '/\/login/';
 
-  function Handler()
+  public function Handler()
   {
     match ($_SERVER["REQUEST_METHOD"]) {
       'GET' => self::build_view(),
@@ -15,7 +15,7 @@ class AuthController extends AuthModel
     };
   }
 
-  function login()
+  private function login()
   {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -37,7 +37,7 @@ class AuthController extends AuthModel
     header("location: controllers/auth/auth.controller.php");
   }
 
-  function build_view()
+  private function build_view()
   {
     $auth_error = isset($_GET["auth_error"]) ? $_GET["auth_error"] : null;
     $field =  isset($_GET["field"]) ? $_GET["field"] : null;
