@@ -2,7 +2,7 @@
 
 class DatabaseModel
 {
-  protected function connect()
+  protected function connect(): PDOException | PDO
   {
     $ENV = parse_ini_file('.env');
 
