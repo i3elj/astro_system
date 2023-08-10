@@ -8,9 +8,9 @@ class AuthModel extends DatabaseModel
       "SELECT * FROM users WHERE uemail = ?;"
     );
 
-    $succeed = $stmt->execute([$email]);
+    $succeeded = $stmt->execute([$email]);
 
-    if (!$succeed) {
+    if (!$succeeded) {
       printf("Prepare statement error: " . $stmt);
       $stmt = null;
       exit(1);
@@ -25,9 +25,9 @@ class AuthModel extends DatabaseModel
       "SELECT * FROM users WHERE upwd = ?;"
     );
 
-    $succeed = $stmt->execute([$pwd]);
+    $succeeded = $stmt->execute([$pwd]);
 
-    if (!$succeed) {
+    if (!$succeeded) {
       printf("Prepare statement error: " . $stmt);
       $stmt = null;
       exit(1);
@@ -42,8 +42,8 @@ class AuthModel extends DatabaseModel
       ->prepare("SELECT uname, uemail FROM users
         WHERE uemail = ? AND upwd = ?;");
 
-    $succeeded = $stmt->execute([$uemail, $upwd]);
-    if (!$succeeded) {
+    $succeededed = $stmt->execute([$uemail, $upwd]);
+    if (!$succeededed) {
       printf("Prepare statement not succeeded: " . $stmt);
       $stmt = null;
       exit(1);
