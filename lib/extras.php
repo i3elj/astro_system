@@ -7,7 +7,7 @@ function dd($arr_of_values)
     var_dump($value);
   }
   echo "</pre>";
-  exit();
+  exit(0);
 }
 
 function require_style(string $file)
@@ -28,13 +28,13 @@ function notfound()
 {
   http_response_code(404);
   include 'views/notfound.php';
-  exit();
+  exit(0);
 }
 
 function badrequest()
 {
   http_response_code(400);
-  exit();
+  exit(0);
 }
 
 function get_route_params(string $path, array $keys): array
