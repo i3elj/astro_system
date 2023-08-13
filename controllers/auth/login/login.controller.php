@@ -1,8 +1,8 @@
 <?php
 
-require_once "model/auth/auth.model.php";
+require_once "model/auth/login/login.model.php";
 
-class AuthController extends AuthModel
+class LoginController extends LoginModel
 {
   public const path = '/\/login/';
 
@@ -20,21 +20,22 @@ class AuthController extends AuthModel
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $email_success = $this->checkEmail($email);
-    if (!$email_success) {
-      header("location: /login?auth_error=email doesn't exist&field=email");
-      exit(0);
-    }
+    $json_response = [
+      "validEmail" => true,
+      "validPassword" => true
+    ];
 
-    $pwd_success = $this->checkPassword($password);
-    if (!$pwd_success) {
-      header("location: /login?auth_error=wrong password&field=pwd&email_recovery=$email");
-      exit(0);
-    }
+    if (!$this->checkEmail($email))
+      $json_response["validEmail"] = false;
 
-    $this->logUser($email, $password);
+    if (!$this->checkPassword($password))
+      $json_response["validPassword"] = false;
 
-    header("location: controllers/auth/auth.controller.php");
+    if ($json_response["validEmail"] && $json_response["validPassword"])
+      $this->logUser($email, $password);
+
+    echo json_encode($json_response);
+    exit(0);
   }
 
   private function build_view()
@@ -44,7 +45,7 @@ class AuthController extends AuthModel
     $email_recovery = isset($_GET["email_recovery"]) ? $_GET["email_recovery"] : null;
 
     $title = "Astro System - Login";
-    require_once 'views/auth/auth.view.php';
+    require_once 'views/auth/login/login.view.php';
     exit(0);
   }
 }
