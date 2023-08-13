@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 
-<?= create_head_tag($title, [ "views/home/home.style.css" ]) ?>
+<?= create_head_tag($title, ["views/home/home.style.css"]) ?>
 
 <body>
   <nav id="Home_navbar">
     <h2 id="Home_navbar-logo">Logo</h2>
-    <?php if ($uname || $uemail) : ?>
-      <p>Logged in</p>
-    <?php else : ?>
-      <a id="Home_navbar-login" href="/login">Login</a>
-    <?php endif; ?>
+    <div>
+      <?php if ($uname || $uemail) : ?>
+        <p>Logged in</p>
+      <?php else : ?>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Log In</a>
+      <?php endif; ?>
+    </div>
   </nav>
   <main id="Home_main">
     <div>
