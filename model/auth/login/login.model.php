@@ -1,11 +1,11 @@
 <?php
 
-class AuthModel extends DatabaseModel
+class LoginModel extends DatabaseModel
 {
   protected function checkEmail($email)
   {
     $stmt = $this->connect()->prepare(
-      "SELECT * FROM users WHERE uemail = ?;"
+      "SELECT * FROM users WHERE email = ?;"
     );
 
     $succeeded = $stmt->execute([$email]);
@@ -22,7 +22,7 @@ class AuthModel extends DatabaseModel
   protected function checkPassword(string $pwd)
   {
     $stmt = $this->connect()->prepare(
-      "SELECT * FROM users WHERE upwd = ?;"
+      "SELECT * FROM users WHERE password = ?;"
     );
 
     $succeeded = $stmt->execute([$pwd]);
@@ -36,13 +36,25 @@ class AuthModel extends DatabaseModel
     return $stmt->rowCount() == 1;
   }
 
-  protected function logUser($uemail, $upwd)
+  protected function logUser($email, $password)
   {
+    /**
+     * new function:
+     * -> get email and password DONE
+     * -> fix the database
+     * -> encrypt
+     * -> check if there's a token in the database
+     * -> return the token to the user
+     *
+     * in the client:
+     * -> store the token in cookies
+     * -> stay logged in
+    */
     $stmt = $this->connect()
-      ->prepare("SELECT uname, uemail FROM users
-        WHERE uemail = ? AND upwd = ?;");
+      ->prepare("SELECT nickname, email FROM users
+        WHERE email = ? AND password = ?;");
 
-    $succeededed = $stmt->execute([$uemail, $upwd]);
+    $succeededed = $stmt->execute([$email, $password]);
     if (!$succeededed) {
       printf("Prepare statement not succeeded: " . $stmt);
       $stmt = null;
@@ -50,11 +62,10 @@ class AuthModel extends DatabaseModel
     }
 
     $user_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = null;
 
     session_start();
-    $_SESSION['uname'] = $user_data[0]["uname"];
-    $_SESSION['uemail'] = $user_data[0]["uemail"];
-
-    $stmt = null;
+    $_SESSION['name'] = $user_data[0]["nickname"];
+    $_SESSION['email'] = $user_data[0]["email"];
   }
 }
