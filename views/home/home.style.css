@@ -5,6 +5,12 @@
   justify-content: space-between;
 }
 
+#Home_navbar div {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
 #Home_main {
   display: flex;
   flex-direction: row;
