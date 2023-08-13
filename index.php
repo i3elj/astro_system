@@ -10,8 +10,16 @@ $path = $parsed_uri['path'];
 
 $routes = [
   [
-    'path' => AuthController::path,
-    'view' => 'AuthController'
+    'path' => DashboardController::path,
+    'view' => 'DashboardController'
+  ],
+  [
+    'path' => SignUpController::path,
+    'view' => 'SignUpController'
+  ],
+  [
+    'path' => LoginController::path,
+    'view' => 'LoginController'
   ],
   [
     'path' => HomeController::path,
