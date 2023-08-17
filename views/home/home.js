@@ -90,7 +90,7 @@ class OrderList {
   /**
     * @param order             The latest order added to the queue
     * @param order.name        The name of the dish
-    * @param order.amount      How many of those the client ordered
+    * @param order.amount      How many of those the client have ordered
     * @param order.price       Self-explanatory
     * @param order.datetime    The moment the order was added to the queue
     * @param order.status      The status of the order regarding the queue
