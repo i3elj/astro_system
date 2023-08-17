@@ -14,38 +14,37 @@ class DefaultMigrations extends DatabaseModel
     {
         $tables = [
             "users" => "CREATE TABLE users (
-                cpf             BIGINT PRIMARY KEY,
-                nickname        TEXT,
-                real_name       TEXT,
-                email           VARCHAR,
-                password        VARCHAR,
-                auth_token      VARCHAR,
+                cpf             VARCHAR(14) PRIMARY KEY UNIQUE,
+                nickname        TEXT NOT NULL,
+                real_name       TEXT NOT NULL,
+                email           VARCHAR NOT NULL,
+                password        TEXT NOT NULL,
+                auth_token      TEXT NOT NULL,
                 phone_number    TEXT,
                 permissions     TEXT,
-                role            TEXT,
-                UNIQUE (cpf)
+                role            TEXT NOT NULL
             );",
             "dishes" => "CREATE TABLE dishes (
-                id              SERIAL PRIMARY KEY,
-                name            TEXT,
+                id              SERIAL PRIMARY KEY UNIQUE,
+                name            TEXT NOT NULL,
                 cost            DECIMAL(10,2),
-                ingredients     TEXT
+                ingredients     TEXT NOT NULL
             );",
             "ingredients" => "CREATE TABLE ingredients (
-                id              SERIAL PRIMARY KEY,
-                name            TEXT
+                id              SERIAL PRIMARY KEY UNIQUE,
+                name            TEXT NOT NULL
             );",
             "tables" => "CREATE TABLE tables (
-                id              INT PRIMARY KEY,
+                id              INT PRIMARY KEY UNIQUE,
                 location        TEXT,
                 bill            DECIMAL(10,2),
-                is_reserved     BOOLEAN,
-                is_occupied     BOOLEAN
+                is_reserved     BOOLEAN NOT NULL,
+                is_occupied     BOOLEAN NOT NULL
             );",
             "orders" => "CREATE TABLE orders (
-                id              INT PRIMARY KEY,
-                fk_table_id     INT,
-                fk_ordered_item INT,
+                id              INT PRIMARY KEY UNIQUE,
+                fk_table_id     INT NOT NULL,
+                fk_ordered_item INT NOT NULL,
                 observations    TEXT,
                 created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 expiration_time TIMESTAMP DEFAULT (CURRENT_TIMESTAMP + INTERVAL '2 hours'),
@@ -55,8 +54,13 @@ class DefaultMigrations extends DatabaseModel
         ];
 
         foreach ($tables as $table_name => $table) {
-            $stmt = $this->connect()->prepare($table);
-            $succeeded = $stmt->execute();
+            try {
+                $stmt = $this->connect()->prepare($table);
+                $succeeded = $stmt->execute();
+            } catch (PDOException $e) {
+                error_log("ERROR at: " . $table_name, 4);
+                error_log($e, 4);
+            }
 
             if (!$succeeded) {
                 printf("Prepare statement error: " . $stmt);
@@ -70,16 +74,22 @@ class DefaultMigrations extends DatabaseModel
 
     private function PopulateTables()
     {
+        // password + cpf
+        $date = date("m/d/Y h:i:s a", time());
+        $auth_token = password_hash('088.136.004-02' . $date, PASSWORD_ARGON2I);
+        $pwd = password_hash('adminad@min', PASSWORD_ARGON2I);
         $queries = [
-            "users" => "INSERT INTO users VALUES (
-                91762124084,
-                'jeff',
-                'Jeromy Filipe',
-                'ad@min',
-                'admin',
-                '+557728161101',
-                'superuser',
-                'admin'
+            "users" => "INSERT INTO users
+                 VALUES (
+                    '088.136.004-02',
+                    'adm',
+                    'administrator',
+                    'ad@min',
+                    :password,
+                    :authToken,
+                    '+55 (33)9111-2222',
+                    'superuser',
+                    'admin'
             );",
             "dishes" => "INSERT INTO dishes(name, cost, ingredients) VALUES (
                 'Hot Chocolate',
@@ -121,19 +131,27 @@ class DefaultMigrations extends DatabaseModel
                         exit(1);
                     }
                 }
-                printf("INSERTING VALUE INTO $query_name TABLE...\n");
-            } else {
-                $stmt = $this->connect()->prepare($query);
-                $succeeded = $stmt->execute();
-
-                if (!$succeeded) {
-                    printf("Prepare statement error: $stmt");
-                    $stmt = null;
-                    exit(1);
-                }
 
                 printf("INSERTING VALUE INTO $query_name TABLE...\n");
+                exit(0);
             }
+
+            $stmt = $this->connect()->prepare($query);
+
+            if ($query_name == 'users') {
+                $stmt->bindParam(':authToken', $auth_token, PDO::PARAM_STR);
+                $stmt->bindParam(':password', $pwd, PDO::PARAM_STR);
+            }
+
+            $succeeded = $stmt->execute();
+
+            if (!$succeeded) {
+                printf("Prepare statement error: $stmt");
+                $stmt = null;
+                exit(1);
+            }
+
+            printf("INSERTING VALUE INTO $query_name TABLE...\n");
         }
     }
 }
