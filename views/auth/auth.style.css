@@ -21,10 +21,10 @@ h1 {
   font-weight: 400;
 }
 
-p {
-  display: none;
+#loginError {
   text-align: center;
-  color: #e38585;
+  color: rgba(0,0,0,0);
+  transform: translateY(-20px);
 }
 
 form {
@@ -34,7 +34,7 @@ form {
 }
 
 .inputField,
-.submitButton {
+#submitButton {
   background: none;
   border: 0.5px solid #66666c;
   border-radius: 8px;
@@ -45,13 +45,13 @@ form {
   transition: 300ms;
 }
 
-.submitButton {
+#submitButton {
   font-family: Cantarell;
   cursor: pointer;
   border: 0.5px solid #66666c;
 }
 
-.submitButton:focus {
+#submitButton:focus {
   border-color: #d0d0d0;
   outline: 0;
 }
@@ -122,12 +122,12 @@ label[for='tos'] {
   color: #d0d0d0;
 }
 
-.submitButton:not(:disabled):hover {
+#submitButton:not(:disabled):hover {
   background-color: #d0d0d0;
   color: #363740;
 }
 
-.submitButton:disabled {
+#submitButton:disabled {
   color: #66666c;
   cursor: not-allowed;
 }
