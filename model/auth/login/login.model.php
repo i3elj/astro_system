@@ -2,10 +2,15 @@
 
 class LoginModel extends DatabaseModel
 {
-  protected function checkEmail($email)
+  /**
+   * @param string $email User's email
+   *
+   * @return bool True if the email is correct, false otherwise
+   */
+  protected function checkEmail(string $email): bool
   {
     $stmt = $this->connect()->prepare(
-      "SELECT * FROM users WHERE email = ?;"
+      "SELECT email FROM users WHERE email = ?;"
     );
 
     $succeeded = $stmt->execute([$email]);
@@ -16,16 +21,24 @@ class LoginModel extends DatabaseModel
       exit(1);
     }
 
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     return $stmt->rowCount() == 1;
   }
 
-  protected function checkPassword(string $pwd)
+  /**
+   * @param string $pwd User's password
+   * @param string $email User's email
+   *
+   * @return bool True if the password is correct, false otherwise
+   */
+  protected function checkPassword(string $pwd, string $email): bool
   {
     $stmt = $this->connect()->prepare(
-      "SELECT * FROM users WHERE password = ?;"
+      "SELECT password FROM users WHERE email = ?;"
     );
 
-    $succeeded = $stmt->execute([$pwd]);
+    $succeeded = $stmt->execute([$email]);
 
     if (!$succeeded) {
       printf("Prepare statement error: " . $stmt);
@@ -33,39 +46,62 @@ class LoginModel extends DatabaseModel
       exit(1);
     }
 
-    return $stmt->rowCount() == 1;
+    $db_pwd = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['password'];
+    return password_verify($pwd . $email, $db_pwd);
   }
 
-  protected function logUser($email, $password)
+  /**
+   * @param string $pwd User's password
+   * @param string $email User's email
+   *
+   * @return If authentication is successful it returns the user auth token
+   */
+  protected function logUser(string $pwd, string $email): string
   {
-    /**
-     * new function:
-     * -> get email and password DONE
-     * -> fix the database
-     * -> encrypt
-     * -> check if there's a token in the database
-     * -> return the token to the user
-     *
-     * in the client:
-     * -> store the token in cookies
-     * -> stay logged in
-    */
-    $stmt = $this->connect()
-      ->prepare("SELECT nickname, email FROM users
-        WHERE email = ? AND password = ?;");
+    $stmt = $this->connect()->prepare(
+      "SELECT cpf, auth_token, password FROM users WHERE email = ?;"
+    );
 
-    $succeededed = $stmt->execute([$email, $password]);
+    $succeededed = $stmt->execute([$email]);
+
     if (!$succeededed) {
       printf("Prepare statement not succeeded: " . $stmt);
       $stmt = null;
       exit(1);
     }
 
-    $user_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $stmt = null;
+    $user_data = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+    $new_auth_token = $this->updateAuthToken($user_data['cpf']);
 
-    session_start();
-    $_SESSION['name'] = $user_data[0]["nickname"];
-    $_SESSION['email'] = $user_data[0]["email"];
+    $db_password = $user_data['password'];
+
+    return $this->checkPassword($pwd, $email)
+      ? $new_auth_token
+      : "Wrong Password!";
+  }
+
+  /**
+   * @param string $cpf
+   *
+   * @return string An Auth Token
+   */
+  private function updateAuthToken(string $cpf): string
+  {
+    $date = date("m/d/Y h:i:s a", time());
+    $new_auth_token = password_hash($cpf . $date, PASSWORD_ARGON2I);
+
+    $stmt = $this->connect()->prepare(
+      "UPDATE users SET auth_token = ? WHERE cpf = ?;"
+    );
+
+    $succeededed = $stmt->execute([$new_auth_token, $cpf]);
+
+    if (!$succeededed) {
+      printf("Prepare statement not succeeded: " . $stmt);
+      $stmt = null;
+      exit(1);
+    }
+
+    return $new_auth_token;
   }
 }
