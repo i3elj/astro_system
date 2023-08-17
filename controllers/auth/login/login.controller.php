@@ -18,23 +18,29 @@ class LoginController extends LoginModel
   private function login()
   {
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $pwd = $_POST['password'];
 
-    $json_response = [
-      "validEmail" => true,
-      "validPassword" => true
-    ];
+    if (!$this->checkEmail($email)) {
+      echo json_encode([
+        "success" => false,
+        "field" => 'email',
+        "message" => "Email doesn't exist!"
+      ]);
+      exit(0);
+    }
 
-    if (!$this->checkEmail($email))
-      $json_response["validEmail"] = false;
+    if (!$this->checkPassword($pwd, $email)) {
+      echo json_encode([
+        "success" => false,
+        "field" => 'password',
+        "message" => "Wrong password!"
+      ]);
+      exit(0);
+    }
 
-    if (!$this->checkPassword($password))
-      $json_response["validPassword"] = false;
+    $auth_token = $this->logUser($pwd, $email);
 
-    if ($json_response["validEmail"] && $json_response["validPassword"])
-      $this->logUser($email, $password);
-
-    echo json_encode($json_response);
+    echo json_encode(["success" => true, "token" => $auth_token]);
     exit(0);
   }
 
