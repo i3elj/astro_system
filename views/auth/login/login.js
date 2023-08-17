@@ -1,34 +1,19 @@
-async function auth() {
-    const email = document.querySelector('input[name="email"]')
-    const password = document.querySelector('input[name="password"]')
-    const errorField = document.querySelector('#loginError')
+import { post, handle_failed_response } from '../auth.js'
 
-    if (email.value == "" || password.value == "")
-        return
+export async function login() {
+  const form = document.querySelector('#form')
+  const response = await post('/login', form)
 
-    const form = document.querySelector('#form')
+  if (response.success) {
+    const token = response.token
+    const date = new Date()
+    date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000)/*a week in ms*/)
+    document.cookie = `authToken=${token};expires=${date.toUTCString()}`
+    document.location = "http://localhost:3000/dashboard"
+    return
+  }
 
-    const data = new URLSearchParams(new FormData(form))
-    const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        body: data
-    })
-
-    const { validEmail, validPassword } = await response.json()
-
-    let errorMessage = "Wrong password!"
-
-    if (!validEmail) {
-        email.classList.add('fieldError')
-        errorMessage = "Email doesn't exist!"
-        email.focus()
-    }
-
-    if (!validPassword) password.classList.add('fieldError')
-    if (validEmail && !validPassword) password.focus()
-
-    if (!validEmail || !validPassword) {
-        errorField.innerHTML = errorMessage
-        errorField.style.display = 'initial'
-    }
+  handle_failed_response(response)
 }
+
+window.login = login
