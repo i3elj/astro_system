@@ -135,3 +135,7 @@ label[for='tos'] {
 .inputField:not(:placeholder-shown) {
 	border-color: #d0d0d0;
 }
+
+.fieldError {
+	border: 0.5px solid #e38585 !important;
+}
