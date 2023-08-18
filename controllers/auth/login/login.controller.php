@@ -4,54 +4,53 @@ require_once "model/auth/login/login.model.php";
 
 class LoginController extends LoginModel
 {
-  public const path = '/\/login/';
+	public const path = '/\/login/';
 
-  public function Handler()
-  {
-    match ($_SERVER["REQUEST_METHOD"]) {
-      'GET' => self::build_view(),
-      'POST' => self::login(),
-      default => badrequest()
-    };
-  }
+	public function Handler()
+	{
+		match ($_SERVER["REQUEST_METHOD"]) {
+			'GET' => self::build_view(),
+			'POST' => self::login(),
+			default => badrequest()
+		};
+	}
 
-  private function login()
-  {
-    $email = $_POST['email'];
-    $pwd = $_POST['password'];
+	private function login(): void
+	{
+		$email = $_POST['email'];
+		$pwd = $_POST['password'];
 
-    if (!$this->checkEmail($email)) {
-      echo json_encode([
-        "success" => false,
-        "field" => 'email',
-        "message" => "Email doesn't exist!"
-      ]);
-      exit(0);
-    }
+		if (!$this->checkEmail($email)) {
+			echo json_encode([
+				"success" => false,
+				"field" => 'email',
+				"message" => "Email doesn't exist!"
+			]);
+			exit(0);
+		}
 
-    if (!$this->checkPassword($pwd, $email)) {
-      echo json_encode([
-        "success" => false,
-        "field" => 'password',
-        "message" => "Wrong password!"
-      ]);
-      exit(0);
-    }
+		if (!$this->checkPassword($pwd, $email)) {
+			echo json_encode([
+				"success" => false,
+				"field" => 'password',
+				"message" => "Wrong password!"
+			]);
+			exit(0);
+		}
 
-    $auth_token = $this->logUser($pwd, $email);
+		$auth_token = $this->logUser($pwd, $email);
 
-    echo json_encode(["success" => true, "token" => $auth_token]);
-    exit(0);
-  }
+		echo json_encode(["success" => true, "token" => $auth_token]);
+		exit(0);
+	}
 
-  private function build_view()
-  {
-    $auth_error = isset($_GET["auth_error"]) ? $_GET["auth_error"] : null;
-    $field =  isset($_GET["field"]) ? $_GET["field"] : null;
-    $email_recovery = isset($_GET["email_recovery"]) ? $_GET["email_recovery"] : null;
+	private function build_view(): void
+	{
+		$auth_error = isset($_GET["auth_error"]) ? $_GET["auth_error"] : null;
+		$field =  isset($_GET["field"]) ? $_GET["field"] : null;
+		$email_recovery = isset($_GET["email_recovery"]) ? $_GET["email_recovery"] : null;
 
-    $title = "Astro System - Login";
-    require_once 'views/auth/login/login.view.php';
-    exit(0);
-  }
+		require_once 'views/auth/login/login.view.php';
+		exit(0);
+	}
 }

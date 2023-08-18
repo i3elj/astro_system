@@ -2,13 +2,13 @@
 
 class PedidoController extends PedidoModel
 {
-  static function Route()
-  {
-  }
+	static function Route()
+	{
+	}
 
-  static function build_view()
-  {
-  }
+	static function build_view()
+	{
+	}
 }
 
 // function EditarPedidoController()

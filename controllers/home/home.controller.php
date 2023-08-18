@@ -6,7 +6,7 @@ class HomeController extends HomeModel
 {
     public const path = '/\//';
 
-    static function Handler()
+    public function Handler(): void
     {
         match ($_SERVER["REQUEST_METHOD"]) {
             "GET" => self::build_view(),
@@ -15,7 +15,7 @@ class HomeController extends HomeModel
         };
     }
 
-    function add_order()
+    private function add_order(): void
     {
         // $name = $_POST['dishName'];
         // $amount = (int) $_POST['amount'];
@@ -41,10 +41,9 @@ class HomeController extends HomeModel
         self::build_view();
     }
 
-    static function build_view()
+    private function build_view(): void
     {
         require_once 'views/home/home.view.php';
-
         exit(0);
     }
 }
