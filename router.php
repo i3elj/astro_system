@@ -7,7 +7,7 @@ function create_router(array $routes, string $current_path)
             if ($current_path != $matches[0])
                 notfound();
 
-            $view = new $route['view'];
+            $view = new $route['controller']($current_path);
             $view->Handler();
         }
     }
