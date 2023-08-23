@@ -33,6 +33,7 @@
 					placeholder="CPF ex.000.111.222-33"
 					pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}"
 					maxlength="14"
+					onfocus="this.select()"
 					required
 				/>
 				<input
@@ -41,6 +42,7 @@
 					name="phonenumber"
 					placeholder="+55 (33)91111-2222"
 					pattern="\+[0-9]{2} \([0-9]{2}\)[0-9]{5}-[0-9]{4}"
+					onfocus="this.select()"
 					required
 				/>
 			</div>
@@ -89,8 +91,7 @@
 		</form>
 	</div>
 
-	<script type="module" src="views/auth/signup/signup.js">
-	</script>
+	<script type="module" src="views/auth/signup/signup.js"></script>
 </body>
 
 </html>
