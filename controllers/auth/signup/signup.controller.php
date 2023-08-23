@@ -2,9 +2,11 @@
 
 require_once 'model/auth/signup/signup.model.php';
 
-class SignUpController extends SignUpModel
+class SignUp extends SignUpModel
 {
-	public const path = '/\/signup/';
+	public function __construct(private string $path = '/\/signup/')
+	{
+	}
 
 	public function Handler()
 	{
@@ -37,7 +39,7 @@ class SignUpController extends SignUpModel
 		$pwd = password_hash($pwd . $email, PASSWORD_ARGON2I);
 		$this->register([$cpf, $nickname, $real_name, $email, $pwd, $token, $phone_number]);
 
-		echo json_encode(["success" => true, "field" => '', "message" => '']);
+		echo json_encode(["success" => true, "token" => $token]);
 		exit(0);
 	}
 

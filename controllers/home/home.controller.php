@@ -2,9 +2,11 @@
 
 require_once "model/home/home.model.php";
 
-class HomeController extends HomeModel
+class Home extends HomeModel
 {
-    public const path = '/\//';
+    public function __construct(private string $path = '/\//')
+    {
+    }
 
     public function Handler(): void
     {

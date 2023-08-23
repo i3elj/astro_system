@@ -2,9 +2,11 @@
 
 require_once "model/auth/login/login.model.php";
 
-class LoginController extends LoginModel
+class Login extends LoginModel
 {
-	public const path = '/\/login/';
+	public function __construct(private string $path = '/\/login/')
+	{
+	}
 
 	public function Handler()
 	{

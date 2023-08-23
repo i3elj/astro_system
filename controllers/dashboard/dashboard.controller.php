@@ -2,9 +2,11 @@
 
 require_once "model/dashboard/dashboard.model.php";
 
-class DashboardController extends DashboardModel
+class Dashboard extends DashboardModel
 {
-	public const path = '/\/dashboard/';
+	public function __construct(private string $path = '/\/dashboard/')
+	{
+	}
 
 	public function Handler(): void
 	{
