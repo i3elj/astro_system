@@ -1,4 +1,5 @@
-import { post, handle_failed_response } from '../auth.js'
+import auth from '../auth.js'
+
 
 let signup_field = document.querySelector("#submitButton")
 let checkbox = document.querySelector("#tos")
@@ -10,13 +11,9 @@ checkbox.addEventListener('change', function () {
 
 export async function signup() {
 	const form = document.querySelector("#form")
-	const res = await post('/signup', form)
+	const response = await auth.post('/signup', form)
 
-	if (!res.success) {
-		handle_failed_response(res)
-	} else {
-
-	}
+	response.success ? auth.on_success(response) : auth.on_error(response)
 }
 
 window.signup = signup
