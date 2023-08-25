@@ -3,11 +3,12 @@
 class LoginModel extends DatabaseModel
 {
 	/**
-	 * @param string $email User's email
+	 * Check if the provided email exists or not.
 	 *
+	 * @param string $email User's email
 	 * @return bool True if the email is correct, false otherwise
 	 */
-	protected function checkEmail(string $email): bool
+	protected function checkEmail($email)
 	{
 		$rows = $this->queryReturn(
 			"SELECT email FROM users WHERE email = ?;",
@@ -18,12 +19,13 @@ class LoginModel extends DatabaseModel
 	}
 
 	/**
+	 * Check if the provided password exists or not.
+	 *
 	 * @param string $pwd User's password
 	 * @param string $email User's email
-	 *
 	 * @return bool True if the password is correct, false otherwise
 	 */
-	protected function checkPassword(string $pwd, string $email): bool
+	protected function checkPassword($pwd, $email)
 	{
 		$rows = $this->queryReturn(
 			"SELECT password FROM users WHERE email = ?;",
@@ -35,12 +37,14 @@ class LoginModel extends DatabaseModel
 	}
 
 	/**
+	 * Authenticate the user if the password and email are valid.
+	 *
 	 * @param string $pwd User's password
 	 * @param string $email User's email
-	 *
-	 * @return If authentication is successful it returns the user auth token
+	 * @return string If authentication is successful it returns the user auth
+	 * token
 	 */
-	protected function logUser(string $pwd, string $email): string
+	protected function logUser($pwd, $email)
 	{
 		$rows = $this->queryReturn(
 			"SELECT cpf, auth_token, password FROM users WHERE email = ?;",
@@ -56,11 +60,12 @@ class LoginModel extends DatabaseModel
 	}
 
 	/**
-	 * @param string $cpf
+	 * It updates the auth token of the user based on the current time.
 	 *
+	 * @param string $cpf A user unique identification key.
 	 * @return string An Auth Token
 	 */
-	private function updateAuthToken(string $cpf): string
+	private function updateAuthToken($cpf)
 	{
 		$date = date("m/d/Y h:i:s a", time());
 		$new_auth_token = password_hash($cpf . $date, PASSWORD_ARGON2I);

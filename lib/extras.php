@@ -1,13 +1,18 @@
 <?php
 
-function dd($arr_of_values)
+/**
+ * Dump and die. Sends variables to the client and kills the connection.
+ *
+ * @param array $values Holds each value that will be send to the client.
+ */
+function dd(...$values)
 {
 	echo "<pre>";
-	foreach ($arr_of_values as $value) {
+	foreach ($values as $value) {
 		var_dump($value);
 	}
 	echo "</pre>";
-	exit(0);
+	die(0);
 }
 
 function require_style(string $file)
@@ -24,6 +29,9 @@ function require_script(string $file, string $args = "")
 	echo '</script>';
 }
 
+/**
+ * Returns a basic page with 404 "not found" status code.
+ */
 function notfound()
 {
 	http_response_code(404);
@@ -31,6 +39,9 @@ function notfound()
 	exit(0);
 }
 
+/**
+ * Returns a 404 "bad request" status code.
+ */
 function badrequest()
 {
 	http_response_code(400);

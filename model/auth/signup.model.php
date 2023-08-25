@@ -2,45 +2,41 @@
 
 class SignUpModel extends DatabaseModel
 {
-	protected function user_exist(string $cpf): bool
+	/**
+	 * Check if the provided user exists or not, based on it's unique id.
+	 *
+	 * @param string $cpf User's unique id.
+	 * @return bool True if the user exists, false otherwise.
+	 */
+	protected function user_exist($cpf)
 	{
-		$stmt = $this->connect()->prepare(
-			"SELECT 1 FROM users WHERE cpf = ?"
+		$rows = $this->queryReturn(
+			"SELECT 1 FROM users WHERE cpf = ?;",
+			$cpf
 		);
 
-		$succeeded = $stmt->execute([$cpf]);
-
-		if (!$succeeded) {
-			printf("Prepare statement error: " . $stmt);
-			$stmt = null;
-			exit(1);
-		}
-
-		return $stmt->rowCount() == 1;
+		return sizeof($rows) == 1;
 	}
 
-	protected function register(array $user): void
+	/**
+	 * Create a new account for the user.
+	 *
+	 * @param array $user All the values which are necessary to register the
+	 * user.
+	 *
+	 * 	- cpf, nickname, real name, email, password, token and phone_number.
+	 *
+	 * @return void
+	 */
+	protected function register(...$user)
 	{
-		$stmt = $this->connect()->prepare(
+		$this->query(
 			"INSERT INTO users(
-				cpf,
-				nickname,
-				real_name,
-				email,
-				password,
-				auth_token,
-				phone_number,
-				permissions,
-				role
+				cpf, nickname,
+				real_name, email,
+				password, auth_token,
+				phone_number, permissions, role
 			) VALUES (?, ?, ?, ?, ?, ?, ?, 'superuser', 'owner');"
 		);
-
-		$succeeded = $stmt->execute($user);
-
-		if (!$succeeded) {
-			printf("Prepare statement error: " . $stmt);
-			$stmt = null;
-			exit(1);
-		}
 	}
 }

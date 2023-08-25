@@ -2,7 +2,12 @@
 
 class DatabaseModel
 {
-	protected function connect(): PDOException | PDO
+	/**
+	 * Connects to a database
+	 *
+	 * @return PDOException | PDO
+	 */
+	protected function connect()
 	{
 		$ENV = parse_ini_file('.env');
 
@@ -24,7 +29,14 @@ class DatabaseModel
 		return $pdo;
 	}
 
-	protected function query(string $query_string, array $values): void
+	/**
+	 * Runs a query in the database.
+	 *
+	 * @param string $query_string The query you want to run
+	 * @param arary $values All the values the query needs
+	 * @return void
+	 */
+	protected function query($query_string, $values = [])
 	{
 		$stmt = $this->connect()->prepare($query_string);
 
@@ -37,7 +49,14 @@ class DatabaseModel
 		}
 	}
 
-	protected function queryReturn(string $query_string, array $values): array
+	/**
+	 * Runs a query in the database and return the affected rows.
+	 *
+	 * @param string $query_string The query you want to run
+	 * @param arary $values All the values the query needs
+	 * @return array
+	 */
+	protected function queryReturn($query_string, ...$values = [])
 	{
 		$stmt = $this->connect()->prepare($query_string);
 

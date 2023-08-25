@@ -8,6 +8,10 @@ class Login extends LoginModel
 	{
 	}
 
+	/**
+	 * The main method of each controller. This method takes care of what the
+	 * controller will do depending on each http method used.
+	 */
 	public function Handler()
 	{
 		match ($_SERVER["REQUEST_METHOD"]) {
@@ -17,7 +21,10 @@ class Login extends LoginModel
 		};
 	}
 
-	private function login(): void
+	/**
+	 * This method takes care of authenticating the user.
+	 */
+	private function login()
 	{
 		$email = $_POST['email'];
 		$pwd = $_POST['password'];
@@ -46,7 +53,11 @@ class Login extends LoginModel
 		exit(0);
 	}
 
-	private function build_view(): void
+	/**
+	 * Each Controller will have a build_view function where it sends the
+	 * desired webpage to the client.
+	 */
+	private function build_view()
 	{
 		require_once 'views/auth/login/login.view.php';
 		exit(0);

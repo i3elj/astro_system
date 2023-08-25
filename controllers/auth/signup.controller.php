@@ -8,6 +8,10 @@ class SignUp extends SignUpModel
 	{
 	}
 
+	/**
+	 * The main method of each controller. This method takes care of what the
+	 * controller will do depending on each http method used.
+	 */
 	public function Handler()
 	{
 		match ($_SERVER['REQUEST_METHOD']) {
@@ -16,6 +20,9 @@ class SignUp extends SignUpModel
 		};
 	}
 
+	/**
+	 * This method takes care of creating a new account for the user.
+	 */
 	private function signup()
 	{
 		$cpf = $_POST['cpf'];
@@ -37,12 +44,16 @@ class SignUp extends SignUpModel
 		$date = date("m/d/Y h:i:s a", time());
 		$token = password_hash($cpf . $date, PASSWORD_ARGON2I);
 		$pwd = password_hash($pwd . $email, PASSWORD_ARGON2I);
-		$this->register([$cpf, $nickname, $real_name, $email, $pwd, $token, $phone_number]);
+		$this->register($cpf, $nickname, $real_name, $email, $pwd, $token, $phone_number);
 
 		echo json_encode(["success" => true, "token" => $token]);
 		exit(0);
 	}
 
+	/**
+	 * Each Controller will have a build_view function where it sends the
+	 * desired webpage to the client.
+	 */
 	private function build_view()
 	{
 		require_once 'views/auth/signup/signup.view.php';
