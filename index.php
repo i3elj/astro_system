@@ -9,6 +9,7 @@ $parsed_uri = parse_url($_SERVER["REQUEST_URI"]);
 $path = $parsed_uri['path'];
 
 $routes = [
+	['path' => '/\/menu/', 'controller' => 'Menu'],
 	['path' => '/\/dashboard/', 'controller' => 'Dashboard'],
 	['path' => '/\/signup/', 'controller' => 'SignUp'],
 	['path' => '/\/login/', 'controller' => 'Login'],
