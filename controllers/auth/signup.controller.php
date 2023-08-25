@@ -1,6 +1,6 @@
 <?php
 
-require_once 'model/auth/signup/signup.model.php';
+require_once 'model/auth/signup.model.php';
 
 class SignUp extends SignUpModel
 {

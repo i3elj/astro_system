@@ -1,6 +1,6 @@
 <?php
 
-require_once 'model/menu/menu.model.php';
+require_once 'model/menu.model.php';
 
 class Menu extends MenuModel
 {
@@ -18,7 +18,7 @@ class Menu extends MenuModel
 
     private function build_view(): void
     {
-        require_once 'views/menu/menu.view.php';
+        require_once 'views/menu.view.php';
         exit(0);
     }
 }

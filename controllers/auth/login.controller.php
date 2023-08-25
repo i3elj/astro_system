@@ -1,6 +1,6 @@
 <?php
 
-require_once "model/auth/login/login.model.php";
+require_once "model/auth/login.model.php";
 
 class Login extends LoginModel
 {

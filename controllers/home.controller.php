@@ -1,6 +1,6 @@
 <?php
 
-require_once "model/home/home.model.php";
+require_once "model/home.model.php";
 
 class Home extends HomeModel
 {
@@ -45,7 +45,7 @@ class Home extends HomeModel
 
     private function build_view(): void
     {
-        require_once 'views/home/home.view.php';
+        require_once 'views/home.view.php';
         exit(0);
     }
 }
