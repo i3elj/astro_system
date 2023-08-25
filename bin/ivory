@@ -10,9 +10,10 @@ $options = [
 
 if (sizeof($argv) == 1 || $argv[1] == '--help' || $argv[1] == '-h') {
 	echo "ivory - A helper script to create new endpoints in this project. It's intent is to be used in the root folder:\n";
-	foreach ($options as $option => $description) {
+
+	foreach ($options as $option => $description)
 		echo "\t" . $option . "\t" . $description . "\n";
-	}
+
 	exit(0);
 }
 
@@ -20,17 +21,12 @@ if (sizeof($argv) == 1 || $argv[1] == '--help' || $argv[1] == '-h') {
 $argv = array_splice($argv, 1);
 
 $arguments = [];
-foreach ($argv as $arg) {
-	array_push($arguments, explode("=", $arg));
-}
+foreach ($argv as $arg) array_push($arguments, explode("=", $arg));
 
 $values = [];
-foreach ($arguments as $argument) {
-	array_push($values, $argument[1]);
-}
+foreach ($arguments as $argument) array_push($values, $argument[1]);
 
 [$RouteName, $path] = $values;
-
 $routename = strtolower($RouteName);
 
 ///////////
@@ -62,6 +58,10 @@ class $RouteName extends " . $RouteName . "Model
     {
     }
 
+	/**
+	 * The main method of each controller. This method takes care of what the
+	 * controller will do depending on each http method used.
+	 */
     public function Handler(): void
     {
         match (\$_SERVER['REQUEST_METHOD']) {
@@ -70,6 +70,10 @@ class $RouteName extends " . $RouteName . "Model
         };
     }
 
+	/**
+	 * Each Controller will have a build_view function where it sends the
+	 * desired webpage to the client.
+	 */
     private function build_view(): void
     {
         require_once 'views/$routename/$routename.view.php';
