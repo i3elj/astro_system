@@ -23,4 +23,33 @@ class DatabaseModel
 
 		return $pdo;
 	}
+
+	protected function query(string $query_string, array $values): void
+	{
+		$stmt = $this->connect()->prepare($query_string);
+
+		$succeeded = $stmt->execute($values);
+
+		if (!$succeeded) {
+			printf("Prepare statement error: " . $stmt);
+			$stmt = null;
+			exit(1);
+		}
+	}
+
+	protected function queryReturn(string $query_string, array $values): array
+	{
+		$stmt = $this->connect()->prepare($query_string);
+
+		$succeeded = $stmt->execute($values);
+
+		if (!$succeeded) {
+			printf("Prepare statement error: " . $stmt);
+			$stmt = null;
+			exit(1);
+		}
+
+		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $rows;
+	}
 }
