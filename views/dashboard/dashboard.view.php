@@ -11,9 +11,10 @@
 		<h1>Hey, you're logged in! Neat</h1>
 		<button onclick="logout()">Log out</button>
 	<?php else : ?>
-		<h1>Sorry, You're not allowed to be here :(</h1>
+		<script type="text/javascript">
+			document.location = "http://localhost:3000/login"
+		</script>
 	<?php endif; ?>
-
 </body>
 
 <script type="module" src="views/dashboard/dashboard.js"></script>
