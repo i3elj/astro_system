@@ -1,0 +1,117 @@
+#!/bin/env php
+<?php
+
+$options = [
+	"--help or -h  " => "Show this help message",
+	"--create-route" => "Pass the name of the new route. Ex: --create-route=Login",
+	"--path        " => "Pass a url path to the endpoint. Ex: --path=/login"
+];
+
+
+if (sizeof($argv) == 1 || $argv[1] == '--help' || $argv[1] == '-h') {
+	echo "ivory - A helper script to create new endpoints in this project. It's intent is to be used in the root folder:\n";
+	foreach ($options as $option => $description) {
+		echo "\t" . $option . "\t" . $description . "\n";
+	}
+	exit(0);
+}
+
+// remove the script itself: "./ivory"
+$argv = array_splice($argv, 1);
+
+$arguments = [];
+foreach ($argv as $arg) {
+	array_push($arguments, explode("=", $arg));
+}
+
+$values = [];
+foreach ($arguments as $argument) {
+	array_push($values, $argument[1]);
+}
+
+[$RouteName, $path] = $values;
+
+$routename = strtolower($RouteName);
+
+///////////
+// MODEL //
+///////////
+mkdir("./model/$routename");
+$file = fopen("./model/$routename/$routename.model.php", "w");
+$content = "<?php
+
+require_once 'model/DatabaseModel.php';
+
+class " . $RouteName . "Model extends DatabaseModel
+{
+}
+";
+fwrite($file, $content);
+fclose($file);
+
+////////////////
+// CONTROLLER //
+////////////////
+mkdir("./controllers/$routename");
+$file = fopen("./controllers/$routename/$routename.controller.php", "w");
+$content = "<?php
+
+require_once 'model/$routename/$routename.model.php';
+
+class $RouteName extends " . $RouteName . "Model
+{
+    public function __construct(private string \$path = '/\\$path/')
+    {
+    }
+
+    public function Handler(): void
+    {
+        match (\$_SERVER['REQUEST_METHOD']) {
+            'GET' => self::build_view(),
+            default => badrequest(),
+        };
+    }
+
+    private function build_view(): void
+    {
+        require_once 'views/$routename/$routename.view.php';
+        exit(0);
+    }
+}
+";
+fwrite($file, $content);
+fclose($file);
+
+$file = fopen("./controllers/import.php", "a");
+$content = "require_once 'controllers/$routename/$routename.controller.php';\n";
+fwrite($file, $content);
+fclose($file);
+
+//////////
+// VIEW //
+//////////
+mkdir("./views/$routename");
+$file = fopen("./views/$routename/$routename.view.php", "w");
+$content = "<!DOCTYPE html>
+<html>
+
+<?= create_head_tag(
+	title: 'Astro System - $RouteName',
+	styles: ['views/$routename/$routename.style.css']
+) ?>
+
+<body>
+	<h1>Hello from $RouteName</h1>
+</body>
+<script type='text/javascript' src='views/$routename/$routename.js'></script>
+
+</html>
+";
+fwrite($file, $content);
+fclose($file);
+
+$file = fopen("./views/$routename/$routename.style.css", "w");
+fclose($file);
+
+$file = fopen("./views/$routename/$routename.js", "w");
+fclose($file);
