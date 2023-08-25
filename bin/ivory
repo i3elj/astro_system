@@ -36,8 +36,7 @@ $routename = strtolower($RouteName);
 ///////////
 // MODEL //
 ///////////
-mkdir("./model/$routename");
-$file = fopen("./model/$routename/$routename.model.php", "w");
+$file = fopen("./model/$routename.model.php", "w");
 $content = "<?php
 
 require_once 'model/DatabaseModel.php';
@@ -52,11 +51,10 @@ fclose($file);
 ////////////////
 // CONTROLLER //
 ////////////////
-mkdir("./controllers/$routename");
-$file = fopen("./controllers/$routename/$routename.controller.php", "w");
+$file = fopen("./controllers/$routename.controller.php", "w");
 $content = "<?php
 
-require_once 'model/$routename/$routename.model.php';
+require_once 'model/$routename.model.php';
 
 class $RouteName extends " . $RouteName . "Model
 {
@@ -83,7 +81,7 @@ fwrite($file, $content);
 fclose($file);
 
 $file = fopen("./controllers/import.php", "a");
-$content = "require_once 'controllers/$routename/$routename.controller.php';\n";
+$content = "require_once 'controllers/$routename.controller.php';\n";
 fwrite($file, $content);
 fclose($file);
 
