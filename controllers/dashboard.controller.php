@@ -19,7 +19,7 @@ class Dashboard extends DashboardModel
 	private function build_view(): void
 	{
 		$auth_token = $_COOKIE['authToken'];
-		require_once 'views/dashboard.view.php';
+		require_once 'views/dashboard/dashboard.view.php';
 		exit(0);
 	}
 }
