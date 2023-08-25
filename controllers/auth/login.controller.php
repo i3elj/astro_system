@@ -48,10 +48,6 @@ class Login extends LoginModel
 
 	private function build_view(): void
 	{
-		$auth_error = isset($_GET["auth_error"]) ? $_GET["auth_error"] : null;
-		$field =  isset($_GET["field"]) ? $_GET["field"] : null;
-		$email_recovery = isset($_GET["email_recovery"]) ? $_GET["email_recovery"] : null;
-
 		require_once 'views/auth/login/login.view.php';
 		exit(0);
 	}
