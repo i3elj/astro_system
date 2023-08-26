@@ -1,13 +1,15 @@
 <?php
 
-class DatabaseModel
+class DatabaseWrapper
 {
-	/**
-	 * Connects to a database
-	 *
-	 * @return PDOException | PDO
-	 */
-	protected function connect()
+	public function sqlite()
+	{
+		$pdo = new PDO('sqlite:database.db');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+		return $pdo;
+	}
+
+	public function postgres()
 	{
 		$ENV = parse_ini_file('.env');
 
@@ -18,15 +20,28 @@ class DatabaseModel
 		$NAME = $ENV["DB_DATABASE"];
 
 		$dsn =
-			'pgsql:host=' . $HOST .
-			';port='      . $PORT .
-			';dbname='    . $NAME .
-			';user='      . $USER .
-			';password='  . $PWD;
+			"pgsql:host=" . $HOST .
+			";port="      . $PORT .
+			";dbname="    . $NAME .
+			";user="      . $USER .
+			";password="  . $PWD;
 		$pdo = new PDO($dsn, $USER, $PWD) or throw new PDOException();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 		return $pdo;
+	}
+}
+
+class DatabaseModel
+{
+	/**
+	 * Connects to a database
+	 *
+	 * @return DatabaseWrapper
+	 */
+	protected function connect()
+	{
+		return new DatabaseWrapper;
 	}
 
 	/**
@@ -38,7 +53,7 @@ class DatabaseModel
 	 */
 	protected function query($query_string, $values = [])
 	{
-		$stmt = $this->connect()->prepare($query_string);
+		$stmt = $this->connect()->sqlite()->prepare($query_string);
 
 		$succeeded = $stmt->execute($values);
 
@@ -58,7 +73,7 @@ class DatabaseModel
 	 */
 	protected function queryReturn($query_string, $values = [])
 	{
-		$stmt = $this->connect()->prepare($query_string);
+		$stmt = $this->connect()->sqlite()->prepare($query_string);
 
 		$succeeded = $stmt->execute($values);
 
