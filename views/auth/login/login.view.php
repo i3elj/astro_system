@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<?= Tags::head(
+<?= \Tags\head(
 	title: "Astro System - Login",
 	styles: ['views/auth/auth.style.css']
 ) ?>

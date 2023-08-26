@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<?= Tags::head(
+<?= \Tags\head(
 	title: "Astro System - Dashboard",
 	styles: ["views/dashboard/dashboard.style.css"]
 ) ?>
