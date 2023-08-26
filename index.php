@@ -9,6 +9,7 @@ $parsed_uri = parse_url($_SERVER["REQUEST_URI"]);
 $path = $parsed_uri['path'];
 
 $routes = [
+	// Ex: http://localhost:3000/mesas' ou 'http://localhost:3000/dashboard'
 	['path' => '/\/mesas/', 'controller' => 'Mesas'],
 	['path' => '/\/menu/', 'controller' => 'Menu'],
 	['path' => '/\/dashboard/', 'controller' => 'Dashboard'],

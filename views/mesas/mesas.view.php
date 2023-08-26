@@ -10,6 +10,7 @@
 	<?= \Tags\navbar($auth_token, $this->path) ?>
 	<h1>Hello from Mesas</h1>
 </body>
+
 <script type='text/javascript' src='views/mesas/mesas.js'></script>
 
 </html>
