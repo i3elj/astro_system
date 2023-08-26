@@ -92,6 +92,7 @@
 	</div>
 
 	<script type="module" src="views/auth/signup/signup.js"></script>
+
 </body>
 
 </html>
