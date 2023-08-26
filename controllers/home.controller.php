@@ -15,8 +15,8 @@ class Home extends HomeModel
     public function Handler(): void
     {
         match ($_SERVER["REQUEST_METHOD"]) {
-            "GET" => self::build_view(),
-            "POST" => self::add_order(),
+            "GET" => $this->build_view(),
+            "POST" => $this->add_order(),
             default => badrequest(),
         };
     }
@@ -44,7 +44,7 @@ class Home extends HomeModel
 
         // Database::add_pedidos_to_db($order, $id);
 
-        self::build_view();
+        $this->build_view();
     }
 
     /**
@@ -53,6 +53,7 @@ class Home extends HomeModel
      */
     private function build_view(): void
     {
+        $auth_token = $_COOKIE['authToken'];
         require_once 'views/home/home.view.php';
         exit(0);
     }

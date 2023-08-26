@@ -33,7 +33,7 @@ class DatabaseModel
 	 * Runs a query in the database.
 	 *
 	 * @param string $query_string The query you want to run
-	 * @param arary $values All the values the query needs
+	 * @param array $values All the values the query needs
 	 * @return void
 	 */
 	protected function query($query_string, $values = [])
@@ -53,10 +53,10 @@ class DatabaseModel
 	 * Runs a query in the database and return the affected rows.
 	 *
 	 * @param string $query_string The query you want to run
-	 * @param arary $values All the values the query needs
+	 * @param array $values All the values the query needs
 	 * @return array
 	 */
-	protected function queryReturn($query_string, ...$values = [])
+	protected function queryReturn($query_string, $values = [])
 	{
 		$stmt = $this->connect()->prepare($query_string);
 

@@ -15,7 +15,7 @@ class Dashboard extends DashboardModel
 	public function Handler(): void
 	{
 		match ($_SERVER['REQUEST_METHOD']) {
-			'GET' => self::build_view(),
+			'GET' => $this->build_view(),
 			default => badrequest()
 		};
 	}

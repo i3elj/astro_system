@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<?= create_head_tag(
+<?= Tags::head(
 	title: 'Astro System - SignUp',
 	styles: ['views/auth/auth.style.css']
 ) ?>

@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html>
 
-<?= create_head_tag(
+<?= \Tags\head(
 	title: "Astro System",
 	styles: ["views/home/home.style.css"]
 ) ?>
 
 <body>
-	<nav id="Home_navbar">
-		<h2 id="Home_navbar-logo">Logo</h2>
+	<?= \Tags\navbar($auth_token, $this->path) ?>
+	<main class="main">
 		<div>
-			<?php if ($uname || $uemail) : ?>
-				<p>Logged in</p>
-			<?php else : ?>
-				<a href="/signup">Sign Up</a>
-				<a href="/login">Log In</a>
-			<?php endif; ?>
+			<h1 class="main-title">Best Restaurant System Ever!</h1>
+			<p class="main-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 		</div>
-	</nav>
-	<main id="Home_main">
-		<div>
-			<h1 id="Home_main-title">Best Restaurant System Ever!</h1>
-			<p id="Home_main-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
-		<img id="Home_main-img" src="https://wixplosives.github.io/codux-assets-storage/add-panel/image-placeholder.jpg" />
+
+		<img class="main-img" src="https://wixplosives.github.io/codux-assets-storage/add-panel/image-placeholder.jpg" />
 	</main>
 </body>
+
 <script type="text/javascript" src="views/home/home.js"></script>
 
 </html>
@@ -36,9 +28,9 @@
 	?>
 	  <li>
 		<a href='/table/<?php // $table["id"]
-						?>'>
+										?>'>
 		  Mesa <?php // $table["id"]
-				?>
+						?>
 		</a>
 	  </li>
 	<?php // endforeach
@@ -50,7 +42,7 @@
 	?>
 	<div>
 	  <h1 class="title">Mesa <?php // $selected_table["id"]
-								?></h1>
+														?></h1>
 	  <table id="orderList">
 		<tr>
 		  <th>Prato</th>
@@ -65,15 +57,15 @@
 		?>
 		  <tr>
 			<td class="table-dishName"><?php // $order["dishName"]
-										?></td>
+																	?></td>
 			<td class="table-quantity"><?php // $order["quantity"]
-										?>x</td>
+																	?>x</td>
 			<td class="table-price">R$ <?php // $order["price"]
-										?></td>
+																	?></td>
 			<td class="table-hour"><?php // $order["hour"]
-									?></td>
+															?></td>
 			<td class="table-status"><?php // $order["status"]
-										?></td>
+																?></td>
 		  </tr>
 		<?php // endforeach
 		?>
@@ -82,7 +74,7 @@
 		  <?php // $action_url = "/table/" . $selected_table['id'];
 			?>
 		  <form action=<?php // $action_url
-						?> method="POST">
+										?> method="POST">
 			<td colspan="2" class="td-input">
 			  <input id="name" type='text' name='dishName' />
 			</td>

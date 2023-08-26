@@ -1,6 +1,18 @@
 <?php
 
 /**
+ * Log variables to the console
+ *
+ * @param array $values Holds each value that will be send to the client.
+ */
+function logger(...$values)
+{
+	foreach ($values as $key => $value) {
+		error_log("\tLOGGER SAYS: $key: $value", 4);
+	}
+}
+
+/**
  * Dump and die. Sends variables to the client and kills the connection.
  *
  * @param array $values Holds each value that will be send to the client.

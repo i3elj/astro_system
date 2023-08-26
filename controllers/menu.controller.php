@@ -15,7 +15,7 @@ class Menu extends MenuModel
     public function Handler(): void
     {
         match ($_SERVER['REQUEST_METHOD']) {
-            'GET' => self::build_view(),
+            'GET' => $this->build_view(),
             default => badrequest(),
         };
     }
@@ -26,6 +26,7 @@ class Menu extends MenuModel
      */
     private function build_view(): void
     {
+        $auth_token = $_COOKIE['authToken'];
         require_once 'views/menu/menu.view.php';
         exit(0);
     }

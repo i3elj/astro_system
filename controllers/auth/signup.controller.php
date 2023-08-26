@@ -15,8 +15,8 @@ class SignUp extends SignUpModel
 	public function Handler()
 	{
 		match ($_SERVER['REQUEST_METHOD']) {
-			'GET' => self::build_view(),
-			'POST' => self::signup()
+			'GET' => $this->build_view(),
+			'POST' => $this->signup()
 		};
 	}
 
