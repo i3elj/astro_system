@@ -1,6 +1,7 @@
 <?php
 
-require_once "model/DatabaseModel.php";
+require_once 'model/DatabaseModel.php';
+require_once 'lib/extras.php';
 
 class DefaultMigrations extends DatabaseModel
 {
@@ -54,13 +55,8 @@ class DefaultMigrations extends DatabaseModel
 		];
 
 		foreach ($tables as $table_name => $table) {
-			try {
-				$stmt = $this->connect()->prepare($table);
-				$succeeded = $stmt->execute();
-			} catch (PDOException $e) {
-				error_log("ERROR at: " . $table_name, 4);
-				error_log($e, 4);
-			}
+			$stmt = $this->connect()->postgres()->prepare($table);
+			$succeeded = $stmt->execute();
 
 			if (!$succeeded) {
 				printf("Prepare statement error: " . $stmt);
@@ -122,7 +118,7 @@ class DefaultMigrations extends DatabaseModel
 		foreach ($queries as $query_name => $query) {
 			if (is_array($query)) {
 				foreach ($query as $value) {
-					$stmt = $this->connect()->prepare($value);
+					$stmt = $this->connect()->postgres()->prepare($value);
 					$succeeded = $stmt->execute();
 
 					if (!$succeeded) {
@@ -136,7 +132,7 @@ class DefaultMigrations extends DatabaseModel
 				exit(0);
 			}
 
-			$stmt = $this->connect()->prepare($query);
+			$stmt = $this->connect()->postgres()->prepare($query);
 
 			if ($query_name == 'users') {
 				$stmt->bindParam(':authToken', $auth_token, PDO::PARAM_STR);
