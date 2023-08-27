@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 
-<?= Tags::head(
+<?= \Tags\head(
 	title: "Astro System - Login",
 	styles: ['views/auth/auth.style.css']
 ) ?>
 
 <body>
-	<div id="authContainer">
+	<?= \Tags\navbar($auth_token, $path) ?>
+	<main id="authContainer">
 		<h1>Login</h1>
 		<p id="loginError">Vazio</p>
 		<form id="form" onsubmit="login(); return false">
@@ -15,7 +16,7 @@
 			<input class="inputField" type="password" name="password" placeholder="Type your password" required />
 			<input id="submitButton" type="submit" value="Authenticate" />
 		</form>
-	</div>
+	</main>
 </body>
 
 <script type="module" src="views/auth/login/login.js"></script>
