@@ -23,6 +23,10 @@ function navbar($token, $path)
 			height: 38px;
 		}
 
+		.navbar-links>a {
+			height: 30px;
+		}
+
 		.logout {
 			all: unset;
 			font-size: 18px;
@@ -59,36 +63,42 @@ function navbar($token, $path)
 			margin-bottom: -2px;
 		}
 	</style>
+
 	<nav class='navbar'>
-		<a href="/" class='navbar-logo h2'>Astro</a>
+		<a href="/home" class='navbar-logo h2'>Astro</a>
+
 		<div class='navbar-links'>
 
 			<?php if ($token) : ?>
-
 				<div class='navbar-buttons'>
-					<div class='link-container <?= $path == '/caixa' ? 'active' : null ?>'>
-						<a href='/caixa'>Fechar Caixa</a>
+					<div class='link-container <?= $path == '/dashboard' ? 'active' : null ?>'>
+						<a href='/dashboard'>Painel de Controle</a>
 					</div>
 
-					<div class='link-container <?= $path == '/mesas' ? 'active' : null ?>'>
-						<a href='/mesas'>Mesas</a>
+					<div class='link-container <?= $path == '/caixa' ? 'active' : null ?>'>
+						<a href='/caixa'>Caixa</a>
 					</div>
 
 					<div class='link-container <?= $path == '/contabilidade' ? 'active' : null ?>'>
 						<a href='/contabilidade'>Contabilidade</a>
 					</div>
 
-					<div class='link-container <?= $path == '/menu' ? 'active' : null ?>'>
-						<a href='/menu'>Menu</a>
+					<div class='link-container <?= $path == '/mesas' ? 'active' : null ?>'>
+						<a href='/mesas'>Mesas</a>
+					</div>
+
+					<div class='link-container <?= $path == '/cardapio' ? 'active' : null ?>'>
+						<a href='/cardapio'>Cardápio</a>
 					</div>
 				</div>
 
 				<div class='vertical-line'></div>
+
 				<button class='logout btn' onclick='logout()'>
-					Log out
+					Log Out
 				</button>
 
-				<a style='height: 30px' href='/profile' title="Profile Settings">
+				<a href='/profile' title="Profile Settings">
 					<?= \Icons\Profile() ?>
 				</a>
 
