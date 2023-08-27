@@ -53,7 +53,7 @@ class Home extends HomeModel
      */
     private function build_view(): void
     {
-        $auth_token = $_COOKIE['authToken'];
+        $auth_token = $_COOKIE['authToken'] ?? '';
         require_once 'views/home/home.view.php';
         exit(0);
     }

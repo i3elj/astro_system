@@ -63,7 +63,7 @@ function navbar($token, $path)
 		<a href="/" class='navbar-logo h2'>Astro</a>
 		<div class='navbar-links'>
 
-			<?php if ($token) : ?>
+			<?php if (strlen($token) > 0) : ?>
 
 				<div class='navbar-buttons'>
 					<div class='link-container <?= $path == '/caixa' ? 'active' : null ?>'>
