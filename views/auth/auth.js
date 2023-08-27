@@ -32,7 +32,7 @@ export function on_error(response) {
 
 export function logout() {
 	document.cookie = "authToken=a;expires=Thu, 01 Jan 1970 00:00:01 GMT";
-	document.location = "http://localhost:3000/login"
+	document.location = "http://localhost:3000/home"
 }
 
 const auth = {
