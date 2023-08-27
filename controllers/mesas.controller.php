@@ -26,7 +26,7 @@ class Mesas extends MesasModel
 	 */
     private function build_view(): void
     {
-        $auth_token = $_COOKIE['authToken'];
+        $auth_token = $_COOKIE['authToken'] ?? '';
         require_once 'views/mesas/mesas.view.php';
         exit(0);
     }

@@ -2,7 +2,7 @@
 
 require_once "model/home.model.php";
 
-class Home extends HomeModel
+class Home extends HomeModel implements Auth
 {
     public function __construct(private string $path = '/\//')
     {
@@ -53,7 +53,7 @@ class Home extends HomeModel
      */
     private function build_view(): void
     {
-        $auth_token = $_COOKIE['authToken'];
+        $auth_token = $_COOKIE['authToken'] ?? '';
         require_once 'views/home/home.view.php';
         exit(0);
     }
