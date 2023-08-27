@@ -9,12 +9,14 @@ $parsed_uri = parse_url($_SERVER["REQUEST_URI"]);
 $path = $parsed_uri['path'];
 
 $routes = [
+	['path' => '/\/home/', 'controller' => 'Home'],
+	// ['path' => '/\/caixa/', 'controller' => 'Caixa'], not implemented
 	['path' => '/\/mesas/', 'controller' => 'Mesas'],
-	['path' => '/\/menu/', 'controller' => 'Menu'],
+	['path' => '/\/cardapio/', 'controller' => 'Cardapio'],
 	['path' => '/\/dashboard/', 'controller' => 'Dashboard'],
 	['path' => '/\/signup/', 'controller' => 'SignUp'],
 	['path' => '/\/login/', 'controller' => 'Login'],
-	['path' => '/\//', 'controller' => 'Home']
+	// ['path' => '/\//', 'controller' => 'LandingPage'], not implemented
 ];
 
 create_router($routes, $path);
