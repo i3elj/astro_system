@@ -1,5 +1,7 @@
 <?php
+require_once "model/DatabaseModel.php";
 
-class DashboardModel extends DatabaseModel
+class DashboardModel
 {
+	use \Database\Model;
 }

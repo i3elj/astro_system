@@ -2,6 +2,7 @@
 
 require_once "model/DatabaseModel.php";
 
-class HomeModel extends DatabaseModel
+class HomeModel
 {
+	use \Database\Model;
 }

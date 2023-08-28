@@ -1,7 +1,12 @@
 <?php
 
-class DatabaseModel
+namespace Database;
+
+use \PDO;
+
+trait Model
 {
+
 	/**
 	 * Connects to a database
 	 *
@@ -23,8 +28,8 @@ class DatabaseModel
 			';dbname='    . $NAME .
 			';user='      . $USER .
 			';password='  . $PWD;
-		$pdo = new PDO($dsn, $USER, $PWD) or throw new PDOException();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+		$pdo = new \PDO($dsn, $USER, $PWD) or throw new \PDOException();
+		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 
 		return $pdo;
 	}

@@ -1,7 +1,11 @@
 <?php
 
-class SignUpModel extends DatabaseModel
+require_once "model/DatabaseModel.php";
+
+class SignUpModel
 {
+	use \Database\Model;
+
 	/**
 	 * Check if the provided user exists or not, based on it's unique id.
 	 *

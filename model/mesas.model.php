@@ -2,6 +2,7 @@
 
 require_once 'model/DatabaseModel.php';
 
-class MesasModel extends DatabaseModel
+class MesasModel
 {
+	use \Database\Model;
 }
