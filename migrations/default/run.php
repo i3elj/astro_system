@@ -1,6 +1,7 @@
 <?php
 
-require_once "model/DatabaseModel.php";
+require_once 'model/DatabaseModel.php';
+require_once 'lib/extras.php';
 
 class DefaultMigrations extends DatabaseModel
 {
@@ -14,53 +15,48 @@ class DefaultMigrations extends DatabaseModel
 	{
 		$tables = [
 			"users" => "CREATE TABLE users (
-				cpf             VARCHAR(14) PRIMARY KEY UNIQUE,
-				nickname        TEXT NOT NULL,
-				real_name       TEXT NOT NULL,
-				email           VARCHAR NOT NULL,
-				password        TEXT NOT NULL,
-				auth_token      TEXT NOT NULL,
-				phone_number    TEXT,
-				permissions     TEXT,
-				role            TEXT NOT NULL
+			    cpf 			TEXT PRIMARY KEY,
+			    nickname 		TEXT NOT NULL,
+			    real_name 		TEXT NOT NULL,
+			    email 			VARCHAR NOT NULL,
+			    password 		TEXT NOT NULL,
+			    auth_token 		TEXT NOT NULL,
+			    phone_number 	TEXT,
+			    permissions 	TEXT,
+			    role 			TEXT NOT NULL
 			);",
 			"dishes" => "CREATE TABLE dishes (
-				id              SERIAL PRIMARY KEY UNIQUE,
-				name            TEXT NOT NULL,
-				cost            DECIMAL(10,2),
-				ingredients     TEXT NOT NULL
+			    id 			INTEGER PRIMARY KEY,
+			    name 		TEXT NOT NULL,
+			    cost 		DECIMAL(10,2),
+			    ingredients TEXT NOT NULL
 			);",
 			"ingredients" => "CREATE TABLE ingredients (
-				id              SERIAL PRIMARY KEY UNIQUE,
-				name            TEXT NOT NULL
+			    id 		INTEGER PRIMARY KEY,
+			    name 	TEXT NOT NULL
 			);",
 			"tables" => "CREATE TABLE tables (
-				id              INT PRIMARY KEY UNIQUE,
-				location        TEXT,
-				bill            DECIMAL(10,2),
-				is_reserved     BOOLEAN NOT NULL,
-				is_occupied     BOOLEAN NOT NULL
+			    id 			INTEGER PRIMARY KEY,
+			    location 	TEXT,
+			    bill 		DECIMAL(10,2),
+			    is_reserved BOOLEAN NOT NULL,
+			    is_occupied BOOLEAN NOT NULL
 			);",
-			"orders" => "CREATE TABLE orders (
-				id              INT PRIMARY KEY UNIQUE,
-				fk_table_id     INT NOT NULL,
-				fk_ordered_item INT NOT NULL,
-				observations    TEXT,
-				created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-				expiration_time TIMESTAMP DEFAULT (CURRENT_TIMESTAMP + INTERVAL '2 hours'),
-				FOREIGN KEY (fk_table_id) REFERENCES tables(id),
-				FOREIGN KEY (fk_ordered_item) REFERENCES dishes(id)
+			"orders" => " CREATE TABLE orders (
+			    id 				INTEGER PRIMARY KEY,
+			    fk_table_id 	INTEGER NOT NULL,
+			    fk_ordered_item INTEGER NOT NULL,
+			    observations 	TEXT,
+			    created_at 		TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			    expiration_time TIMESTAMP DEFAULT (datetime('now', '+2 hours')),
+			    FOREIGN KEY (fk_table_id) REFERENCES tables(id),
+			    FOREIGN KEY (fk_ordered_item) REFERENCES dishes(id)
 			);"
 		];
 
 		foreach ($tables as $table_name => $table) {
-			try {
-				$stmt = $this->connect()->prepare($table);
-				$succeeded = $stmt->execute();
-			} catch (PDOException $e) {
-				error_log("ERROR at: " . $table_name, 4);
-				error_log($e, 4);
-			}
+			$stmt = $this->connect()->prepare($table);
+			$succeeded = $stmt->execute();
 
 			if (!$succeeded) {
 				printf("Prepare statement error: " . $stmt);

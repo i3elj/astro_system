@@ -10,7 +10,7 @@ trait Model
 	/**
 	 * Connects to a database
 	 *
-	 * @return PDOException | PDO
+	 * @return PDO | PDOException
 	 */
 	protected function connect()
 	{
