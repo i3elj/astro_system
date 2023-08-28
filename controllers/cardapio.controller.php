@@ -1,9 +1,12 @@
 <?php
 
 require_once 'model/cardapio.model.php';
+require_once "services/auth.service.php";
 
 class Cardapio extends CardapioModel
 {
+    use Services\Auth;
+
     public function __construct(private string $path = '/\/cardapio/')
     {
     }
@@ -27,6 +30,7 @@ class Cardapio extends CardapioModel
     private function build_view(): void
     {
         $auth_token = $_COOKIE['authToken'] ?? '';
+        $is_logged = $this->is_authenticated($auth_token);
         require_once 'views/cardapio/cardapio.view.php';
         exit(0);
     }

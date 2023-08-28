@@ -1,9 +1,11 @@
 <?php
 
-require_once "model/auth/login.model.php";
+require_once "services/auth.service.php";
 
-class Login extends LoginModel
+class Login
 {
+	use \Services\Auth;
+
 	public function __construct(private string $path = '/\/login/')
 	{
 	}
