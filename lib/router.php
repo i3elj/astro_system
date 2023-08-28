@@ -16,11 +16,10 @@ function create_router($routes, $path)
 {
     foreach ($routes as $route) {
         if (preg_match($route['path'], $path, $matches)) {
-            if ($path != $matches[0])
-                notfound();
-
             $view = new $route['controller']($path);
             $view->Handler();
         }
     }
+
+    notfound();
 }
