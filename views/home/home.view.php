@@ -1,13 +1,18 @@
+<?php
+require_once "views/partials/head.php";
+require_once "views/partials/navbar.php"
+?>
+
 <!DOCTYPE html>
 <html>
 
-<?= \Tags\head(
+<?= Tags\head(
 	title: "Astro System",
 	styles: ["views/home/home.style.css"]
 ) ?>
 
 <body>
-	<?= \Tags\navbar($auth_token, $this->path) ?>
+	<?= Tags\navbar($is_logged, $this->path) ?>
 	<main class="main">
 		<div>
 			<h1 class="main-title">Best Restaurant System Ever!</h1>

@@ -2,6 +2,8 @@
 
 namespace Tags;
 
+require_once "views/partials/icons.php";
+
 function navbar($token, $path)
 { ?>
 	<style>
