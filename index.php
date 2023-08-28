@@ -1,9 +1,4 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
-
-
-
-//AAAAAAAAAAAAAAAAAAAAA
 
 require_once 'lib/router.php';
 require_once 'lib/extras.php';
