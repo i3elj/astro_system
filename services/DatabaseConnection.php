@@ -4,7 +4,7 @@ namespace Database;
 
 use \PDO;
 
-trait Model
+trait Connection
 {
 
 	/**
@@ -30,6 +30,7 @@ trait Model
 			';password='  . $PWD;
 		$pdo = new \PDO($dsn, $USER, $PWD) or throw new \PDOException();
 		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+		$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 
 		return $pdo;
 	}

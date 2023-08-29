@@ -1,10 +1,10 @@
 <?php
 
-require_once "model/DatabaseModel.php";
+require_once "services/DatabaseConnection.php";
 
 class SignUpModel
 {
-	use \Database\Model;
+	use \Database\Connection;
 
 	/**
 	 * Check if the provided user exists or not, based on it's unique id.

@@ -4,7 +4,7 @@ namespace Services;
 
 trait Auth
 {
-	use \Database\Model;
+	use \Database\Connection;
 
 	/**
 	 * Check if the provided email exists or not.

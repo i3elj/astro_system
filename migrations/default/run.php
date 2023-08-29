@@ -1,10 +1,12 @@
 <?php
 
-require_once 'model/DatabaseModel.php';
+require_once 'services/DatabaseConnection.php';
 require_once 'lib/extras.php';
 
-class DefaultMigrations extends DatabaseModel
+class DefaultMigrations
 {
+	use \Database\Connection;
+
 	public function InitDatabase()
 	{
 		$this->CreateTables();

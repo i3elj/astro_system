@@ -1,7 +1,7 @@
 <?php
-require_once "model/DatabaseModel.php";
+require_once "services/DatabaseConnection.php";
 
 class DashboardModel
 {
-	use \Database\Model;
+	use \Database\Connection;
 }

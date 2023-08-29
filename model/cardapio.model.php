@@ -1,8 +1,8 @@
 <?php
 
-require_once 'model/DatabaseModel.php';
+require_once 'services/DatabaseConnection.php';
 
 class CardapioModel
 {
-	use \Database\Model;
+	use \Database\Connection;
 }
