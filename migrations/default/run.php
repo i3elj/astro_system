@@ -17,42 +17,42 @@ class DefaultMigrations
 	{
 		$tables = [
 			"users" => "CREATE TABLE users (
-			    cpf 			TEXT PRIMARY KEY,
-			    nickname 		TEXT NOT NULL,
-			    real_name 		TEXT NOT NULL,
-			    email 			VARCHAR NOT NULL,
-			    password 		TEXT NOT NULL,
-			    auth_token 		TEXT NOT NULL,
-			    phone_number 	TEXT,
-			    permissions 	TEXT,
-			    role 			TEXT NOT NULL
+				cpf             VARCHAR(14) PRIMARY KEY UNIQUE,
+				nickname        TEXT NOT NULL,
+				real_name       TEXT NOT NULL,
+				email           VARCHAR NOT NULL,
+				password        TEXT NOT NULL,
+				auth_token      TEXT NOT NULL,
+				phone_number    TEXT,
+				permissions     TEXT,
+				role            TEXT NOT NULL
 			);",
 			"dishes" => "CREATE TABLE dishes (
-			    id 			INTEGER PRIMARY KEY,
-			    name 		TEXT NOT NULL,
-			    cost 		DECIMAL(10,2),
-			    ingredients TEXT NOT NULL
+				id              SERIAL PRIMARY KEY UNIQUE,
+				name            TEXT NOT NULL,
+				cost            DECIMAL(10,2),
+				ingredients     TEXT NOT NULL
 			);",
 			"ingredients" => "CREATE TABLE ingredients (
-			    id 		INTEGER PRIMARY KEY,
-			    name 	TEXT NOT NULL
+				id 		SERIAL PRIMARY KEY UNIQUE,
+				name 	TEXT NOT NULL
 			);",
 			"tables" => "CREATE TABLE tables (
-			    id 			INTEGER PRIMARY KEY,
-			    location 	TEXT,
-			    bill 		DECIMAL(10,2),
-			    is_reserved BOOLEAN NOT NULL,
-			    is_occupied BOOLEAN NOT NULL
+				id              INTEGER PRIMARY KEY UNIQUE,
+				location        TEXT,
+				is_reserved     BOOLEAN NOT NULL,
+				is_occupied     BOOLEAN NOT NULL,
+				bill            DECIMAL(10,2)
 			);",
-			"orders" => " CREATE TABLE orders (
-			    id 				INTEGER PRIMARY KEY,
-			    fk_table_id 	INTEGER NOT NULL,
-			    fk_ordered_item INTEGER NOT NULL,
-			    observations 	TEXT,
-			    created_at 		TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-			    expiration_time TIMESTAMP DEFAULT (datetime('now', '+2 hours')),
-			    FOREIGN KEY (fk_table_id) REFERENCES tables(id),
-			    FOREIGN KEY (fk_ordered_item) REFERENCES dishes(id)
+			"orders" => "CREATE TABLE orders (
+				id              INT PRIMARY KEY UNIQUE,
+				fk_table_id     INT NOT NULL,
+				fk_ordered_item INT NOT NULL,
+				observations    TEXT,
+				created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+				expiration_time TIMESTAMP DEFAULT (CURRENT_TIMESTAMP + INTERVAL '2 hours'),
+				FOREIGN KEY (fk_table_id) REFERENCES tables(id),
+				FOREIGN KEY (fk_ordered_item) REFERENCES dishes(id)
 			);"
 		];
 
@@ -110,10 +110,10 @@ class DefaultMigrations
 				"INSERT INTO ingredients(name) VALUES ('maize starch');",
 			],
 			"tables" => [
-				"INSERT INTO tables VALUES (0,'plaza1',0,false,false);",
-				"INSERT INTO tables VALUES (1,'plaza1',0,false,true);",
-				"INSERT INTO tables VALUES (2,'plaza2',0,false,true);",
-				"INSERT INTO tables VALUES (3,'plaza3',0,true,false);",
+				"INSERT INTO tables VALUES (0,'plaza1',false,false,0);",
+				"INSERT INTO tables VALUES (1,'plaza1',false,true,0);",
+				"INSERT INTO tables VALUES (2,'plaza2',false,true,0);",
+				"INSERT INTO tables VALUES (3,'plaza3',true,false,0);",
 			],
 		];
 
@@ -131,25 +131,25 @@ class DefaultMigrations
 				}
 
 				printf("INSERTING VALUE INTO $query_name TABLE...\n");
-				exit(0);
+			} else {
+
+				$stmt = $this->connect()->prepare($query);
+
+				if ($query_name == 'users') {
+					$stmt->bindParam(':authToken', $auth_token, PDO::PARAM_STR);
+					$stmt->bindParam(':password', $pwd, PDO::PARAM_STR);
+				}
+
+				$succeeded = $stmt->execute();
+
+				if (!$succeeded) {
+					printf("Prepare statement error: $stmt");
+					$stmt = null;
+					exit(1);
+				}
+
+				printf("INSERTING VALUE INTO $query_name TABLE...\n");
 			}
-
-			$stmt = $this->connect()->prepare($query);
-
-			if ($query_name == 'users') {
-				$stmt->bindParam(':authToken', $auth_token, PDO::PARAM_STR);
-				$stmt->bindParam(':password', $pwd, PDO::PARAM_STR);
-			}
-
-			$succeeded = $stmt->execute();
-
-			if (!$succeeded) {
-				printf("Prepare statement error: $stmt");
-				$stmt = null;
-				exit(1);
-			}
-
-			printf("INSERTING VALUE INTO $query_name TABLE...\n");
 		}
 	}
 }
