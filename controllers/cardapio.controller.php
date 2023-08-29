@@ -5,7 +5,7 @@ require_once "services/auth.service.php";
 
 class Cardapio extends CardapioModel
 {
-    use Services\Auth;
+    use \Services\Auth;
 
     public function __construct(private string $path = '/\/cardapio/')
     {

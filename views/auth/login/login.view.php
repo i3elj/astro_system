@@ -6,13 +6,13 @@ require_once "views/partials/navbar.php"
 <!DOCTYPE html>
 <html>
 
-<?= Tags\head(
+<?= \Tags\head(
 	title: "Astro System - Login",
 	styles: ['views/auth/auth.style.css']
 ) ?>
 
 <body>
-	<?= Tags\navbar($auth_token, $path) ?>
+	<?= \Tags\navbar($auth_token, $path) ?>
 	<main id="authContainer">
 		<h1>Login</h1>
 		<p id="loginError">Vazio</p>
