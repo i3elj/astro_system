@@ -6,40 +6,43 @@ require_once "views/partials/navbar.php"
 <!DOCTYPE html>
 <html>
 
-<?= Tags\head(
+<?= \Tags\head(
 	title: 'Astro System - Mesas',
 	styles: ['views/mesas/mesas.style.css']
 ) ?>
 
 <body>
-	<?= \Tags\navbar($auth_token, $this->path) ?>
+	<?= \Tags\navbar($is_logged, $this->path) ?>
 	<main>
 		<div class="searchContainer">
 			<h1>Pesquise Por Mesas</h1>
 			<div class="horizontal-line"></div>
-			<div class="options">
+			<form class="options">
 				<div class="optionsContainers">
-					<label for="searchBy">Pesquisar Por</label>
-					<input type="number" name="searchBy" id="" placeholder="Número">
-				</div>
-				<div class="optionsContainers">
-					<label for="keyWord">Palavras-Chave</label>
-					<input type="text" name="keyWord" id="" placeholder="Pesquisar mesa">
-				</div>
-				<div class="optionsContainers">
-					<label for="sortNumber">Ordene Por</label>
-					<input type="number" name="sortNumber" id="" placeholder="Número">
-				</div>
-				<div class="optionsContainers">
-					<label for="sortType">Ordenação</label>
-					<select name="SortType" id="">
-						<option value="crescente">Crescente</option>
-						<option value="decrescente">Decrescente</option>
+					<label for="sortBy">Ordene Por</label>
+					<select name="sortBy" id="sortBy">
+						<option value="number">Número</option>
+						<option value="description">Descrição</option>
+						<option value="ocupied">Ocupação</option>
+						<option value="status">Status</option>
+						<option value="reserved">Reserva</option>
+						<option value="bill">Valor</option>
 					</select>
 				</div>
 				<div class="optionsContainers">
-					<label for="intensPage">Itens por Página</label>
-					<select name="itensPage" id="">
+					<label for="keywords">Palavras-Chave</label>
+					<input type="text" name="keywords" id="keywords" placeholder="Pesquisar mesa" autofocus>
+				</div>
+				<div class="optionsContainers">
+					<label for="orderType">Ordenação</label>
+					<select name="orderType" id="orderType">
+						<option value="ascending">Crescente</option>
+						<option value="descending">Decrescente</option>
+					</select>
+				</div>
+				<div class="optionsContainers">
+					<label for="itemsPerPage">Itens por Página</label>
+					<select name="itemsPerPage" id="itemsPerPage">
 						<option value="10">10</option>
 						<option value="20">20</option>
 						<option value="50">50</option>
@@ -47,40 +50,30 @@ require_once "views/partials/navbar.php"
 					</select>
 				</div>
 				<input type="submit" value="Pesquisar">
-			</div>
+			</form>
 		</div>
 		<table class="tableList">
 			<thead>
 				<tr>
 					<th>Numero da Mesa</th>
-					<th>Descricao</th>
+					<th>Descrição</th>
 					<th>Ocupada</th>
 					<th>Status</th>
 					<th>Reservada</th>
-					</tr>
+					<th>Valor</th>
+				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>001</td>
-					<td>Praca 2</td>
-					<td>Sim</td>
-					<td>Aberta</td>
-					<td>Nao</td>
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Praca 2</td>
-					<td>Sim</td>
-					<td>Aberta</td>
-					<td>Nao</td>
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Praca 2</td>
-					<td>Sim</td>
-					<td>Aberta</td>
-					<td>Nao</td>
-				</tr>
+				<?php foreach ($table_list as $row) : ?>
+					<tr>
+						<td><?= $row['id'] ?></td>
+						<td><?= $row['location'] ?></td>
+						<td><?= $row['is_occupied'] ? 'Sim' : 'Nao' ?></td>
+						<td>status</td>
+						<td><?= $row['is_reserved'] ? 'Sim' : 'Nao' ?></td>
+						<td><?= $row['bill'] ?></td>
+					</tr>
+				<?php endforeach ?>
 			</tbody>
 		</table>
 	</main>
