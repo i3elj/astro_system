@@ -46,14 +46,18 @@ trait Auth
 	 * @param string $token User's token
 	 * @return bool True if the token exists, false otherwise.
 	 */
-	protected function is_authenticated($token): bool
+	protected function is_authenticated($token)
 	{
-		$rows = $this->queryReturn(
-			"SELECT auth_token FROM users WHERE auth_token = ?;",
-			[$token]
-		);
+		if (isset($token)) {
+			$rows = $this->queryReturn(
+				"SELECT auth_token FROM users WHERE auth_token = ?;",
+				[$token]
+			);
 
-		return sizeof($rows) == 1;
+			return sizeof($rows) == 1;
+		}
+
+		return false;
 	}
 
 	/**
