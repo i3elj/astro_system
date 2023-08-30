@@ -26,7 +26,7 @@ function navbar($token, $path)
 		}
 
 		.navbar-links>a {
-			height: 30px;
+			font-size: 18px;
 		}
 
 		.logout {
