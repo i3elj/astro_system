@@ -1,6 +1,6 @@
 <?php
 require_once "views/partials/head.php";
-require_once "views/partials/navbar.php"
+require_once "views/partials/navbar.php";
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +8,10 @@ require_once "views/partials/navbar.php"
 
 <?= \Tags\head(
 	title: 'Astro System - Mesas',
-	styles: ['views/mesas/mesas.style.css']
+	styles: [
+		'views/mesas/mesas.style.css',
+		'views/partials/searchContainer/searchContainer.css',
+	]
 ) ?>
 
 <body>
@@ -19,11 +22,11 @@ require_once "views/partials/navbar.php"
 			<div class="horizontal-line"></div>
 			<form class="options">
 				<div class="optionsContainers">
-					<label for="sortBy">Ordene Por</label>
+					<label for="sortBy">Pesquise Por</label>
 					<select name="sortBy" id="sortBy">
 						<option value="number">Número</option>
 						<option value="description">Descrição</option>
-						<option value="ocupied">Ocupação</option>
+						<option value="occupied">Ocupação</option>
 						<option value="status">Status</option>
 						<option value="reserved">Reserva</option>
 						<option value="bill">Valor</option>
@@ -68,9 +71,9 @@ require_once "views/partials/navbar.php"
 					<tr>
 						<td><?= $row['id'] ?></td>
 						<td><?= $row['location'] ?></td>
-						<td><?= $row['is_occupied'] ? 'Sim' : 'Nao' ?></td>
-						<td><?= $row['is_reserved'] ? 'Sim' : 'Nao' ?></td>
-						<td>status</td>
+						<td><?= $row['is_occupied'] ? 'Sim' : 'Não' ?></td>
+						<td><?= $row['is_reserved'] ? 'Sim' : 'Não' ?></td>
+						<td><?= $row['status'] ?></td>
 						<td><?= $row['bill'] ?></td>
 					</tr>
 				<?php endforeach ?>
