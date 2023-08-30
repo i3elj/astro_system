@@ -112,4 +112,6 @@ function navbar($token, $path)
 			<?php endif; ?>
 		</div>
 	</nav>
+
+	<script type="module" src="views/partials/navbar.js"></script>
 <?php }
