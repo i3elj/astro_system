@@ -24,7 +24,7 @@ class DefaultMigrations
 				password        TEXT NOT NULL,
 				auth_token      TEXT NOT NULL,
 				phone_number    TEXT,
-				permissions     TEXT,
+				permissions     TEXT NOT NULL,
 				role            TEXT NOT NULL
 			);",
 			"dishes" => "CREATE TABLE dishes (
@@ -40,8 +40,9 @@ class DefaultMigrations
 			"tables" => "CREATE TABLE tables (
 				id              INTEGER PRIMARY KEY UNIQUE,
 				location        TEXT,
-				is_reserved     BOOLEAN NOT NULL,
 				is_occupied     BOOLEAN NOT NULL,
+				is_reserved     BOOLEAN NOT NULL,
+				status          TEXT NOT NULL,
 				bill            DECIMAL(10,2)
 			);",
 			"orders" => "CREATE TABLE orders (
@@ -110,10 +111,10 @@ class DefaultMigrations
 				"INSERT INTO ingredients(name) VALUES ('maize starch');",
 			],
 			"tables" => [
-				"INSERT INTO tables VALUES (0,'plaza1',false,false,0);",
-				"INSERT INTO tables VALUES (1,'plaza1',false,true,0);",
-				"INSERT INTO tables VALUES (2,'plaza2',false,true,0);",
-				"INSERT INTO tables VALUES (3,'plaza3',true,false,0);",
+				"INSERT INTO tables VALUES (0,'plaza1',true,false,'aberta',0);",
+				"INSERT INTO tables VALUES (1,'plaza1',true,false,'aberta',0);",
+				"INSERT INTO tables VALUES (2,'plaza2',true,false,'aberta',0);",
+				"INSERT INTO tables VALUES (3,'plaza3',false,true,'aberta',0);",
 			],
 		];
 
