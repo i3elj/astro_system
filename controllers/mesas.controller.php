@@ -34,7 +34,12 @@ class Mesas extends MesasModel
         $orderType = htmlspecialchars($_GET['orderType'] ?? "ascending");
         $itemsPerPage = htmlspecialchars($_GET['itemsPerPage'] ?? 10);
 
-        $table_list = $this->getTableList($itemsPerPage);
+        $table_list = $this->getTableList(
+            $keywords,
+            $sortBy,
+            $orderType,
+            (int)$itemsPerPage
+        );
 
         $validated_token = htmlspecialchars($_COOKIE['authToken']);
         $is_logged = $this->is_authenticated($validated_token);
