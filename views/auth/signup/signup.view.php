@@ -1,3 +1,8 @@
+<?php
+require_once "views/partials/head.php";
+require_once "views/partials/navbar.php"
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +12,7 @@
 ) ?>
 
 <body>
+	<?= \Tags\navbar(false, $this->path) ?>
 	<div id="authContainer">
 		<h1>Sign Up</h1>
 		<p id="loginError">Vazio</p>
