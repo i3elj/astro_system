@@ -82,10 +82,8 @@ thead>tr {
 
 thead>tr>th {
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     padding: 8px 0px;
-    justify-content: space-between;
-    align-self: stretch;
     background: linear-gradient(180deg, #FFF 0%, #F2F2F2 100%);
 }
 
@@ -99,9 +97,7 @@ tbody>tr {
 
 tbody>tr>td {
     padding: 4px 0px;
-    justify-content: space-between;
-    align-self: stretch;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 

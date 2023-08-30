@@ -58,8 +58,8 @@ require_once "views/partials/navbar.php"
 					<th>Numero da Mesa</th>
 					<th>Descrição</th>
 					<th>Ocupada</th>
-					<th>Status</th>
 					<th>Reservada</th>
+					<th>Status</th>
 					<th>Valor</th>
 				</tr>
 			</thead>
@@ -69,8 +69,8 @@ require_once "views/partials/navbar.php"
 						<td><?= $row['id'] ?></td>
 						<td><?= $row['location'] ?></td>
 						<td><?= $row['is_occupied'] ? 'Sim' : 'Nao' ?></td>
-						<td>status</td>
 						<td><?= $row['is_reserved'] ? 'Sim' : 'Nao' ?></td>
+						<td>status</td>
 						<td><?= $row['bill'] ?></td>
 					</tr>
 				<?php endforeach ?>
