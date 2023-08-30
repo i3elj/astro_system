@@ -7,7 +7,7 @@ class Home extends HomeModel
 {
     use \Services\Auth;
 
-    public function __construct(private string $path = '/\//')
+    public function __construct(private string $path = '/\/home/')
     {
     }
 
