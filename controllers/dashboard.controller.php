@@ -19,7 +19,7 @@ class Dashboard extends DashboardModel
 	{
 		match ($_SERVER['REQUEST_METHOD']) {
 			'GET' => $this->build_view(),
-			default => badrequest()
+			default => bad_request()
 		};
 	}
 
