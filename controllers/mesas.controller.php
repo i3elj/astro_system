@@ -1,14 +1,23 @@
 <?php
 
 require_once 'model/mesas.model.php';
-require_once "services/auth.service.php";
+require_once 'services/auth.service.php';
 
 class Mesas extends MesasModel
 {
     use \Services\Auth;
 
-    public function __construct(private string $path = '/\/mesas/')
+    public function __construct(private string $path)
     {
+    }
+
+    /**
+     * The main method of each controller. This method takes care of what the
+     * controller will do depending on each http method used.
+     */
+    public function ApiHandler(): void
+    {
+        $this->build_view();
     }
 
     /**
@@ -17,10 +26,10 @@ class Mesas extends MesasModel
      */
     public function Handler(): void
     {
-        match ($_SERVER['REQUEST_METHOD']) {
-            'GET' => $this->build_view(),
-            default => badrequest(),
-        };
+        if ($_SERVER['REQUEST_METHOD'] == 'GET')
+            $this->build_view();
+
+        bad_request();
     }
 
     /**
@@ -29,9 +38,9 @@ class Mesas extends MesasModel
      */
     private function build_view(): void
     {
-        $keywords = htmlspecialchars($_GET['keywords'] ?? "");
-        $sortBy = htmlspecialchars($_GET['sortBy'] ?? "number");
-        $orderType = htmlspecialchars($_GET['orderType'] ?? "ascending");
+        $keywords = htmlspecialchars($_GET['keywords'] ?? '');
+        $sortBy = htmlspecialchars($_GET['sortBy'] ?? 'number');
+        $orderType = htmlspecialchars($_GET['orderType'] ?? 'ascending');
         $itemsPerPage = htmlspecialchars($_GET['itemsPerPage'] ?? 10);
 
         $table_list = $this->getTableList(
