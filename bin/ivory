@@ -23,11 +23,13 @@ $argv = array_splice($argv, 1);
 $arguments = [];
 foreach ($argv as $arg) array_push($arguments, explode("=", $arg));
 
-$values = [];
-foreach ($arguments as $argument) array_push($values, $argument[1]);
 
-[$RouteName, $path] = $values;
-$routename = strtolower($RouteName);
+$values = [];
+foreach ($arguments as $argument) $values[$argument[0]] = $argument[1];
+
+$routename = strtolower($values['--create-route']);
+$RouteName = $values['--create-route'];
+$path = $values['--path'];
 
 ///////////
 // MODEL //
@@ -37,7 +39,7 @@ $content = "<?php
 
 require_once 'services/DatabaseConnection.php';
 
-class " . $RouteName . "Model
+class $RouteName Model
 {
 	use \Database\Connection;
 }
@@ -53,9 +55,9 @@ $content = "<?php
 
 require_once 'model/$routename.model.php';
 
-class $RouteName extends " . $RouteName . "Model
+class $RouteName extends $RouteName Model
 {
-    public function __construct(private string \$path = '/\\$path/')
+    public function __construct(private string \$path = '$path')
     {
     }
 
@@ -65,10 +67,11 @@ class $RouteName extends " . $RouteName . "Model
 	 */
     public function Handler(): void
     {
-        match (\$_SERVER['REQUEST_METHOD']) {
-            'GET' => \$this->build_view(),
-            default => badrequest(),
-        };
+        if (\$_SERVER['REQUEST_METHOD'] == 'GET') {
+            this->build_view();
+        }
+
+         bad_request();
     }
 
 	/**
@@ -100,7 +103,7 @@ $content = "<!DOCTYPE html>
 
 <?= \Tags\head(
 	title: 'Astro System - $RouteName',
-	styles: ['views/$routename/$routename.style.css']
+	styles: ['/views/$routename/$routename.style.css']
 ) ?>
 
 <body>
@@ -108,7 +111,7 @@ $content = "<!DOCTYPE html>
 	<h1>Hello from $RouteName</h1>
 </body>
 
-<script type='text/javascript' src='views/$routename/$routename.js'></script>
+<script type='text/javascript' src='/views/$routename/$routename.js'></script>
 
 </html>
 ";
