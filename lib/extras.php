@@ -52,17 +52,27 @@ function notfound()
 }
 
 /**
- * Returns a 404 "bad request" status code.
+ * Returns a 400 'bad request' status code.
  */
-function badrequest()
+function bad_request()
 {
 	http_response_code(400);
 	exit(0);
 }
 
+/**
+ * Returns a 400 'bad request' status code and a json body.
+ */
+function bad_api_request()
+{
+	http_response_code(400);
+	echo json_encode(['message' => 'bad request']);
+	exit(0);
+}
+
 function get_route_params(string $path, array $keys): array
 {
-	$parsed_uri = parse_url($_SERVER["REQUEST_URI"]);
+	$parsed_uri = parse_url($_SERVER['REQUEST_URI']);
 	$required_path = $parsed_uri['path'];
 
 	preg_match($path, $required_path, $matches);
