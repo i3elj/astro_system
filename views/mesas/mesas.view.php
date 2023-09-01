@@ -1,6 +1,6 @@
 <?php
-require_once "views/partials/head.php";
-require_once "views/partials/navbar.php";
+require_once 'views/partials/head.php';
+require_once 'views/partials/navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,53 +9,53 @@ require_once "views/partials/navbar.php";
 <?= \Tags\head(
 	title: 'Astro System - Mesas',
 	styles: [
-		'views/mesas/mesas.style.css',
-		'views/partials/searchContainer/searchContainer.css',
+		'/views/mesas/mesas.style.css',
+		'/views/partials/searchContainer/searchContainer.css',
 	]
 ) ?>
 
 <body>
 	<?= \Tags\navbar($is_logged, $this->path) ?>
 	<main>
-		<div class="searchContainer">
+		<div class='searchContainer'>
 			<h1>Pesquise Por Mesas</h1>
-			<div class="horizontal-line"></div>
-			<form class="options">
-				<div class="optionsContainers">
-					<label for="sortBy">Pesquise Por</label>
-					<select name="sortBy" id="sortBy">
-						<option value="number">Número</option>
-						<option value="description">Descrição</option>
-						<option value="occupied">Ocupação</option>
-						<option value="status">Status</option>
-						<option value="reserved">Reserva</option>
-						<option value="bill">Valor</option>
+			<div class='horizontal-line'></div>
+			<form class='options'>
+				<div class='optionsContainers'>
+					<label for='sortBy'>Pesquise Por</label>
+					<select name='sortBy' id='sortBy'>
+						<option value='number'>Número</option>
+						<option value='description'>Descrição</option>
+						<option value='occupied'>Ocupação</option>
+						<option value='status'>Status</option>
+						<option value='reserved'>Reserva</option>
+						<option value='bill'>Valor</option>
 					</select>
 				</div>
-				<div class="optionsContainers">
-					<label for="keywords">Palavras-Chave</label>
-					<input type="text" name="keywords" id="keywords" placeholder="Pesquisar mesa" autofocus>
+				<div class='optionsContainers'>
+					<label for='keywords'>Palavras-Chave</label>
+					<input type='text' name='keywords' id='keywords' placeholder='Pesquisar mesa' autofocus>
 				</div>
-				<div class="optionsContainers">
-					<label for="orderType">Ordenação</label>
-					<select name="orderType" id="orderType">
-						<option value="ascending">Crescente</option>
-						<option value="descending">Decrescente</option>
+				<div class='optionsContainers'>
+					<label for='orderType'>Ordenação</label>
+					<select name='orderType' id='orderType'>
+						<option value='ascending'>Crescente</option>
+						<option value='descending'>Decrescente</option>
 					</select>
 				</div>
-				<div class="optionsContainers">
-					<label for="itemsPerPage">Itens por Página</label>
-					<select name="itemsPerPage" id="itemsPerPage">
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
+				<div class='optionsContainers'>
+					<label for='itemsPerPage'>Itens por Página</label>
+					<select name='itemsPerPage' id='itemsPerPage'>
+						<option value='10'>10</option>
+						<option value='20'>20</option>
+						<option value='50'>50</option>
+						<option value='100'>100</option>
 					</select>
 				</div>
-				<input type="submit" value="Pesquisar">
+				<input class="button" type='submit' value='Pesquisar'>
 			</form>
 		</div>
-		<table class="tableList">
+		<table class='tableList'>
 			<thead>
 				<tr>
 					<th>Numero da Mesa</th>
@@ -82,6 +82,6 @@ require_once "views/partials/navbar.php";
 	</main>
 </body>
 
-<script type='text/javascript' src='views/mesas/mesas.js'></script>
+<script type='text/javascript' src='/views/mesas/mesas.js'></script>
 
 </html>

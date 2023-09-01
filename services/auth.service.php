@@ -15,7 +15,7 @@ trait Auth
 	protected function checkEmail($email)
 	{
 		$rows = $this->queryReturn(
-			"SELECT email FROM users WHERE email = ?;",
+			'SELECT email FROM users WHERE email = ?;',
 			[$email]
 		);
 
@@ -32,7 +32,7 @@ trait Auth
 	protected function checkPassword($pwd, $email)
 	{
 		$rows = $this->queryReturn(
-			"SELECT password FROM users WHERE email = ?;",
+			'SELECT password FROM users WHERE email = ?;',
 			[$email]
 		);
 
@@ -50,7 +50,7 @@ trait Auth
 	{
 		if (isset($token)) {
 			$rows = $this->queryReturn(
-				"SELECT auth_token FROM users WHERE auth_token = ?;",
+				'SELECT auth_token FROM users WHERE auth_token = ?;',
 				[$token]
 			);
 
@@ -71,7 +71,7 @@ trait Auth
 	protected function logUser($pwd, $email)
 	{
 		$rows = $this->queryReturn(
-			"SELECT cpf, auth_token, password FROM users WHERE email = ?;",
+			'SELECT cpf, auth_token, password FROM users WHERE email = ?;',
 			[$email]
 		);
 
@@ -80,7 +80,7 @@ trait Auth
 
 		return $this->checkPassword($pwd, $email)
 			? $new_auth_token
-			: "Wrong Password!";
+			: 'Wrong Password!';
 	}
 
 	/**
@@ -89,16 +89,35 @@ trait Auth
 	 * @param string $cpf A user unique identification key.
 	 * @return string An Auth Token
 	 */
-	private function updateAuthToken($cpf)
+	protected function updateAuthToken($cpf)
 	{
-		$date = date("m/d/Y h:i:s a", time());
+		$date = date('m/d/Y h:i:s a', time());
 		$new_auth_token = password_hash($cpf . $date, PASSWORD_ARGON2I);
 
 		$this->query(
-			"UPDATE users SET auth_token = ? WHERE cpf = ?;",
+			'UPDATE users SET auth_token = ? WHERE cpf = ?;',
 			[$new_auth_token, $cpf]
 		);
 
 		return $new_auth_token;
+	}
+
+	/**
+	 * Get some useful user information.
+	 *
+	 * @param string $token Authentication token.
+	 * @return array
+	 */
+	protected function getUserInfo($token)
+	{
+		$rows = $this->queryReturn(
+			'SELECT cpf, nickname, real_name, email,
+				phone_number, permissions, role
+			FROM users
+			WHERE auth_token = ?',
+			[$token]
+		);
+
+		return $rows[0];
 	}
 }

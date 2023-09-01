@@ -1,7 +1,7 @@
 <?php
 
-require_once "model/home.model.php";
-require_once "services/auth.service.php";
+require_once 'model/home.model.php';
+require_once 'services/auth.service.php';
 
 class Home extends HomeModel
 {
@@ -17,10 +17,10 @@ class Home extends HomeModel
      */
     public function Handler(): void
     {
-        match ($_SERVER["REQUEST_METHOD"]) {
-            "GET" => $this->build_view(),
-            "POST" => $this->add_order(),
-            default => badrequest(),
+        match ($_SERVER['REQUEST_METHOD']) {
+            'GET' => $this->build_view(),
+            'POST' => $this->add_order(),
+            default => bad_request(),
         };
     }
 
@@ -42,7 +42,7 @@ class Home extends HomeModel
         //   'quantity' => $amount,
         //   'price' => $price * $amount,
         //   'hour' => date('H:i'),
-        //   'status' => "Na fila",
+        //   'status' => 'Na fila',
         // ];
 
         // Database::add_pedidos_to_db($order, $id);

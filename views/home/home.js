@@ -76,14 +76,14 @@ class OrderList {
 			if (menu[i].name == name) dish = menu[i]
 
 		const datetime = new Date()
-			.toLocaleTimeString('pt-BR', { hour: "numeric", minute: "numeric" });
+			.toLocaleTimeString('pt-BR', { hour: 'numeric', minute: 'numeric' });
 
 		this.addOrderToTable({
 			name: name,
 			amount: amount,
 			price: amount * dish.price,
 			datetime: datetime,
-			status: "Na Fila"
+			status: 'Na Fila'
 		});
 	}
 

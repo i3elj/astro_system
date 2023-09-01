@@ -34,19 +34,19 @@ class SignUp extends SignUpModel
 
 		if ($this->user_exist($cpf)) {
 			echo json_encode([
-				"success" => false,
-				"field" => 'cpf',
-				"message" => "cpf's already registered"
+				'success' => false,
+				'field' => 'cpf',
+				'message' => 'cpf is already registered'
 			]);
 			exit(0);
 		}
 
-		$date = date("m/d/Y h:i:s a", time());
+		$date = date('m/d/Y h:i:s a', time());
 		$token = password_hash($cpf . $date, PASSWORD_ARGON2I);
 		$pwd = password_hash($pwd . $email, PASSWORD_ARGON2I);
 		$this->register($cpf, $nickname, $real_name, $email, $pwd, $token, $phone_number);
 
-		echo json_encode(["success" => true, "token" => $token]);
+		echo json_encode(['success' => true, 'token' => $token]);
 		exit(0);
 	}
 

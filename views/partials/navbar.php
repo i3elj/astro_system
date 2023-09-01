@@ -2,7 +2,7 @@
 
 namespace Tags;
 
-require_once "views/partials/icons.php";
+require_once 'views/partials/icons.php';
 
 function navbar($token, $path)
 { ?>
@@ -67,7 +67,7 @@ function navbar($token, $path)
 	</style>
 
 	<nav class='navbar'>
-		<a href="/home" class='navbar-logo h2'>Astro</a>
+		<a href='/home' class='navbar-logo h2'>Astro</a>
 
 		<div class='navbar-links'>
 
@@ -100,7 +100,7 @@ function navbar($token, $path)
 					Log Out
 				</button>
 
-				<a href='/profile' title="Profile Settings">
+				<a href='/profile' title='Profile Settings'>
 					<?= \Icons\Profile() ?>
 				</a>
 
@@ -113,5 +113,5 @@ function navbar($token, $path)
 		</div>
 	</nav>
 
-	<script type="module" src="views/partials/navbar.js"></script>
+	<script type='module' src='/views/partials/navbar.js'></script>
 <?php }

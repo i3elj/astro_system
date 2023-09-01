@@ -1,7 +1,7 @@
 <?php
 
 require_once 'model/cardapio.model.php';
-require_once "services/auth.service.php";
+require_once 'services/auth.service.php';
 
 class Cardapio extends CardapioModel
 {

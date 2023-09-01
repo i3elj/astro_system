@@ -16,11 +16,11 @@ trait Connection
 	{
 		$ENV = parse_ini_file('.env');
 
-		$HOST = $ENV["DB_HOST"];
-		$PORT = $ENV["DB_PORT"];
-		$USER = $ENV["DB_USER"];
-		$PWD  = $ENV["DB_PASSWORD"];
-		$NAME = $ENV["DB_DATABASE"];
+		$HOST = $ENV['DB_HOST'];
+		$PORT = $ENV['DB_PORT'];
+		$USER = $ENV['DB_USER'];
+		$PWD  = $ENV['DB_PASSWORD'];
+		$NAME = $ENV['DB_DATABASE'];
 
 		$dsn =
 			'pgsql:host=' . $HOST .
@@ -49,7 +49,7 @@ trait Connection
 		$succeeded = $stmt->execute($values);
 
 		if (!$succeeded) {
-			printf("Prepare statement error: " . $stmt);
+			printf('Prepare statement error: ' . $stmt);
 			$stmt = null;
 			exit(1);
 		}
@@ -69,7 +69,7 @@ trait Connection
 		$succeeded = $stmt->execute($values);
 
 		if (!$succeeded) {
-			printf("Prepare statement error: " . $stmt);
+			printf('Prepare statement error: ' . $stmt);
 			$stmt = null;
 			exit(1);
 		}

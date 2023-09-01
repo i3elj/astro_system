@@ -1,5 +1,5 @@
 <?php
-require_once "services/DatabaseConnection.php";
+require_once 'services/DatabaseConnection.php';
 
 class DashboardModel
 {

@@ -13,7 +13,7 @@ export function on_success(response) {
 	const date = new Date()
 	date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000)/*a week in ms*/)
 	document.cookie = `authToken=${token};expires=${date.toUTCString()}`
-	document.location = "http://localhost:3000/dashboard"
+	document.location = 'http://localhost:3000/dashboard'
 }
 
 export function on_error(response) {
@@ -23,16 +23,16 @@ export function on_error(response) {
 
 	if (response.field != undefined) {
 		let field = document.querySelector(`input[name='${response.field}']`)
-		field.classList.add("fieldError")
+		field.classList.add('fieldError')
 		field.focus()
-		field.addEventListener("blur",
-			() => field.classList.remove("fieldError"))
+		field.addEventListener('blur',
+			() => field.classList.remove('fieldError'))
 	}
 }
 
 export function logout() {
-	document.cookie = "authToken=a;expires=Thu, 01 Jan 1970 00:00:01 GMT";
-	document.location = "http://localhost:3000/home"
+	document.cookie = 'authToken=a;expires=Thu, 01 Jan 1970 00:00:01 GMT';
+	document.location = 'http://localhost:3000/home'
 }
 
 const auth = {

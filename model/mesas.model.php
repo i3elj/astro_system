@@ -21,38 +21,38 @@ class MesasModel
 		$orderType,
 		$itemsPerPage
 	) {
-		// TODO: use OFFSET clause to make some type of "pagination"
+		// TODO: use OFFSET clause to make some type of 'pagination'
 		if ($keywords != null) {
 			$rows = match ($sortBy) {
-				"number" => $this->queryReturn(
-					"SELECT * from tables WHERE id = ? LIMIT ?",
+				'number' => $this->queryReturn(
+					'SELECT * from tables WHERE id = ? LIMIT ?',
 					[(int)$keywords, $itemsPerPage]
 				),
-				"description" => $this->queryReturn(
-					"SELECT * from tables WHERE location = ? LIMIT ?",
+				'description' => $this->queryReturn(
+					'SELECT * from tables WHERE location = ? LIMIT ?',
 					[$keywords, $itemsPerPage]
 				),
-				"occupied" => $this->queryReturn(
-					"SELECT * from tables WHERE is_occupied = ? LIMIT ?",
-					[$keywords == "Sim", $itemsPerPage]
+				'occupied' => $this->queryReturn(
+					'SELECT * from tables WHERE is_occupied = ? LIMIT ?',
+					[$keywords == 'Sim', $itemsPerPage]
 				),
-				"status" => $this->queryReturn(
-					"SELECT * from tables WHERE status = ? LIMIT ?",
+				'status' => $this->queryReturn(
+					'SELECT * from tables WHERE status = ? LIMIT ?',
 					[$keywords, $itemsPerPage]
 				),
-				"reserved" => $this->queryReturn(
-					"SELECT * from tables WHERE is_reserved = ? LIMIT ?",
-					[$keywords == "Sim", $itemsPerPage]
+				'reserved' => $this->queryReturn(
+					'SELECT * from tables WHERE is_reserved = ? LIMIT ?',
+					[$keywords == 'Sim', $itemsPerPage]
 				),
-				"bill" => $this->queryReturn(
-					"SELECT * from tables WHERE bill = ? LIMIT ?",
+				'bill' => $this->queryReturn(
+					'SELECT * from tables WHERE bill = ? LIMIT ?',
 					[(float)$keywords, $itemsPerPage]
 				),
 				default => null,
 			};
 		} else {
 			$rows = $this->queryReturn(
-				"SELECT * from tables LIMIT ?",
+				'SELECT * from tables LIMIT ?',
 				[$itemsPerPage]
 			);
 		}

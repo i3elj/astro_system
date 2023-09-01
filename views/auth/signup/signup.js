@@ -1,8 +1,7 @@
 import auth from '../auth.js'
 
-
-let signup_field = document.querySelector("#submitButton")
-let checkbox = document.querySelector("#tos")
+let signup_field = document.querySelector('#submitButton')
+let checkbox = document.querySelector('#tos')
 
 checkbox.addEventListener('change', function () {
 	if (!this.checked) signup_field.disabled = true
@@ -10,7 +9,7 @@ checkbox.addEventListener('change', function () {
 })
 
 export async function signup() {
-	const form = document.querySelector("#form")
+	const form = document.querySelector('#form')
 	const response = await auth.post('/signup', form)
 
 	response.success ? auth.on_success(response) : auth.on_error(response)

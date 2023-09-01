@@ -1,6 +1,6 @@
 <?php
 
-require_once "services/auth.service.php";
+require_once 'services/auth.service.php';
 
 class Login
 {
@@ -16,10 +16,10 @@ class Login
 	 */
 	public function Handler()
 	{
-		match ($_SERVER["REQUEST_METHOD"]) {
+		match ($_SERVER['REQUEST_METHOD']) {
 			'GET' => $this->build_view(),
 			'POST' => $this->login(),
-			default => badrequest()
+			default => bad_request()
 		};
 	}
 
@@ -33,25 +33,25 @@ class Login
 
 		if (!$this->checkEmail($email)) {
 			echo json_encode([
-				"success" => false,
-				"field" => 'email',
-				"message" => "Email doesn't exist!"
+				'success' => false,
+				'field' => 'email',
+				'message' => 'Email does not exist!'
 			]);
 			exit(0);
 		}
 
 		if (!$this->checkPassword($pwd, $email)) {
 			echo json_encode([
-				"success" => false,
-				"field" => 'password',
-				"message" => "Wrong password!"
+				'success' => false,
+				'field' => 'password',
+				'message' => 'Wrong password!'
 			]);
 			exit(0);
 		}
 
 		$auth_token = $this->logUser($pwd, $email);
 
-		echo json_encode(["success" => true, "token" => $auth_token]);
+		echo json_encode(['success' => true, 'token' => $auth_token]);
 		exit(0);
 	}
 

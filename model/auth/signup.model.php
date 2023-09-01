@@ -1,6 +1,6 @@
 <?php
 
-require_once "services/DatabaseConnection.php";
+require_once 'services/DatabaseConnection.php';
 
 class SignUpModel
 {
@@ -15,7 +15,7 @@ class SignUpModel
 	protected function user_exist($cpf)
 	{
 		$rows = $this->queryReturn(
-			"SELECT 1 FROM users WHERE cpf = ?;",
+			'SELECT 1 FROM users WHERE cpf = ?;',
 			$cpf
 		);
 

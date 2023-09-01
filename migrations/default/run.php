@@ -16,7 +16,7 @@ class DefaultMigrations
 	private function CreateTables()
 	{
 		$tables = [
-			"users" => "CREATE TABLE users (
+			'users' => 'CREATE TABLE users (
 				cpf             VARCHAR(14) PRIMARY KEY UNIQUE,
 				nickname        TEXT NOT NULL,
 				real_name       TEXT NOT NULL,
@@ -26,26 +26,29 @@ class DefaultMigrations
 				phone_number    TEXT,
 				permissions     TEXT NOT NULL,
 				role            TEXT NOT NULL
-			);",
-			"dishes" => "CREATE TABLE dishes (
+			);',
+			'dishes' => 'CREATE TABLE dishes (
 				id              SERIAL PRIMARY KEY UNIQUE,
+				fk_user         VARCHAR(14) NOT NULL,
 				name            TEXT NOT NULL,
 				cost            DECIMAL(10,2),
-				ingredients     TEXT NOT NULL
-			);",
-			"ingredients" => "CREATE TABLE ingredients (
+				ingredients     TEXT NOT NULL,
+				FOREIGN KEY (fk_user) REFERENCES users(cpf)
+			);',
+			'ingredients' => 'CREATE TABLE ingredients (
 				id 		SERIAL PRIMARY KEY UNIQUE,
-				name 	TEXT NOT NULL
-			);",
-			"tables" => "CREATE TABLE tables (
+				name 	TEXT NOT NULL,
+				cost    DECIMAL(1000,2)
+			);',
+			'tables' => 'CREATE TABLE tables (
 				id              INTEGER PRIMARY KEY UNIQUE,
 				location        TEXT,
 				is_occupied     BOOLEAN NOT NULL,
 				is_reserved     BOOLEAN NOT NULL,
 				status          TEXT NOT NULL,
 				bill            DECIMAL(10,2)
-			);",
-			"orders" => "CREATE TABLE orders (
+			);',
+			'orders' => 'CREATE TABLE orders (
 				id              INT PRIMARY KEY UNIQUE,
 				fk_table_id     INT NOT NULL,
 				fk_ordered_item INT NOT NULL,
@@ -54,7 +57,7 @@ class DefaultMigrations
 				expiration_time TIMESTAMP DEFAULT (CURRENT_TIMESTAMP + INTERVAL '2 hours'),
 				FOREIGN KEY (fk_table_id) REFERENCES tables(id),
 				FOREIGN KEY (fk_ordered_item) REFERENCES dishes(id)
-			);"
+			);'
 		];
 
 		foreach ($tables as $table_name => $table) {
@@ -62,23 +65,22 @@ class DefaultMigrations
 			$succeeded = $stmt->execute();
 
 			if (!$succeeded) {
-				printf("Prepare statement error: " . $stmt);
+				printf('Prepare statement error: ' . $stmt);
 				$stmt = null;
 				exit(1);
 			}
 
-			printf("GENERATING $table_name TABLE...\n");
+			printf('GENERATING $table_name TABLE...\n');
 		}
 	}
 
 	private function PopulateTables()
 	{
-		// password + cpf
-		$date = date("m/d/Y h:i:s a", time());
+		$date = date('m/d/Y h:i:s a', time());
 		$auth_token = password_hash('088.136.004-02' . $date, PASSWORD_ARGON2I);
 		$pwd = password_hash('adminad@min', PASSWORD_ARGON2I);
 		$queries = [
-			"users" => "INSERT INTO users
+			'users' => 'INSERT INTO users
 				 VALUES (
 					'088.136.004-02',
 					'adm',
@@ -125,15 +127,14 @@ class DefaultMigrations
 					$succeeded = $stmt->execute();
 
 					if (!$succeeded) {
-						printf("Prepare statement error: " . $stmt);
+						printf('Prepare statement error: ' . $stmt);
 						$stmt = null;
 						exit(1);
 					}
 				}
 
-				printf("INSERTING VALUE INTO $query_name TABLE...\n");
+				printf('INSERTING VALUE INTO $query_name TABLE...\n');
 			} else {
-
 				$stmt = $this->connect()->prepare($query);
 
 				if ($query_name == 'users') {
@@ -144,12 +145,12 @@ class DefaultMigrations
 				$succeeded = $stmt->execute();
 
 				if (!$succeeded) {
-					printf("Prepare statement error: $stmt");
+					printf('Prepare statement error: $stmt');
 					$stmt = null;
 					exit(1);
 				}
 
-				printf("INSERTING VALUE INTO $query_name TABLE...\n");
+				printf('INSERTING VALUE INTO $query_name TABLE...\n');
 			}
 		}
 	}

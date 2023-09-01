@@ -1,3 +1,3 @@
-import { logout } from "../auth/auth.js";
+import { logout } from '../auth/auth.js';
 
 window.logout = logout

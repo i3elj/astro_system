@@ -8,7 +8,7 @@
 function logger(...$values)
 {
 	foreach ($values as $key => $value) {
-		error_log("\tLOGGER SAYS: $key: $value", 4);
+		error_log('\t\tLOGGER:: $key: $value', 4);
 	}
 }
 
@@ -19,11 +19,11 @@ function logger(...$values)
  */
 function dd(...$values)
 {
-	echo "<pre>";
+	echo '<pre>';
 	foreach ($values as $value) {
 		var_dump($value);
 	}
-	echo "</pre>";
+	echo '</pre>';
 	die(0);
 }
 
@@ -34,15 +34,15 @@ function require_style(string $file)
 	echo '</style>';
 }
 
-function require_script(string $file, string $args = "")
+function require_script(string $file, string $args = '')
 {
-	echo '<script type="text/javascript" ' . $args . '>';
+	echo "<script type='text/javascript' $args >";
 	require_once $file;
 	echo '</script>';
 }
 
 /**
- * Returns a basic page with 404 "not found" status code.
+ * Returns a basic page with 404 'not found' status code.
  */
 function notfound()
 {
