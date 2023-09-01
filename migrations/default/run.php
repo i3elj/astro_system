@@ -91,32 +91,12 @@ class DefaultMigrations
 					'+55 (33)9111-2222',
 					'superuser',
 					'admin'
-			);",
-			"dishes" => "INSERT INTO dishes(name, cost, ingredients) VALUES (
-				'Hot Chocolate',
-				8.99,
-				'milk,chocolate,cinnamon,maize starch,sugar,milk cream'
-			);",
-			"ingredients" => [
-				"INSERT INTO ingredients(name) VALUES ('mayonnaise');",
-				"INSERT INTO ingredients(name) VALUES ('pickles');",
-				"INSERT INTO ingredients(name) VALUES ('onion');",
-				"INSERT INTO ingredients(name) VALUES ('chicken breast');",
-				"INSERT INTO ingredients(name) VALUES ('tomato');",
-				"INSERT INTO ingredients(name) VALUES ('cheese');",
-				"INSERT INTO ingredients(name) VALUES ('lettuce');",
-				"INSERT INTO ingredients(name) VALUES ('milk');",
-				"INSERT INTO ingredients(name) VALUES ('chocolate');",
-				"INSERT INTO ingredients(name) VALUES ('cinnamon');",
-				"INSERT INTO ingredients(name) VALUES ('sugar');",
-				"INSERT INTO ingredients(name) VALUES ('milk cream');",
-				"INSERT INTO ingredients(name) VALUES ('maize starch');",
-			],
-			"tables" => [
-				"INSERT INTO tables VALUES (0,'plaza1',true,false,'aberta',0);",
-				"INSERT INTO tables VALUES (1,'plaza1',true,false,'aberta',0);",
-				"INSERT INTO tables VALUES (2,'plaza2',true,false,'aberta',0);",
-				"INSERT INTO tables VALUES (3,'plaza3',false,true,'aberta',0);",
+			);',
+			'tables' => [
+				'INSERT INTO tables VALUES (0,'plaza1',true,false,'aberta',0);',
+				'INSERT INTO tables VALUES (1,'plaza1',true,false,'aberta',0);',
+				'INSERT INTO tables VALUES (2,'plaza2',true,false,'aberta',0);',
+				'INSERT INTO tables VALUES (3,'plaza3',false,true,'aberta',0);',
 			],
 		];
 
