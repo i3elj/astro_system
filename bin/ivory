@@ -27,45 +27,52 @@ if (sizeof($argv) == 1 || $argv[1] == '--help' || $argv[1] == '-h') {
 	exit(0);
 }
 
+
 // remove the script itself: "./ivory"
 $argv = array_splice($argv, 1);
 
 $arguments = [];
 foreach ($argv as $arg) array_push($arguments, explode("=", $arg));
 
-
 $values = [];
 foreach ($arguments as $argument) $values[$argument[0]] = $argument[1];
 
-$routename = strtolower($values['--create-route']);
-$RouteName = $values['--create-route'];
-$path = $values['--path'];
+foreach ($values as $key => $value) {
+	switch ($key) {
+		case '--path':
+			$path = $values['--path'];
+		case '--create-route':
+			$routename = camel_to_snake($values['--create-route']);
+			$RouteName = $values['--create-route'];
+			///////////
+			// MODEL //
+			///////////
+			$file = fopen("./src/model/$routename.model.php", "w");
+			$content = "<?php
 
-///////////
-// MODEL //
-///////////
-$file = fopen("./model/$routename.model.php", "w");
-$content = "<?php
+namespace $RouteName;
 
-require_once 'services/DatabaseConnection.php';
+require_once 'src/services/DatabaseConnection.php';
 
-class $RouteName Model
+class Model
 {
-	use \Database\Connection;
+	use \Services\Database\Connection;
 }
 ";
-fwrite($file, $content);
-fclose($file);
+			fwrite($file, $content);
+			fclose($file);
 
-////////////////
-// CONTROLLER //
-////////////////
-$file = fopen("./controllers/$routename.controller.php", "w");
-$content = "<?php
+			////////////////
+			// CONTROLLER //
+			////////////////
+			$file = fopen("./controllers/$routename.php", "w");
+			$content = "<?php
 
-require_once 'model/$routename.model.php';
+namespace $RouteName;
 
-class $RouteName extends $RouteName Model
+require_once 'src/model/$routename.model.php';
+
+class Controller extends Model
 {
     public function __construct(private string \$path = '$path')
     {
@@ -90,30 +97,30 @@ class $RouteName extends $RouteName Model
 	 */
     private function build_view(): void
     {
-        require_once 'views/$routename/$routename.view.php';
+        require_once 'src/views/$routename/$routename.view.php';
         exit(0);
     }
 }
 ";
-fwrite($file, $content);
-fclose($file);
+			fwrite($file, $content);
+			fclose($file);
 
-$file = fopen("./controllers/import.php", "a");
-$content = "require_once 'controllers/$routename.controller.php';\n";
-fwrite($file, $content);
-fclose($file);
+			$file = fopen("./controllers/import.php", "a");
+			$content = "require_once 'src/controllers/$routename.php';\n";
+			fwrite($file, $content);
+			fclose($file);
 
-//////////
-// VIEW //
-//////////
-mkdir("./views/$routename");
-$file = fopen("./views/$routename/$routename.view.php", "w");
-$content = "<!DOCTYPE html>
+			//////////
+			// VIEW //
+			//////////
+			mkdir("./src/views/$routename");
+			$file = fopen("./src/views/$routename/$routename.view.php", "w");
+			$content = "<!DOCTYPE html>
 <html>
 
 <?= \Tags\head(
 	title: 'Astro System - $RouteName',
-	styles: ['/views/$routename/$routename.style.css']
+	styles: ['/src/views/$routename/$routename.style.css']
 ) ?>
 
 <body>
@@ -121,15 +128,33 @@ $content = "<!DOCTYPE html>
 	<h1>Hello from $RouteName</h1>
 </body>
 
-<script type='text/javascript' src='/views/$routename/$routename.js'></script>
+<script type='text/javascript' src='/src/views/$routename/$routename.js'></script>
 
 </html>
 ";
-fwrite($file, $content);
-fclose($file);
+			fwrite($file, $content);
+			fclose($file);
 
-$file = fopen("./views/$routename/$routename.style.css", "w");
-fclose($file);
+			$file = fopen("./src/views/$routename/$routename.style.css", "w");
+			fclose($file);
 
-$file = fopen("./views/$routename/$routename.js", "w");
-fclose($file);
+			$file = fopen("./src/views/$routename/$routename.js", "w");
+			fclose($file);
+
+			break;
+
+
+		case '--create-service':
+			$ServiceName = $values['--create-service'];
+			$file = fopen("./src/services/$ServiceName.service.php", "w");
+			$content = "<?php
+
+namespace Services;
+
+trait $ServiceName
+{
+}";
+			fwrite($file, $content);
+			fclose($file);
+	}
+}
