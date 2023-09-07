@@ -20,32 +20,23 @@
  */
 function create_router($routes, $api_routes, $path)
 {
-    if ($path == '/') {
-        header('location: /home');
-        exit(0);
-    }
+	if ($path == '/') {
+		header('location: /home');
+		exit(0);
+	}
 
-    $method = $_SERVER['REQUEST_METHOD'];
+	$contains_api = strpos($path, 'api/') !== false;
+	$call_handler = function ($route, $path) {
+		if ($route['path'] == $path) {
+			$view = new $route['controller']($path);
+			$view->Handler();
+		}
+	};
 
-    $contains_api = strpos($path, 'api') !== false;
+	if ($contains_api)
+		foreach ($api_routes as $route) $call_handler($route, $path);
+	else
+		foreach ($routes as $route) $call_handler($route, $path);
 
-    if ($contains_api) {
-        foreach ($api_routes as $route) {
-            if ($route['path'] == $path) {
-                $view = new $route['controller']($path, $route['method']);
-
-                if ($method == $route['method']) $view->ApiHandler();
-                else bad_api_request();
-            }
-        }
-    }
-
-    foreach ($routes as $route) {
-        if ($route['path'] == $path) {
-            $view = new $route['controller']($path);
-            $view->Handler();
-        }
-    }
-
-    notfound();
+	notfound();
 }
