@@ -1,10 +1,20 @@
 #!/bin/env php
 <?php
 
+function camel_to_snake($string, $us = "_")
+{
+	return strtolower(preg_replace(
+		'/(?<=\d)(?=[A-Za-z])|(?<=[A-Za-z])(?=\d)|(?<=[a-z])(?=[A-Z])/',
+		$us,
+		$string
+	));
+}
+
 $options = [
-	"--help or -h  " => "Show this help message",
-	"--create-route" => "Pass the name of the new route. Ex: --create-route=Login",
-	"--path        " => "Pass a url path to the endpoint. Ex: --path=/login"
+	"--help or -h    " => "Show this help message",
+	"--path          " => "Path to the new endpoint. Ex: --path=/login",
+	"--create-route  " => "Name of the controller to be in charge of the new endpoint. Ex: --create-route=Login",
+	"--create-service" => "Pass the name of the new service. Ex: --create-service=Navigation",
 ];
 
 
