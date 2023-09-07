@@ -1,11 +1,11 @@
 <?php
 
-require_once 'services/DatabaseConnection.php';
+require_once 'src/services/DatabaseConnection.php';
 require_once 'lib/extras.php';
 
 class DefaultMigrations
 {
-	use \Database\Connection;
+	use \Services\Database\Connection;
 
 	public function InitDatabase()
 	{

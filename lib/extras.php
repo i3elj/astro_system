@@ -47,7 +47,7 @@ function require_script(string $file, string $args = '')
 function notfound()
 {
 	http_response_code(404);
-	include 'views/notfound.php';
+	include 'src/views/notfound.php';
 	exit(0);
 }
 
