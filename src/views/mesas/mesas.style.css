@@ -1,0 +1,38 @@
+table {
+    align-self: stretch;
+    border: 1px solid #8E8E8E;
+    background: #FFF;
+    border-collapse: collapse;
+}
+
+thead>tr {
+    border: 1px solid #8E8E8E;
+    background: linear-gradient(180deg, #FFF 0%, #F2F2F2 100%);
+
+}
+
+thead>tr>th {
+    font-style: normal;
+    font-weight: 600;
+    padding: 8px 0px;
+    background: linear-gradient(180deg, #FFF 0%, #F2F2F2 100%);
+}
+
+tbody>tr {
+    border: 0.5px solid #8E8E8E;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+tbody>tr>td {
+    padding: 4px 0px;
+    font-weight: 400;
+}
+
+
+tbody>tr:nth-child(even) {
+    /* 2-1 ou 2n */
+    background-color: #F8F8F8;
+}

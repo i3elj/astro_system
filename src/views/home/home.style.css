@@ -1,0 +1,107 @@
+.main {
+	display: flex;
+	flex-direction: row;
+	place-items: center;
+	justify-content: space-evenly;
+	gap: 84px;
+	margin-top: 4rem;
+}
+
+.main div {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 608px;
+}
+
+.main-title {
+	font-size: 48px;
+}
+
+.main-p {
+	text-align: justify;
+}
+
+.main-img {
+	border-radius: 8px;
+	width: 46rem;
+}
+
+/*
+#tableList {
+	width: 10rem;
+	padding: 3rem;
+	background-color: #e5e5e5;
+}
+
+#tableList h3 {
+	margin-bottom: 2rem;
+}
+
+#tableList ul {
+	list-style: none;
+	margin-left: 1rem;
+}
+
+#tableList ul a {
+	text-decoration: none;
+	color: black;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	width: 40rem;
+	margin: 20px auto 0px;
+	gap: 20px;
+}
+
+.title {
+	margin-bottom: 2rem;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+tr,
+td,
+th {
+	border: 1px solid black;
+}
+
+td,
+th {
+	flex: 1;
+	text-align: center;
+	padding: 4px 1rem;
+}
+
+.td-input {
+	padding: 0;
+}
+
+.td-input button:hover {
+	background-color: #efefef;
+	transition: 300ms;
+}
+
+.td-input button {
+	width: 100%;
+	border: 0;
+	background: none;
+	cursor: pointer;
+}
+
+.td-input input {
+	border: none;
+	width: 100%;
+	height: 2rem;
+	padding: 1rem;
+}
+
+button {
+	height: 2rem;
+	width: 10rem;
+}
+*/

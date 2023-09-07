@@ -1,0 +1,30 @@
+span {
+	font-size: 26px;
+	font-weight: 400;
+}
+
+h1 {
+	display: flex;
+	place-items: center;
+	gap: 10px;
+}
+
+.addItems {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex: 1 0 0;
+	align-self: stretch;
+
+	border: 1px solid #8E8E8E;
+	background: #FAFAFA;
+}
+
+#mainContent {
+	display: flex;
+	place-content: space-around;
+	place-items: center;
+	width: 100%;
+	padding: 44px;
+}
