@@ -16,6 +16,25 @@ trait Connection
 	{
 		$ENV = parse_ini_file('.env');
 
+		$DB   = $ENV['DB'];
+		return match ($DB) {
+			"postgresql" => $this->pgsql_connect($ENV),
+			"sqlite" => $this->sqlite_connect(),
+			default => null,
+		};
+	}
+
+	private function sqlite_connect()
+	{
+		$pdo = new \PDO("sqlite:database.sql");
+		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+		$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+
+		return $pdo;
+	}
+
+	private function pgsql_connect($ENV)
+	{
 		$HOST = $ENV['DB_HOST'];
 		$PORT = $ENV['DB_PORT'];
 		$USER = $ENV['DB_USER'];
