@@ -28,7 +28,8 @@ class SQLiteMigrations
 				role TEXT NOT NULL
 			);",
 			'dishes' => " CREATE TABLE dishes (
-			    id INTEGER PRIMARY KEY,
+				id INTEGER PRIMARY KEY,
+			    fk_user TEXT NOT NULL,
 			    name TEXT NOT NULL,
 			    cost DECIMAL(10,2),
 			    ingredients TEXT NOT NULL
