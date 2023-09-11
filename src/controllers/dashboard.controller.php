@@ -33,6 +33,7 @@ class Controller extends Model
 	{
 		$token = $_COOKIE['authToken'];
 		$is_logged = $this->is_authenticated($token);
+        if (!$is_logged) header('location: /login');
 		require_once 'src/views/dashboard/dashboard.view.php';
 		exit(0);
 	}

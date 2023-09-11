@@ -32,6 +32,7 @@ class Controller extends Model
     {
         $token = $_COOKIE['authToken'];
         $is_logged = $this->is_authenticated($token);
+        if (!$is_logged) header('location: /login');
         require_once 'src/views/cardapio/new/new.view.php';
         exit(0);
     }

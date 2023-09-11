@@ -48,21 +48,14 @@ trait Auth
 	 */
 	protected function is_authenticated($token)
 	{
-		if (isset($token)) {
-			$rows = $this->queryReturn(
-				'SELECT auth_token FROM users WHERE auth_token = ?;',
-				[$token]
-			);
+		if (!isset($token)) return false;
 
-			if (sizeof($rows) == 1) {
-				return true;
-			} else {
-				header("location: /login");
-				exit(0);
-			}
-		}
+		$rows = $this->queryReturn(
+			'SELECT auth_token FROM users WHERE auth_token = ?;',
+			[$token]
+		);
 
-		return false;
+		return sizeof($rows) == 1;
 	}
 
 	/**
