@@ -30,7 +30,9 @@ function navbar($is_logged, $path)
 		}
 
 		.logout {
-			all: unset;
+			text-decoration: none;
+			background: none;
+			border: none;
 			font-size: 18px;
 		}
 
