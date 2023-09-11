@@ -20,39 +20,109 @@ require_once 'src/views/partials/navbar.php';
 
 	<main>
 		<div class='header'>
-			<h1>Cardápio</h1>
+			<h1>Cardápio - <span>Adicionar Item</span></h1>
 		</div>
-		<div class="addItems">
-			<div class='subheader'>
-				<h2>Adicionar Item</h2>
-			</div>
+		<div class='addItems'>
 			<div id='mainContent'>
+				<form class='newItemContainer'>
+					<div class='inputFieldWrapper'>
+						<label>Nome do Item</label>
+						<input type='text' name=''>
+					</div>
+					<div class='inputFieldWrapper'>
+						<label>Descrição</label>
+						<textarea></textarea>
+					</div>
+					<input type='submit' name=''>
+				</form>
+
 				<div class='newItemContainer'>
-					<form>
-						<div class='newItemTitle'>
-							<label></label>
-							<input type='text' name=''>
-						</div>
-						<div class='newItemDescription'>
-							<label></label>
-							<textarea></textarea>
-						</div>
-						<input type='submit' name=''>
-					</form>
-				</div>
-
-				<div class='vertical-line'></div>
-
-				<div class='newItemIngredients'>
 					<h2>Ingredientes</h2>
-					<div>
-						<table>
-							<thead>
-								<td>Nome do Prato</td>
-								<td>Quantidade</td>
-								<td>Preco</td>
-							</thead>
-						</table>
+					<div id='ingredientsTable' class='tableBorder'>
+						<div class='tableRow columnsName'>
+							<div class='tableCell'>
+								<p>Nome do Ingrediente</p>
+							</div>
+							<div class='tableCell'>
+								<p>Quantidade</p>
+							</div>
+							<div class='tableCell'>
+								<p>Preco</p>
+							</div>
+							<div class='tableCell'>
+								<p>Options</p>
+							</div>
+						</div>
+						<div class='tableRow'>
+							<div class='tableCell'>
+								<p>Arroz</p>
+							</div>
+							<div class='tableCell'>
+								<p>1kg</p>
+							</div>
+							<div class='tableCell'>
+								<p>R$</p>
+								<p>5.00</p>
+							</div>
+							<div class='tableCell'>
+								<button class='button input'>Editar</button>
+								<button class='button input'>Excluir</button>
+							</div>
+						</div>
+						<div class='tableRow'>
+							<div class='tableCell'>
+								<p>Macaxeiraaaaaaaaaaaaaaaa</p>
+							</div>
+							<div class='tableCell'>
+								<p>1kg</p>
+							</div>
+							<div class='tableCell'>
+								<p>R$</p>
+								<p>5.00</p>
+							</div>
+							<div class='tableCell'>
+								<button class='button input'>Editar</button>
+								<button class='button input'>Excluir</button>
+							</div>
+						</div>
+						<div class='tableRow'>
+							<div class='tableCell'>
+								<p>Arroz</p>
+							</div>
+							<div class='tableCell'>
+								<p>1kg</p>
+							</div>
+							<div class='tableCell'>
+								<p>R$</p>
+								<p>150.00</p>
+							</div>
+							<div class='tableCell'>
+								<button class='button input'>Editar</button>
+								<button class='button input'>Excluir</button>
+							</div>
+						</div>
+						<div class='tableRow'>
+							<div class='tableCell'>
+								<p>Arroz</p>
+							</div>
+							<div class='tableCell'>
+								<p>1kg</p>
+							</div>
+							<div class='tableCell'>
+								<p>R$ </p>
+								<p>5.00</p>
+							</div>
+							<div class='tableCell'>
+								<button class='button input'>Editar</button>
+								<button class='button input'>Excluir</button>
+							</div>
+						</div>
+					</div>
+					<div class='inputWrapper'>
+						<input class='input' type="text" name="name" placeholder='Ex: Arroz' />
+						<input class='input' type="text" name="amount" placeholder='Ex: 500ml' />
+						<input class='input' type="number" min="0" step=".01" name="price" placeholder='Ex: 15,00' />
+						<button onclick="addItem()">Adicionar</button>
 					</div>
 				</div>
 			</div>
@@ -61,6 +131,7 @@ require_once 'src/views/partials/navbar.php';
 
 </body>
 
+<script type='module' src='/src/views/cardapio/new/new.js'></script>
 <script src='/public/lib/resize.js'></script>
 
 </html>
