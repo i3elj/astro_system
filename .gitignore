@@ -6,4 +6,4 @@
 .env.production.local
 .env.local
 
-database.sql
+./database.sql
