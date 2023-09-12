@@ -63,6 +63,8 @@ class Controller
 	 */
 	private function build_view()
 	{
+		$token = $_COOKIE['authToken'] ?? null;
+		$is_logged = $this->is_authenticated($token);
 		require_once 'src/views/auth/login/login.view.php';
 		exit(0);
 	}

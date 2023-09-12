@@ -12,7 +12,7 @@ require_once 'src/views/partials/navbar.php'
 ) ?>
 
 <body>
-	<?= \Tags\navbar($auth_token, $path) ?>
+	<?= \Tags\navbar($is_logged, $this->path) ?>
 	<main id='authContainer'>
 		<h1>Login</h1>
 		<p id='loginError'>Vazio</p>
