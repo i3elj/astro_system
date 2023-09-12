@@ -1,3 +1,5 @@
+import URI from "../../../public/lib/uri.js";
+
 class OrderList {
 	/**
 	 * Initializes the order list of the last session
@@ -27,7 +29,7 @@ class OrderList {
 	 */
 	static async fetchMenu() {
 		if (sessionStorage.getItem('menu') == null) {
-			const response = await fetch('http://localhost:3000/api/menu');
+			const response = await fetch(`${URI}/api/menu`);
 			const menu = await response.json();
 			sessionStorage.setItem('menu', JSON.stringify(menu));
 		}

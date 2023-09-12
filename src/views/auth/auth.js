@@ -1,6 +1,8 @@
+import URI from "../../../public/lib/uri.js"
+
 export async function post(path, form) {
 	const formattedData = new URLSearchParams(new FormData(form))
-	const res = await fetch(`http://localhost:3000${path}`, {
+	const res = await fetch(`${URI}${path}`, {
 		method: 'POST',
 		body: formattedData
 	})
@@ -13,7 +15,7 @@ export function on_success(response) {
 	const date = new Date()
 	date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000)/*a week in ms*/)
 	document.cookie = `authToken=${token};expires=${date.toUTCString()}`
-	document.location = 'http://localhost:3000/dashboard'
+	document.location = `${URI}/dashboard`
 }
 
 export function on_error(response) {
@@ -32,7 +34,7 @@ export function on_error(response) {
 
 export function logout() {
 	document.cookie = 'authToken=a;expires=Thu, 01 Jan 1970 00:00:01 GMT';
-	document.location = 'http://localhost:3000/home'
+	document.location = `${URI}/home`
 }
 
 const auth = {
