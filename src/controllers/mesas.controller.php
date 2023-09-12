@@ -43,7 +43,7 @@ class Controller extends Model
             (int)$itemsPerPage
         );
 
-        $token = $_COOKIE['authToken'];
+        $token = $_COOKIE['authToken'] ?? null;
         $is_logged = $this->is_authenticated($token);
         if (!$is_logged) header('location: /login');
         require_once 'src/views/mesas/mesas.view.php';
