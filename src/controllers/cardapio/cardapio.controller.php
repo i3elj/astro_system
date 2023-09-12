@@ -31,16 +31,16 @@ class Controller extends Model
      */
     private function build_view(): void
     {
-        $token = $_COOKIE['authToken'];
+        $token = $_COOKIE['authToken'] ?? null;
         $is_logged = $this->is_authenticated($token);
-        if (!$is_logged) header('location: /login');
 
         if ($is_logged) {
             $user_info = $this->getUserInfo($token);
             $menu_items = $this->getMenu($user_info['cpf']);
+            require_once 'src/views/cardapio/cardapio.view.php';
+            exit(0);
         }
 
-        require_once 'src/views/cardapio/cardapio.view.php';
-        exit(0);
+        header('location: /login');
     }
 }
