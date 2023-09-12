@@ -18,19 +18,10 @@ trait Connection
 
 		$DB   = $ENV['DB'];
 		return match ($DB) {
-			"postgresql" => $this->pgsql_connect($ENV),
+			"postgres" => $this->pgsql_connect($ENV),
 			"sqlite" => $this->sqlite_connect(),
 			default => null,
 		};
-	}
-
-	private function sqlite_connect()
-	{
-		$pdo = new \PDO("sqlite:database.sql");
-		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
-		$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
-
-		return $pdo;
 	}
 
 	private function pgsql_connect($ENV)
@@ -41,13 +32,18 @@ trait Connection
 		$PWD  = $ENV['DB_PASSWORD'];
 		$NAME = $ENV['DB_DATABASE'];
 
-		$dsn =
-			'pgsql:host=' . $HOST .
-			';port='      . $PORT .
-			';dbname='    . $NAME .
-			';user='      . $USER .
-			';password='  . $PWD;
+		$dsn = "pgsql:host=$HOST;port=$PORT;dbname=$NAME;user=$USER;password=$PWD";
+
 		$pdo = new \PDO($dsn, $USER, $PWD) or throw new \PDOException();
+		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+		$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+
+		return $pdo;
+	}
+
+	private function sqlite_connect()
+	{
+		$pdo = new \PDO("sqlite:database.sql");
 		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 		$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 
