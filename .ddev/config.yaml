@@ -9,7 +9,7 @@ additional_fqdns: []
 database:
     type: postgres
     version: "14"
-host_db_port: "5544"
+host_db_port: "5432"
 use_dns_when_possible: true
 timezone: America/Bahia
 composer_version: "2"
