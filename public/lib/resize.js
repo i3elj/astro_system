@@ -5,5 +5,5 @@ function resize(event) {
 	const mainContent = document.querySelector("#mainContent")
 	const viewport = window.innerHeight
 	const offset = mainContent.offsetTop
-	mainContent.style.height = `${viewport - offset - 20}px`
+	mainContent.style.height = `${viewport - offset - 22}px`
 }
