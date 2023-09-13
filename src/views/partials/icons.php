@@ -10,3 +10,11 @@ function Profile()
 	</svg>
 <?php
 }
+
+function LeftArrow(string $color = "#000")
+{ ?>
+	<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M5.33325 16L13.3333 8M5.33325 16L13.3333 24M5.33325 16H19.3332M26.6666 16H23.3332" stroke="<?= $color ?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+	</svg>
+<?php
+}
