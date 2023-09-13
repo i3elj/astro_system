@@ -3,12 +3,12 @@
 Um sistema de gerenciamento de restaurantes simples, eficiente e prático.
 
 ### Sumário
-- [Configuraçãoo](https://github.com/i3elj/astro_system/README.md#configuração)
-  - [Dependências](https://github.com/i3elj/astro_system/README.md#dependências)
-    - [Windows](https://github.com/i3elj/astro_system/README.md#windows)
-    - [Mac](https://github.com/i3elj/astro_system/README.md#mac)
-    - [Linux](https://github.com/i3elj/astro_system/README.md#linux)
-  - [Rodando o projeto](https://github.com/i3elj/astro_system/README.md#rodando-o-projeto)
+- [Configuraçãoo](https://github.com/i3elj/astro_system/#configuração)
+  - [Dependências](https://github.com/i3elj/astro_system/#dependências)
+    - [Windows](https://github.com/i3elj/astro_system/#windows)
+    - [Mac](https://github.com/i3elj/astro_system/#mac)
+    - [Linux](https://github.com/i3elj/astro_system/#linux)
+  - [Rodando o projeto](https://github.com/i3elj/astro_system/#rodando-o-projeto)
 
 
 ## Configuração
