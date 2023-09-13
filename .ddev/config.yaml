@@ -9,6 +9,7 @@ additional_fqdns: []
 database:
     type: postgres
     version: "14"
+performance_mode: mutagen
 host_db_port: "5432"
 use_dns_when_possible: true
 timezone: America/Bahia
