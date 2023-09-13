@@ -3,7 +3,7 @@
 Um sistema de gerenciamento de restaurantes simples, eficiente e prático.
 
 ### Sumário
-- [Configuraçãoo](https://github.com/i3elj/astro_system/#configuração)
+- [Configuração](https://github.com/i3elj/astro_system/#configuração)
   - [Dependências](https://github.com/i3elj/astro_system/#dependências)
     - [Windows](https://github.com/i3elj/astro_system/#windows)
     - [Mac](https://github.com/i3elj/astro_system/#mac)
@@ -63,7 +63,7 @@ curl -fsSL https://ddev.com/install.sh | bash
   ```bash
   sudo usermod -aG docker $USER
   ```
-### Rodando o projeto localmente
+### Rodando o projeto
 Para rodar o projeto localmente basta seguir os seguintes passos, o mais importante é que nãoo há diferenças entre as plataformas:
 * Clonar o repositório, lembrando que vai depender da branch na qual você for trabalhar:
    ```bash
