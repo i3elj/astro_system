@@ -3,18 +3,25 @@ function addItem() {
 	const amount = document.querySelector('input[name="amount"]')
 	const price = document.querySelector('input[name="price"]')
 
-	const table = document.getElementsByTagName('tbody')[0]
+	const table = document.getElementById('ingredientsTable')
 
 	const newItem = `
-		<tr class='tableRow'>
-			<td class='tableBorder tableCell'>${name.value}</td>
-			<td class='tableBorder tableCell'>${amount.value}</td>
-			<td class='tableBorder tableCell'>${price.value}</td>
-			<td class='tableBorder tableCell'>
-				<button>Editar</button>
-				<button>Excluir</button>
-			</td>
-		</tr>
+		<div class='tableRow'>
+			<div class='tableCell'>
+				<p>${name.value}</p>
+			</div>
+			<div class='tableCell'>
+				<p>${amount.value}</p>
+			</div>
+			<div class='tableCell'>
+				<p>R$ </p>
+				<p>${price.value}</p>
+			</div>
+			<div class='tableCell'>
+				<button class='button'>Editar</button>
+				<button class='button'>Excluir</button>
+			</div>
+		</div>
 	`
 
 	table.innerHTML += newItem
