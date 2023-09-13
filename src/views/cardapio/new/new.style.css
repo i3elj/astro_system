@@ -18,16 +18,42 @@ h1 {
 	align-self: stretch;
 
 	border: 1px solid #8E8E8E;
-	background: #FAFAFA;
+	background: white;
+}
+
+.goBack svg path,
+.goBack {
+	display: flex;
+	flex-direction: row;
+	place-items: center;
+	gap: 10px;
+	position: absolute;
+	top: 14rem;
+	left: 4rem;
+	font-size: 22px;
+	color: black !important;
+	transition: 200ms;
+}
+
+.goBack:hover svg path,
+.goBack:hover {
+	color: #70bcff !important;
+	fill: #70bcff;
+	stroke: #70bcff;
+	transition: 200ms;
 }
 
 #mainContent {
 	display: flex;
-	place-content: space-around;
+	place-content: center;
 	place-items: center;
 	width: 100%;
 	padding: 44px;
-	gap: 20px;
+	gap: 110px;
+}
+
+#newItemInfoContainer {
+	gap: 38px;
 }
 
 .newItemContainer {
@@ -35,6 +61,7 @@ h1 {
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 6px;
+	width: 640px;
 }
 
 .newItemContainer>h2 {
@@ -53,15 +80,25 @@ h1 {
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
+	width: 100%;
+}
+
+.inputFieldWrapper_input {
+	padding: 6px 20px;
+	width: 100%;
+	resize: vertical;
+}
+
+.inputFieldWrapper>textarea {
+	height: 200px;
 }
 
 #ingredientsTable {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	flex: 1 0 0;
-	align-self: stretch;
-	min-height: 20rem;
+	height: 32rem;
+	overflow-y: scroll;
 }
 
 #ingredientsTable,
@@ -90,6 +127,7 @@ h1 {
 
 .tableCell:nth-child(1) {
 	width: 13rem;
+	place-content: start;
 }
 
 .tableCell:nth-child(2) {
@@ -102,7 +140,7 @@ h1 {
 }
 
 .tableCell:nth-child(4) {
-	width: 11rem;
+	flex: 1;
 }
 
 .tableCell:last-child {
@@ -140,10 +178,20 @@ h1 {
 	font-size: 16px;
 }
 
-.input {
-	font-size: 12px;
+.inputWrapper {
+	display: flex;
+	gap: 8px;
 }
 
-td:last-child {
-	padding-right: 4px;
+.input {
+	font-size: 16px;
+	padding: 6px 20px;
+	width: 100%;
+
+	border: 1px solid #515050;
+	background: #FFF;
+}
+
+.input:focus {
+	outline: 2px solid lightblue;
 }
