@@ -57,76 +57,36 @@ require_once 'src/views/partials/navbar.php';
 								<p>Opções</p>
 							</div>
 						</div>
-						<div class='tableRow'>
+
+						<div class='tableRow itemRow'>
 							<div class='tableCell'>
-								<p>Arroz</p>
+								<p class="nameValue">Arroz</p>
 							</div>
 							<div class='tableCell'>
-								<p>1kg</p>
-							</div>
-							<div class='tableCell'>
-								<p>R$</p>
-								<p>5.00</p>
-							</div>
-							<div class='tableCell'>
-								<button class='button'>Editar</button>
-								<button class='button'>Excluir</button>
-							</div>
-						</div>
-						<div class='tableRow'>
-							<div class='tableCell'>
-								<p>Macaxeiraaaaaaaaaaaaaaaa</p>
-							</div>
-							<div class='tableCell'>
-								<p>1kg</p>
-							</div>
-							<div class='tableCell'>
-								<p>R$</p>
-								<p>5.00</p>
-							</div>
-							<div class='tableCell'>
-								<button class='button'>Editar</button>
-								<button class='button'>Excluir</button>
-							</div>
-						</div>
-						<div class='tableRow'>
-							<div class='tableCell'>
-								<p>Arroz</p>
-							</div>
-							<div class='tableCell'>
-								<p>1kg</p>
-							</div>
-							<div class='tableCell'>
-								<p>R$</p>
-								<p>150.00</p>
-							</div>
-							<div class='tableCell'>
-								<button class='button'>Editar</button>
-								<button class='button'>Excluir</button>
-							</div>
-						</div>
-						<div class='tableRow'>
-							<div class='tableCell'>
-								<p>Arroz</p>
-							</div>
-							<div class='tableCell'>
-								<p>1kg</p>
+								<p class="amountValue">1kg</p>
 							</div>
 							<div class='tableCell'>
 								<p>R$ </p>
-								<p>5.00</p>
+								<p class="priceValue">5.00</p>
 							</div>
 							<div class='tableCell'>
-								<button class='button'>Editar</button>
+								<button class='button' onclick="requestEdition(0)">Editar</button>
 								<button class='button'>Excluir</button>
 							</div>
 						</div>
+
 					</div>
-					<div class='inputWrapper'>
+					<div id='addInputWrapper' class='inputWrapper'>
 						<input class='input' type="text" name="name" placeholder='Ex: Arroz' />
 						<input class='input' type="text" name="amount" placeholder='Ex: 500ml' />
 						<input class='input' type="number" min="0" step=".01" name="price" placeholder='Ex: 15,00' />
 						<button class="button" onclick="addItem()">Adicionar</button>
+					</div>
+					<div disabled id='editInputWrapper' class='inputWrapper' style="display: none">
+						<input class='input' type="text" name="name" placeholder='Ex: Arroz' />
+						<input class='input' type="text" name="amount" placeholder='Ex: 500ml' />
+						<input class='input' type="number" min="0" step=".01" name="price" placeholder='Ex: 15,00' />
+						<button class="button saveButton">Salvar</button>
 					</div>
 				</div>
 			</div>
