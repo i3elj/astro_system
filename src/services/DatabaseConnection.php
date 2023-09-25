@@ -16,7 +16,7 @@ trait Connection
 	{
 		$ENV = parse_ini_file('.env');
 
-		$DB   = $ENV['DB'];
+		$DB = $ENV['DB'];
 		return match ($DB) {
 			"postgres" => $this->pgsql_connect($ENV),
 			"sqlite" => $this->sqlite_connect(),
@@ -30,7 +30,7 @@ trait Connection
 		$PORT = $ENV['DB_PORT'];
 		$USER = $ENV['DB_USER'];
 		$PWD  = $ENV['DB_PASSWORD'];
-		$NAME = $ENV['DB_DATABASE'];
+		$NAME = $ENV['DB_NAME'];
 
 		$dsn = "pgsql:host=$HOST;port=$PORT;dbname=$NAME;user=$USER;password=$PWD";
 
