@@ -4,14 +4,14 @@ function loadIngredientsInMemory() {
 		ingredients.push({
 			name: el.children[0].innerText,
 			amount: el.children[1].innerText,
-			price: el.children[2].children[1].innerText
+			price: el.children[2].children[1].innerText //{<p>R$<p><p>5.00<p>}
 		})
 	})
 
 	sessionStorage.setItem('ingredients', JSON.stringify(ingredients))
 }
 
-function addItem() {
+window.addItem = () => {
 	const name = document.querySelector('input[name="name"]')
 	const amount = document.querySelector('input[name="amount"]')
 	const price = document.querySelector('input[name="price"]')
@@ -19,20 +19,20 @@ function addItem() {
 	const table = document.getElementById('ingredientsTable')
 
 	const newItem = `
-		<div class='tableRow'>
-			<div class='tableCell'>
+		<div>
+			<div>
 				<p>${name.value}</p>
 			</div>
-			<div class='tableCell'>
+			<div>
 				<p>${amount.value}</p>
 			</div>
-			<div class='tableCell'>
+			<div>
 				<p>R$ </p>
 				<p>${price.value}</p>
 			</div>
-			<div class='tableCell'>
-				<button class='button'>Editar</button>
-				<button class='button'>Excluir</button>
+			<div>
+				<button>Editar</button>
+				<button>Excluir</button>
 			</div>
 		</div>
 	`
@@ -44,7 +44,7 @@ function addItem() {
  * @param {number} index The ingredient's index
  * @return {void}
  */
-function requestEdition(index) {
+window.requestEdition = (index) => {
 	const inputs = {
 		name: document.querySelectorAll('input[name="name"]')[1],
 		amount: document.querySelectorAll('input[name="amount"]')[1],
@@ -65,6 +65,7 @@ function requestEdition(index) {
 	document.querySelector('#editInputWrapper').style.display = 'flex'
 
 	saveItem(index, inputs, row)
+
 }
 
 /**
@@ -75,17 +76,16 @@ function requestEdition(index) {
  */
 function saveItem(index, inputs, row) {
 	const saveButton = document.querySelector('.saveButton')
-	saveButton.onclick = ev => {
+	saveButton.addEventListener('click', _ => {
 		row.name.innerText = inputs.name.value
 		row.amount.innerText = inputs.amount.value
 		row.price.innerText = inputs.price.value
 
+		loadIngredientsInMemory()
+
 		document.querySelector('#addInputWrapper').style.display = 'flex'
 		document.querySelector('#editInputWrapper').style.display = 'none'
-	}
+	})
 }
 
 document.addEventListener('DOMContentLoaded', loadIngredientsInMemory)
-
-window.addItem = addItem
-window.requestEdition = requestEdition

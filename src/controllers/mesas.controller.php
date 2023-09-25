@@ -19,10 +19,10 @@ class Controller extends Model
      */
     public function Handler(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET')
-            $this->build_view();
-
-        bad_request();
+        match ($_SERVER['REQUEST_METHOD']) {
+            'GET' => $this->build_view(),
+            default => bad_request()
+        };
     }
 
     /**

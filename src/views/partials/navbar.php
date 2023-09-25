@@ -6,100 +6,35 @@ require_once 'src/views/partials/icons.php';
 
 function navbar($is_logged, $path)
 { ?>
-	<style>
-		.navbar {
-			display: flex;
-			padding: 20px 34px;
-			justify-content: space-between;
-			align-items: center;
-			align-self: stretch;
-			border-bottom: 0.5px solid #2B2B2B;
-			background: #F8F8F8;
-		}
+	<nav>
+		<a href='/home'>Astro</a>
 
-		.navbar-links {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			gap: 44px;
-			height: 38px;
-		}
-
-		.navbar-links>a {
-			font-size: 18px;
-		}
-
-		.logout {
-			text-decoration: none;
-			background: none;
-			border: none;
-			font-size: 18px;
-		}
-
-		.profile {
-			all: unset;
-			height: 30px;
-		}
-
-		.navbar-buttons {
-			display: flex;
-			padding-top: 8px;
-			justify-content: center;
-			align-items: center;
-			gap: 24px;
-			height: 100%;
-		}
-
-		.link-container {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			padding-bottom: 8px;
-		}
-
-		.link-container>a {
-			color: black;
-			font-size: 18px;
-		}
-
-		.active {
-			border-bottom: 2px solid black;
-			margin-bottom: -2px;
-		}
-	</style>
-
-	<nav class='navbar'>
-		<a href='/home' class='navbar-logo h2'>Astro</a>
-
-		<div class='navbar-links'>
+		<div>
 
 			<?php if ($is_logged) : ?>
 
-				<div class='navbar-buttons'>
-					<div class='link-container <?= $path == '/dashboard' ? 'active' : null ?>'>
-						<a href='/dashboard'>Painel de Controle</a>
-					</div>
-
-					<div class='link-container <?= $path == '/caixa' ? 'active' : null ?>'>
-						<a href='/caixa'>Caixa</a>
-					</div>
-
-					<div class='link-container <?= $path == '/contabilidade' ? 'active' : null ?>'>
-						<a href='/contabilidade'>Contabilidade</a>
-					</div>
-
-					<div class='link-container <?= $path == '/mesas' ? 'active' : null ?>'>
-						<a href='/mesas'>Mesas</a>
-					</div>
-
-					<div class='link-container <?= $path == '/cardapio' ? 'active' : null ?>'>
-						<a href='/cardapio'>Cardápio</a>
-					</div>
+				<div class='link-container <?= $path == '/dashboard' ? 'active' : null ?>'>
+					<a href='/dashboard'>Painel de Controle</a>
 				</div>
 
+				<div class='link-container <?= $path == '/caixa' ? 'active' : null ?>'>
+					<a href='/caixa'>Caixa</a>
+				</div>
+
+				<div class='link-container <?= $path == '/contabilidade' ? 'active' : null ?>'>
+					<a href='/contabilidade'>Contabilidade</a>
+				</div>
+
+				<div class='link-container <?= $path == '/mesas' ? 'active' : null ?>'>
+					<a href='/mesas'>Mesas</a>
+				</div>
+
+				<div class='link-container <?= $path == '/cardapio' ? 'active' : null ?>'>
+					<a href='/cardapio'>Cardápio</a>
+				</div>
 				<div class='vertical-line'></div>
 
-				<button class='logout btn' onclick='logout()'>
+				<button onclick='logout()'>
 					Log Out
 				</button>
 

@@ -6,10 +6,7 @@ require_once 'src/views/partials/navbar.php'
 <!DOCTYPE html>
 <html>
 
-<?= \Tags\head(
-	title: 'Astro System - SignUp',
-	styles: ['/src/views/auth/auth.style.css']
-) ?>
+<?= \Tags\head('Astro System - Sign Up') ?>
 
 <body>
 	<?= \Tags\navbar(false, $this->path) ?>
@@ -18,22 +15,19 @@ require_once 'src/views/partials/navbar.php'
 		<p id='loginError'>Vazio</p>
 		<form id='form' method='POST' onsubmit='signup(); return false'>
 			<input
-				class='inputField'
 				type='text'
 				name='nickname'
 				placeholder='Choose a nickname'
 				required
 			/>
 			<input
-				class='inputField'
 				type='text'
 				name='realname'
 				placeholder='Real (full) name'
 				required
 			/>
-			<div class='row'>
+			<div >
 				<input
-					class='inputField'
 					type='text'
 					name='cpf'
 					placeholder='CPF ex.000.111.222-33'
@@ -43,7 +37,6 @@ require_once 'src/views/partials/navbar.php'
 					required
 				/>
 				<input
-					class='inputField'
 					type='tel'
 					name='phonenumber'
 					placeholder='+55 (33)91111-2222'
@@ -52,31 +45,27 @@ require_once 'src/views/partials/navbar.php'
 					required
 				/>
 			</div>
-			<div class='row'>
+			<div >
 				<input
-					class='inputField'
 					type='email'
 					name='email'
 					placeholder='Type your email'
 					required
 				/>
 				<input
-					class='inputField'
 					type='email'
 					placeholder='Confirm your email'
 					required
 				/>
 			</div>
-			<div class='row'>
+			<div >
 				<input
-					class='inputField'
 					type='password'
 					name='password'
 					placeholder='Type your password'
 					required
 				/>
 				<input
-					class='inputField'
 					type='password'
 					placeholder='Confirm your password'
 					required

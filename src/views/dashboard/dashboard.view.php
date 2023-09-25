@@ -6,10 +6,7 @@ require_once 'src/views/partials/navbar.php'
 <!DOCTYPE html>
 <html>
 
-<?= \Tags\head(
-	title: 'Astro System - Dashboard',
-	styles: ['/src/views/dashboard/dashboard.style.css']
-) ?>
+<?= \Tags\head('Astro System - Dashboard') ?>
 
 <body>
 	<?= \Tags\navbar($is_logged, $this->path) ?>

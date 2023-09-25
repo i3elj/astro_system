@@ -118,10 +118,7 @@ class Controller extends Model
 			$content = "<!DOCTYPE html>
 <html>
 
-<?= \Tags\head(
-	title: 'Astro System - $RouteName',
-	styles: ['/src/views/$routename/$routename.style.css']
-) ?>
+<?= \Tags\head() ?>
 
 <body>
 	<?= \Tags\\navbar(\$auth_token, \$this->path) ?>
