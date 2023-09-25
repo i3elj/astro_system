@@ -17,41 +17,41 @@ class SQLiteMigrations
 	{
 		$tables = [
 			'users' => "CREATE TABLE users (
-				cpf TEXT PRIMARY KEY,
-				nickname TEXT NOT NULL,
-				real_name TEXT NOT NULL,
-				email VARCHAR NOT NULL,
-				password TEXT NOT NULL,
-				auth_token TEXT NOT NULL,
-				phone_number TEXT,
-				permissions TEXT,
+				cpf             TEXT PRIMARY KEY,
+				nickname        TEXT NOT NULL,
+				real_name       TEXT NOT NULL,
+				email           VARCHAR NOT NULL,
+				password        TEXT NOT NULL,
+				auth_token      TEXT NOT NULL,
+				phone_number    TEXT,
+				permissions     TEXT,
 				role TEXT NOT NULL
 			);",
 			'dishes' => " CREATE TABLE dishes (
-				id INTEGER PRIMARY KEY,
-			    fk_user TEXT NOT NULL,
-			    name TEXT NOT NULL,
-			    cost DECIMAL(10,2),
-			    ingredients TEXT NOT NULL
+				id              INTEGER PRIMARY KEY,
+			    fk_user         TEXT NOT NULL,
+			    name            TEXT NOT NULL,
+			    cost            DECIMAL(10,2),
+			    ingredients     TEXT NOT NULL
 			);",
 			'ingredients' => " CREATE TABLE ingredients (
-			    id INTEGER PRIMARY KEY,
+			    id   INTEGER PRIMARY KEY,
 			    name TEXT NOT NULL
 			);",
 			'tables' => " CREATE TABLE tables (
-			    id INTEGER PRIMARY KEY,
-			    location TEXT,
-			    is_reserved BOOLEAN NOT NULL,
-			    is_occupied BOOLEAN NOT NULL,
-			    status TEXT NOT NULL,
+			    id              INTEGER PRIMARY KEY,
+			    location        TEXT,
+			    is_reserved     BOOLEAN NOT NULL,
+			    is_occupied     BOOLEAN NOT NULL,
+			    status          TEXT NOT NULL,
 			    bill DECIMAL(10,2)
 			);",
 			'orders' => " CREATE TABLE orders (
-			    id INTEGER PRIMARY KEY,
-			    fk_table_id INTEGER NOT NULL,
+			    id 				INTEGER PRIMARY KEY,
+			    fk_table_id 	INTEGER NOT NULL,
 			    fk_ordered_item INTEGER NOT NULL,
-			    observations TEXT,
-			    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			    observations 	TEXT,
+			    created_at 		TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 			    expiration_time TIMESTAMP DEFAULT (datetime('now', '+2 hours')),
 			    FOREIGN KEY (fk_table_id) REFERENCES tables(id),
 			    FOREIGN KEY (fk_ordered_item) REFERENCES dishes(id)
