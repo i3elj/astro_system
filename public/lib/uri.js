@@ -1,3 +1,3 @@
-const URI = 'https://astro-system.ddev.site'
+const URI = 'http://localhost:3000'
 
 export default URI
