@@ -6,15 +6,19 @@ require_once 'src/views/partials/icons.php';
 
 function navbar($is_logged, $path)
 { ?>
-	<nav>
-		<a href='/home'>Astro</a>
+	<nav class="container20 row center spread navbar">
+		<a href='/home'>
+			<h1>Astro</h1>
+		</a>
 
-		<div>
+		<div class="container4 row center">
 
 			<?php if ($is_logged) : ?>
 
 				<div class='link-container <?= $path == '/dashboard' ? 'active' : null ?>'>
-					<a href='/dashboard'>Painel de Controle</a>
+					<a href='/dashboard'>
+						<p>Painel de Controle</p>
+					</a>
 				</div>
 
 				<div class='link-container <?= $path == '/caixa' ? 'active' : null ?>'>

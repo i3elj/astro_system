@@ -10,8 +10,10 @@ require_once 'src/views/partials/navbar.php'
 
 <body>
 	<?= \Tags\navbar($is_logged, $this->path) ?>
-	<h1>Hey, you're logged in! Neat</h1>
-	<button onclick='logout()'>Log out</button>
+	<main>
+		<h1>Hey, you're logged in! Neat</h1>
+		<button onclick='logout()'>Log out</button>
+	</main>
 </body>
 
 <script type='module' src='/src/views/dashboard/dashboard.js'></script>

@@ -10,7 +10,7 @@ require_once 'src/views/partials/navbar.php'
 
 <body>
 	<?= \Tags\navbar($is_logged, $this->path) ?>
-	<main id='main'>
+	<main>
 		<div>
 			<h1>Best Restaurant System Ever!</h1>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
