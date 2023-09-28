@@ -1,160 +1,179 @@
 #!/bin/env php
 <?php
 
-function camel_to_snake($string, $us = "_")
+class Ivory
 {
-	return strtolower(preg_replace(
-		'/(?<=\d)(?=[A-Za-z])|(?<=[A-Za-z])(?=\d)|(?<=[a-z])(?=[A-Z])/',
-		$us,
-		$string
-	));
-}
+	private $options = [
+		"--help or -h    " => "Show this help message",
+		"--path          " => "Path to the new endpoint. Ex: --path=/login",
+		"--create-route  " => "Name of the controller to be in charge of the new endpoint. Ex: --create-route=Login",
+		"--create-service" => "Pass the name of the new service. Ex: --create-service=Navigation",
+	];
 
-$options = [
-	"--help or -h    " => "Show this help message",
-	"--path          " => "Path to the new endpoint. Ex: --path=/login",
-	"--create-route  " => "Name of the controller to be in charge of the new endpoint. Ex: --create-route=Login",
-	"--create-service" => "Pass the name of the new service. Ex: --create-service=Navigation",
-];
+	private array $values = [];
+	private array $arguments = [];
+	private string $path = "";
+	private array $argv = [];
 
+	public function __construct($argv)
+	{
+		$this->argv = array_splice($argv, 1);
 
-if (sizeof($argv) == 1 || $argv[1] == '--help' || $argv[1] == '-h') {
-	echo "ivory - A helper script to create new endpoints in this project. It's intent is to be used in the root folder:\n";
+		foreach ($this->argv as $arg)
+			array_push($this->arguments, explode("=", $arg));
+		foreach ($this->arguments as $argument)
+			$this->values[$argument[0]] = $argument[1];
+	}
 
-	foreach ($options as $option => $description)
-		echo "\t" . $option . "\t" . $description . "\n";
+	public function run()
+	{
+		foreach ($this->values as $key => $value) {
+			switch ($key) {
+				case '--path':
+					$this->path = $value;
+					break;
+				case '--create-route':
+					$routename = $this->camel_to_snake($value);
+					$RouteName = $value;
+					///////////
+					// MODEL //
+					///////////
+					$file = fopen("./src/model/$routename.model.php", "w");
+					$content = "<?php
 
-	exit(0);
-}
+	namespace $RouteName;
 
+	require_once 'src/services/DatabaseConnection.php';
 
-// remove the script itself: "./ivory"
-$argv = array_splice($argv, 1);
+	class Model
+	{
+		use \Services\Database\Connection;
+	}
+	";
+					fwrite($file, $content);
+					fclose($file);
 
-$arguments = [];
-foreach ($argv as $arg) array_push($arguments, explode("=", $arg));
+					////////////////
+					// CONTROLLER //
+					////////////////
+					$file = fopen("./src/controllers/$routename.controller.php", "w");
+					$content = "<?php
 
-$values = [];
-foreach ($arguments as $argument) $values[$argument[0]] = $argument[1];
+	namespace $RouteName;
 
-foreach ($values as $key => $value) {
-	switch ($key) {
-		case '--path':
-			$path = $values['--path'];
-		case '--create-route':
-			$routename = camel_to_snake($values['--create-route']);
-			$RouteName = $values['--create-route'];
-			///////////
-			// MODEL //
-			///////////
-			$file = fopen("./src/model/$routename.model.php", "w");
-			$content = "<?php
+	require_once 'src/model/$routename.model.php';
 
-namespace $RouteName;
+	class Controller extends Model
+	{
+	    public function __construct(private string \$path = '$this->path')
+	    {
+	    }
 
-require_once 'src/services/DatabaseConnection.php';
+		/**
+		 * The main method of each controller. This method takes care of what the
+		 * controller will do depending on each http method used.
+		 */
+	    public function Handler(): void
+	    {
+	        if (\$_SERVER['REQUEST_METHOD'] == 'GET') {
+	            this->build_view();
+	        }
 
-class Model
-{
-	use \Services\Database\Connection;
-}
-";
-			fwrite($file, $content);
-			fclose($file);
+	         bad_request();
+	    }
 
-			////////////////
-			// CONTROLLER //
-			////////////////
-			$file = fopen("./controllers/$routename.php", "w");
-			$content = "<?php
+		/**
+		 * Each Controller will have a build_view function where it sends the
+		 * desired webpage to the client.
+		 */
+	    private function build_view(): void
+	    {
+	        require_once 'src/views/$routename/$routename.view.php';
+	        exit(0);
+	    }
+	}
+	";
+					fwrite($file, $content);
+					fclose($file);
 
-namespace $RouteName;
+					$file = fopen("./src/controllers/import.php", "a");
+					$content = "require_once 'src/controllers/$routename.controller.php';\n";
+					fwrite($file, $content);
+					fclose($file);
 
-require_once 'src/model/$routename.model.php';
+					//////////
+					// VIEW //
+					//////////
+					mkdir("./src/views/$routename");
+					$file = fopen("./src/views/$routename/$routename.view.php", "w");
+					$content = "<!DOCTYPE html>
+	<html>
 
-class Controller extends Model
-{
-    public function __construct(private string \$path = '$path')
-    {
-    }
+	<?= \Tags\head(
+		title: 'Astro System - $RouteName',
+		styles: ['/src/views/$routename/$routename.style.css']
+	) ?>
 
-	/**
-	 * The main method of each controller. This method takes care of what the
-	 * controller will do depending on each http method used.
-	 */
-    public function Handler(): void
-    {
-        if (\$_SERVER['REQUEST_METHOD'] == 'GET') {
-            this->build_view();
-        }
+	<body>
+		<?= \Tags\\navbar(\$auth_token, \$this->path) ?>
+		<h1>Hello from $RouteName</h1>
+	</body>
 
-         bad_request();
-    }
+	<script type='text/javascript' src='/src/views/$routename/$routename.js'></script>
 
-	/**
-	 * Each Controller will have a build_view function where it sends the
-	 * desired webpage to the client.
-	 */
-    private function build_view(): void
-    {
-        require_once 'src/views/$routename/$routename.view.php';
-        exit(0);
-    }
-}
-";
-			fwrite($file, $content);
-			fclose($file);
+	</html>
+	";
+					fwrite($file, $content);
+					fclose($file);
 
-			$file = fopen("./controllers/import.php", "a");
-			$content = "require_once 'src/controllers/$routename.php';\n";
-			fwrite($file, $content);
-			fclose($file);
+					$file = fopen("./src/views/$routename/$routename.style.css", "w");
+					fclose($file);
 
-			//////////
-			// VIEW //
-			//////////
-			mkdir("./src/views/$routename");
-			$file = fopen("./src/views/$routename/$routename.view.php", "w");
-			$content = "<!DOCTYPE html>
-<html>
+					$file = fopen("./src/views/$routename/$routename.js", "w");
+					fclose($file);
 
-<?= \Tags\head(
-	title: 'Astro System - $RouteName',
-	styles: ['/src/views/$routename/$routename.style.css']
-) ?>
-
-<body>
-	<?= \Tags\\navbar(\$auth_token, \$this->path) ?>
-	<h1>Hello from $RouteName</h1>
-</body>
-
-<script type='text/javascript' src='/src/views/$routename/$routename.js'></script>
-
-</html>
-";
-			fwrite($file, $content);
-			fclose($file);
-
-			$file = fopen("./src/views/$routename/$routename.style.css", "w");
-			fclose($file);
-
-			$file = fopen("./src/views/$routename/$routename.js", "w");
-			fclose($file);
-
-			break;
+					break;
 
 
-		case '--create-service':
-			$ServiceName = $values['--create-service'];
-			$file = fopen("./src/services/$ServiceName.service.php", "w");
-			$content = "<?php
+				case '--create-service':
+					$ServiceName = $this->values['--create-service'];
+					$file = fopen("./src/services/$ServiceName.service.php", "w");
+					$content = "<?php
 
-namespace Services;
+	namespace Services;
 
-trait $ServiceName
-{
-}";
-			fwrite($file, $content);
-			fclose($file);
+	trait $ServiceName
+	{
+	}";
+					fwrite($file, $content);
+					fclose($file);
+			}
+		}
+	}
+
+	private function camel_to_snake($string, $sep = "_")
+	{
+		return strtolower(preg_replace(
+			'/(\G(?!^)|\b[a-zA-Z][a-z]*)([A-Z][a-z]*|\d+)/',
+			"$1$sep$2",
+			$string
+		));
+	}
+
+
+	public function help()
+	{
+		if (sizeof($this->argv) == 1 || $this->argv[1] == '--help' || $this->argv[1] == '-h') {
+			echo "ivory - A helper script to create new endpoints in this project. It's intent is to be used in the root folder:\n";
+
+			foreach ($this->options as $option => $description)
+				echo "\t" . $option . "\t" . $description . "\n";
+
+			exit(0);
+		}
 	}
 }
+
+$ivory = new Ivory($argv);
+$ivory->help();
+$ivory->run();
