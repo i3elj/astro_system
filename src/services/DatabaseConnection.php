@@ -77,7 +77,7 @@ trait Connection
 	 * @param array $values All the values the query needs
 	 * @return array
 	 */
-	protected function queryReturn($query_string, $values = [])
+	protected function query_return($query_string, $values = [])
 	{
 		$stmt = $this->connect()->prepare($query_string);
 

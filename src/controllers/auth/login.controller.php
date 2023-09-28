@@ -33,7 +33,7 @@ class Controller
 		$email = $_POST['email'];
 		$pwd = $_POST['password'];
 
-		if (!$this->checkEmail($email)) {
+		if (!$this->check_email($email)) {
 			echo json_encode([
 				'success' => false,
 				'field' => 'email',
@@ -42,7 +42,7 @@ class Controller
 			exit(0);
 		}
 
-		if (!$this->checkPassword($pwd, $email)) {
+		if (!$this->check_password($pwd, $email)) {
 			echo json_encode([
 				'success' => false,
 				'field' => 'password',
@@ -51,7 +51,7 @@ class Controller
 			exit(0);
 		}
 
-		$auth_token = $this->logUser($pwd, $email);
+		$auth_token = $this->log_user($pwd, $email);
 
 		echo json_encode(['success' => true, 'token' => $auth_token]);
 		exit(0);
@@ -64,7 +64,7 @@ class Controller
 	private function build_view()
 	{
 		$token = $_COOKIE['authToken'] ?? null;
-		$is_logged = $this->isAuthenticated($token);
+		$is_logged = $this->is_authenticated($token);
 		require_once 'src/views/auth/login/login.view.php';
 		exit(0);
 	}

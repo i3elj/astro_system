@@ -59,7 +59,7 @@ class Controller extends Model
     private function build_view(): void
     {
         $token = $_COOKIE['authToken'] ?? null;
-        $is_logged = $this->isAuthenticated($token);
+        $is_logged = $this->is_authenticated($token);
         require_once 'src/views/home/home.view.php';
         exit(0);
     }

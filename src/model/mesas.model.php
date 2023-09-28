@@ -17,7 +17,7 @@ class Model
 	 * @param string $itemsPerPage How many rows it will be retrieved.
 	 * @return array|null Consulted rows.
 	 */
-	protected function getTableList(
+	protected function get_table_list(
 		$keywords,
 		$sortBy,
 		$orderType,
@@ -26,34 +26,34 @@ class Model
 		// TODO: use OFFSET clause to make some type of 'pagination'
 		if ($keywords != null) {
 			$rows = match ($sortBy) {
-				'number' => $this->queryReturn(
+				'number' => $this->query_return(
 					'SELECT * from tables WHERE id = ? LIMIT ?',
 					[(int)$keywords, $itemsPerPage]
 				),
-				'description' => $this->queryReturn(
+				'description' => $this->query_return(
 					'SELECT * from tables WHERE location = ? LIMIT ?',
 					[$keywords, $itemsPerPage]
 				),
-				'occupied' => $this->queryReturn(
+				'occupied' => $this->query_return(
 					'SELECT * from tables WHERE is_occupied = ? LIMIT ?',
 					[$keywords == 'Sim', $itemsPerPage]
 				),
-				'status' => $this->queryReturn(
+				'status' => $this->query_return(
 					'SELECT * from tables WHERE status = ? LIMIT ?',
 					[$keywords, $itemsPerPage]
 				),
-				'reserved' => $this->queryReturn(
+				'reserved' => $this->query_return(
 					'SELECT * from tables WHERE is_reserved = ? LIMIT ?',
 					[$keywords == 'Sim', $itemsPerPage]
 				),
-				'bill' => $this->queryReturn(
+				'bill' => $this->query_return(
 					'SELECT * from tables WHERE bill = ? LIMIT ?',
 					[(float)$keywords, $itemsPerPage]
 				),
 				default => null,
 			};
 		} else {
-			$rows = $this->queryReturn(
+			$rows = $this->query_return(
 				'SELECT * from tables LIMIT ?',
 				[$itemsPerPage]
 			);

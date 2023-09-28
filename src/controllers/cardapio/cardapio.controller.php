@@ -32,11 +32,11 @@ class Controller extends Model
     private function build_view(): void
     {
         $token = $_COOKIE['authToken'] ?? null;
-        $is_logged = $this->isAuthenticated($token);
+        $is_logged = $this->is_authenticated($token);
 
         if ($is_logged) {
-            $user_info = $this->getUserInfo($token);
-            $menu_items = $this->getMenu($user_info['cpf']);
+            $user_info = $this->get_user_info($token);
+            $menu_items = $this->get_menu($user_info['cpf']);
             require_once 'src/views/cardapio/cardapio.view.php';
             exit(0);
         }

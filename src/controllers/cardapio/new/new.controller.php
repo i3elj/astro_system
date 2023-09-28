@@ -31,7 +31,7 @@ class Controller extends Model
     private function build_view(): void
     {
         $token = $_COOKIE['authToken'];
-        $is_logged = $this->isAuthenticated($token);
+        $is_logged = $this->is_authenticated($token);
 
         if (!$is_logged) header('location: /login');
 

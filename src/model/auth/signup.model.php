@@ -16,7 +16,7 @@ class Model
 	 */
 	protected function user_exist($cpf)
 	{
-		$rows = $this->queryReturn(
+		$rows = $this->query_return(
 			'SELECT 1 FROM users WHERE cpf = ?;',
 			[$cpf]
 		);

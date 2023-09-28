@@ -32,7 +32,7 @@ class Controller extends Model
     private function build_view(): void
     {
         $token = $_COOKIE['authToken'] ?? null;
-        $is_logged = $this->isAuthenticated($token);
+        $is_logged = $this->is_authenticated($token);
 
         if ($is_logged) header('location: /login');
 
@@ -41,7 +41,7 @@ class Controller extends Model
         $orderType = htmlspecialchars($_GET['orderType'] ?? 'ascending');
         $itemsPerPage = htmlspecialchars($_GET['itemsPerPage'] ?? 10);
 
-        $table_list = $this->getTableList(
+        $table_list = $this->get_table_list(
             $keywords,
             $sortBy,
             $orderType,

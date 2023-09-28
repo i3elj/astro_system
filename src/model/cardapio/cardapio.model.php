@@ -14,9 +14,9 @@ class Model
 	 * @param string $cpf Unique user's identifier.
 	 * @return array
 	 */
-	protected function getMenu($cpf)
+	protected function get_menu($cpf)
 	{
-		$rows = $this->queryReturn(
+		$rows = $this->query_return(
 			'SELECT name, cost, ingredients FROM dishes WHERE fk_user = ?',
 			[$cpf]
 		);
