@@ -46,7 +46,7 @@ trait Auth
 	 * @param string $token User's token
 	 * @return bool True if the token exists, false otherwise.
 	 */
-	protected function is_authenticated($token)
+	protected function isAuthenticated($token)
 	{
 		if (!isset($token)) return false;
 
@@ -69,7 +69,7 @@ trait Auth
 	protected function logUser($pwd, $email)
 	{
 		$rows = $this->queryReturn(
-			'SELECT cpf, auth_token, password FROM users WHERE email = ?;',
+			'SELECT cpf FROM users WHERE email = ?;',
 			[$email]
 		);
 

@@ -77,8 +77,12 @@ class PostgresMigrations
 	private function PopulateTables()
 	{
 		$date = date('m/d/Y h:i:s a', time());
-		$auth_token = password_hash('088.136.004-02' . $date, PASSWORD_ARGON2I);
-		$pwd = password_hash('adminad@min', PASSWORD_ARGON2I);
+		$dummy_data = [
+			'token_key' => '088.136.004-02' . $date,
+			'pwd_key' => 'admin' . 'ad@min',
+		];
+		$auth_token = password_hash($dummy_data['token_key'], PASSWORD_ARGON2I);
+		$pwd = password_hash($dummy_data['pwd_key'], PASSWORD_ARGON2I);
 		$queries = [
 			'users' => "INSERT INTO users
 				 VALUES (

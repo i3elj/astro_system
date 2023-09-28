@@ -32,25 +32,23 @@ class Controller extends Model
     private function build_view(): void
     {
         $token = $_COOKIE['authToken'] ?? null;
-        $is_logged = $this->is_authenticated($token);
+        $is_logged = $this->isAuthenticated($token);
 
-        if ($is_logged) {
-            $keywords = htmlspecialchars($_GET['keywords'] ?? '');
-            $sortBy = htmlspecialchars($_GET['sortBy'] ?? 'number');
-            $orderType = htmlspecialchars($_GET['orderType'] ?? 'ascending');
-            $itemsPerPage = htmlspecialchars($_GET['itemsPerPage'] ?? 10);
+        if ($is_logged) header('location: /login');
 
-            $table_list = $this->getTableList(
-                $keywords,
-                $sortBy,
-                $orderType,
-                (int)$itemsPerPage
-            );
+        $keywords = htmlspecialchars($_GET['keywords'] ?? '');
+        $sortBy = htmlspecialchars($_GET['sortBy'] ?? 'number');
+        $orderType = htmlspecialchars($_GET['orderType'] ?? 'ascending');
+        $itemsPerPage = htmlspecialchars($_GET['itemsPerPage'] ?? 10);
 
-            require_once 'src/views/mesas/mesas.view.php';
-            exit(0);
-        }
+        $table_list = $this->getTableList(
+            $keywords,
+            $sortBy,
+            $orderType,
+            (int)$itemsPerPage
+        );
 
-        header('location: /login');
+        require_once 'src/views/mesas/mesas.view.php';
+        exit(0);
     }
 }
