@@ -21,8 +21,10 @@ class Ivory
 
 		foreach ($this->argv as $arg)
 			array_push($this->arguments, explode("=", $arg));
-		foreach ($this->arguments as $argument)
-			$this->values[$argument[0]] = $argument[1];
+		foreach ($this->arguments as $argument) {
+			if (sizeof($argument) > 1)
+				$this->values[$argument[0]] = $argument[1];
+		}
 	}
 
 	public function run()
@@ -155,7 +157,7 @@ class Ivory
 	{
 		return strtolower(preg_replace(
 			'/(\G(?!^)|\b[a-zA-Z][a-z]*)([A-Z][a-z]*|\d+)/',
-			"$1$sep$2",
+			"$1" . $sep . "$2",
 			$string
 		));
 	}
