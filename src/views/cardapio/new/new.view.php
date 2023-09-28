@@ -7,80 +7,86 @@ require_once 'src/views/partials/navbar.php';
 <!DOCTYPE html>
 <html>
 
-<?= \Tags\head('Astro System - New Cardapio')  ?>
+<?= \Tags\head(
+	title: 'Astro System - New Cardapio',
+	styles: [
+		'/src/views/cardapio/new/new.style.css',
+		'/src/views/partials/header.css',
+	]
+) ?>
 
 <body>
 	<?= \Tags\navbar($is_logged, $this->path) ?>
 
 	<main>
-		<div>
+		<div class='header'>
 			<h1>Cardápio - <span>Adicionar Item</span></h1>
 		</div>
-		<div>
-			<a href='/cardapio'>
+		<div class='addItems'>
+			<a href="/cardapio" class="goBack">
 				<?= \Icons\LeftArrow() ?>
 				Voltar
 			</a>
 			<div id='mainContent'>
-				<div id='newItemInfoContainer'>
-					<div>
+				<div id='newItemInfoContainer' class='newItemContainer'>
+					<div class='inputFieldWrapper'>
 						<label>Nome do Item</label>
-						<input type='text' name=''>
+						<input class='input inputFieldWrapper_input' type='text' name=''>
 					</div>
-					<div>
+					<div class='inputFieldWrapper'>
 						<label>Descrição</label>
-						<textarea></textarea>
+						<textarea class='input inputFieldWrapper_input'></textarea>
 					</div>
-					<button>Adicionar Item</button>
+					<button class='button inputFieldWrapper_input'>Adicionar Item</button>
 				</div>
 
-				<div>
+				<div class='newItemContainer'>
 					<h2>Ingredientes</h2>
-					<div id='ingredientsTable'>
-						<div>
-							<div>
+					<div id='ingredientsTable' class='tableBorder'>
+						<div class='tableRow columnsName'>
+							<div class='tableCell'>
 								<p>Nome</p>
 							</div>
-							<div>
+							<div class='tableCell'>
 								<p>Quantidade</p>
 							</div>
-							<div>
+							<div class='tableCell'>
 								<p>Preço</p>
 							</div>
-							<div>
+							<div class='tableCell'>
 								<p>Opções</p>
 							</div>
 						</div>
 
-						<div>
-							<div>
-								<p>Arroz</p>
+						<div class='tableRow itemRow'>
+							<div class='tableCell'>
+								<p class="nameValue">Arroz</p>
 							</div>
-							<div>
-								<p>1kg</p>
+							<div class='tableCell'>
+								<p class="amountValue">1kg</p>
 							</div>
-							<div>
-								<p>R$</p>
-								<p>5.00</p>
+							<div class='tableCell'>
+								<p>R$ </p>
+								<p class="priceValue">5.00</p>
 							</div>
-							<div>
-								<button onclick='requestEdition(0)'>Editar</button>
-								<button>Excluir</button>
+							<div class='tableCell'>
+								<button class='button' onclick="requestEdition(0)">Editar</button>
+								<button class='button'>Excluir</button>
 							</div>
 						</div>
 
 					</div>
-					<div id='addInputWrapper'>
-						<input type='text' name='name' placeholder='Ex: Arroz' />
-						<input type='text' name='amount' placeholder='Ex: 500ml' />
-						<input type='number' min='0' step='.01' name='price' placeholder='Ex: 15,00' />
-						<button onclick='addItem()'>Adicionar</button>
+					<div id='addInputWrapper' class='inputWrapper'>
+						<input class='input' type="text" name="name" placeholder='Ex: Arroz' />
+						<input class='input' type="text" name="amount" placeholder='Ex: 500ml' />
+						<input class='input' type="number" min="0" step=".01" name="price" placeholder='Ex: 15,00' />
+						<button class="button" onclick="addItem()">Adicionar</button>
 					</div>
-					<div disabled id='editInputWrapper' style='display: none'>
-						<input type='text' name='name' placeholder='Ex: Arroz' />
-						<input type='text' name='amount' placeholder='Ex: 500ml' />
-						<input type='number' min='0' step='.01' name='price' placeholder='Ex: 15,00' />
-						<button>Salvar</button>
+					<div disabled id='editInputWrapper' class='inputWrapper' style="display: none">
+						<input class='input' type="text" name="name" placeholder='Ex: Arroz' />
+						<input class='input' type="text" name="amount" placeholder='Ex: 500ml' />
+						<input class='input' type="number" min="0" step=".01" name="price" placeholder='Ex: 15,00' />
+						<button class="button saveButton">Salvar</button>
 					</div>
 				</div>
 			</div>

@@ -4,33 +4,40 @@ require_once 'src/views/partials/navbar.php'
 ?>
 
 <!DOCTYPE html>
-<html lang='pt-BR'>
+<html lang="pt-BR">
 
-<?= \Tags\head('Astro System - Cardapio') ?>
+<?= \Tags\head(
+	title: 'Astro System - Cardapio',
+	styles: [
+		'/src/views/cardapio/cardapio.style.css',
+		'/src/views/partials/header.css',
+	]
+) ?>
+
+<?= \Tags\navbar($is_logged, $this->path) ?>
 
 <body>
-	<?= \Tags\navbar($is_logged, $this->path) ?>
 	<main>
-		<div>
+		<div class='header'>
 			<h1>Cardápio</h1>
 		</div>
 
 		<?php if (sizeof($menu_items) == 0) : ?>
 
-			<div>
+			<div class='mainContent'>
 				<h2>Adicione items no seu cardápio ou importe um arquivo json</h2>
 				<div>
-					<a href='/cardapio/new'>Adicionar Items</a>
+					<a href="/cardapio/new" class='button'>Adicionar Items</a>
 					<form>
-						<input id='files' type='file' required />
-						<input type='submit' value='Importar Arquivo' />
+						<input id="files" type="file" required/>
+						<input type="submit" class="button" value="Importar Arquivo" />
 					</form>
 				</div>
 			</div>
 
 		<?php else : ?>
 
-			<table>
+			<table class='tableList'>
 				<thead>
 					<tr>
 						<th>Numero da Mesa</th>

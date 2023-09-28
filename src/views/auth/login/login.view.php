@@ -6,7 +6,10 @@ require_once 'src/views/partials/navbar.php'
 <!DOCTYPE html>
 <html>
 
-<?= \Tags\head('Astro System - Log In') ?>
+<?= \Tags\head(
+	title: 'Astro System - Login',
+	styles: ['/src/views/auth/auth.style.css']
+) ?>
 
 <body>
 	<?= \Tags\navbar($is_logged, $this->path) ?>
@@ -14,8 +17,8 @@ require_once 'src/views/partials/navbar.php'
 		<h1>Login</h1>
 		<p id='loginError'>Vazio</p>
 		<form id='form' onsubmit='login(); return false'>
-			<input type='email' name='email' placeholder='Type your email' required />
-			<input type='password' name='password' placeholder='Type your password' required />
+			<input class='inputField' type='email' name='email' placeholder='Type your email' required />
+			<input class='inputField' type='password' name='password' placeholder='Type your password' required />
 			<input id='submitButton' type='submit' value='Authenticate' />
 		</form>
 	</main>

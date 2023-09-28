@@ -20,6 +20,7 @@ class Controller
 	{
 		match ($_SERVER['REQUEST_METHOD']) {
 			'GET' => $this->build_view(),
+			'POST' => $this->login(),
 			default => bad_request()
 		};
 	}

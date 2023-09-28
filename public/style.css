@@ -1,34 +1,13 @@
-:root {
-	--bg0: #E6E6E6;
-	--bg1: #D6D6D6;
-	--bg2: #C6C6C6;
-	--bg3: #B6B6B6;
-	--bg4: #A6A6A6;
-	--fg0: #000000;
-	--fg1: #030303;
-	--fg2: #131313;
-	--fg3: #232323;
-	--fg4: #333333;
-	--link-color: #70bcff;
-}
-
-*,
-*::after,
-*::before {
+* {
 	margin: 0;
 	padding: 0;
 	font-family: 'Inter', sans-serif;
 	box-sizing: border-box;
 }
 
-/* ELEMENTS */
-html {
-	font-size: 16px;
-}
-
 body {
 	color: #000;
-	background: var(--bg);
+	background: #E6E6E6;
 }
 
 main {
@@ -71,7 +50,6 @@ a {
 	background-color: var(--bg0);
 }
 
-/* LINES */
 .vertical-line {
 	height: 100%;
 	width: 1px;
@@ -156,18 +134,17 @@ a {
 	flex-direction: row;
 }
 
-.column {
-	display: flex;
-	flex-direction: column;
+.h2 {
+	font-size: 24px;
+	font-weight: 700;
+	color: #000;
 }
 
-/* ACTIVES */
 .button {
 	padding: 6px 20px;
 	border: 1px solid #515050;
 	background: linear-gradient(180deg, #F8F8F8 0%, #D9D9D9 100%);
 	font-size: 15px;
-	cursor: pointer !important;
 }
 
 .button:hover {

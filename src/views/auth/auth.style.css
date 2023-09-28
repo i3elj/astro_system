@@ -1,0 +1,125 @@
+body {
+	display: flex;
+	flex-direction: column;
+	gap: 6rem;
+}
+
+
+#authContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1 {
+	margin-bottom: 2rem;
+	font-weight: 400;
+}
+
+#loginError {
+	text-align: center;
+	color: rgba(0, 0, 0, 0);
+	transform: translateY(-20px);
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+/* #000000 */
+/* #d0d0d0 */
+
+.inputField,
+#submitButton {
+	background: none;
+	border: 1px solid black;
+	border-radius: 8px;
+	padding: 1rem;
+	font-size: 1rem;
+	font-family: monospace;
+	transition: 300ms;
+}
+
+#submitButton {
+	font-family: Cantarell;
+	cursor: pointer;
+	border: 1px solid black;
+}
+
+
+.inputField:focus {
+	outline: 2px solid #70bcff;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem
+}
+
+#termsOfServiceContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+#tos {
+	appearance: none;
+	-webkit-appearance: none;
+	padding: .5em;
+	border: 2px solid #9b9b9b;
+	border-radius: 4px;
+	transition: 200ms;
+	cursor: pointer;
+}
+
+#tos:hover,
+#tos:hover+label {
+	border-color: #000;
+	color: #000;
+	outline: none;
+	cursor: pointer;
+}
+
+label[for='tos'] {
+	color: #9b9b9b;
+	transition: 200ms;
+}
+
+#tos:focus-visible,
+#tos:focus-visible+label {
+	border-color: #000;
+	color: #000;
+	outline: none;
+}
+
+#tos:checked {
+	background-color: #000;
+	border-color: #000;
+}
+
+#tos:checked+label {
+	color: #000;
+}
+
+#submitButton:not(:disabled):hover {
+	background-color: #d7d7d7;
+}
+
+#submitButton:disabled {
+	color: #7b7b7b;
+	border-color: #7b7b7b;
+	cursor: not-allowed;
+}
+
+.inputField:not(:placeholder-shown) {
+	border-color: #000;
+}
+
+.fieldError {
+	border: 1px solid #e38585 !important;
+}

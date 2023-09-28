@@ -6,16 +6,22 @@ require_once 'src/views/partials/navbar.php';
 <!DOCTYPE html>
 <html>
 
-<?= \Tags\head('Astro System - Mesas') ?>
+<?= \Tags\head(
+	title: 'Astro System - Mesas',
+	styles: [
+		'/src/views/mesas/mesas.style.css',
+		'/src/views/partials/header.css',
+	]
+) ?>
 
 <body>
 	<?= \Tags\navbar($is_logged, $this->path) ?>
 	<main>
-		<div>
+		<div class='searchContainer'>
 			<h1>Pesquise Por Mesas</h1>
-			<div></div>
-			<form>
-				<div>
+			<div class='horizontal-line'></div>
+			<form class='options'>
+				<div class='optionsContainers'>
 					<label for='sortBy'>Pesquise Por</label>
 					<select name='sortBy' id='sortBy'>
 						<option value='number'>Número</option>
@@ -26,18 +32,18 @@ require_once 'src/views/partials/navbar.php';
 						<option value='bill'>Valor</option>
 					</select>
 				</div>
-				<div>
+				<div class='optionsContainers'>
 					<label for='keywords'>Palavras-Chave</label>
 					<input type='text' name='keywords' id='keywords' placeholder='Pesquisar mesa' autofocus>
 				</div>
-				<div>
+				<div class='optionsContainers'>
 					<label for='orderType'>Ordenação</label>
 					<select name='orderType' id='orderType'>
 						<option value='ascending'>Crescente</option>
 						<option value='descending'>Decrescente</option>
 					</select>
 				</div>
-				<div>
+				<div class='optionsContainers'>
 					<label for='itemsPerPage'>Itens por Página</label>
 					<select name='itemsPerPage' id='itemsPerPage'>
 						<option value='10'>10</option>
@@ -46,10 +52,10 @@ require_once 'src/views/partials/navbar.php';
 						<option value='100'>100</option>
 					</select>
 				</div>
-				<input submit' value='Pesquisar'>
+				<input class="button" type='submit' value='Pesquisar'>
 			</form>
 		</div>
-		<table>
+		<table class='tableList'>
 			<thead>
 				<tr>
 					<th>Numero da Mesa</th>
