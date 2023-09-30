@@ -34,26 +34,23 @@ class Controller
 		$pwd = $_POST['password'];
 
 		if (!$this->check_email($email)) {
-			echo json_encode([
-				'success' => false,
-				'field' => 'email',
-				'message' => 'Email does not exist!'
-			]);
+			$response = json_encode(['field' => 'email']);
+			header('HX-Trigger: {"onerror": ' . $response . '}');
+			echo "Email não existe!";
 			exit(0);
 		}
 
 		if (!$this->check_password($pwd, $email)) {
-			echo json_encode([
-				'success' => false,
-				'field' => 'password',
-				'message' => 'Wrong password!'
-			]);
+			$response = json_encode(['field' => 'password']);
+			header('HX-Trigger: {"onerror": ' . $response . '}');
+			echo "Senha errada!";
 			exit(0);
 		}
 
 		$auth_token = $this->log_user($pwd, $email);
 
-		echo json_encode(['success' => true, 'token' => $auth_token]);
+		$response = json_encode(['success' => true, 'token' => $auth_token]);
+		header('HX-Trigger: {"login": ' . $response . '}');
 		exit(0);
 	}
 

@@ -15,10 +15,27 @@ require_once 'src/views/partials/navbar.php'
 	<?= \Tags\navbar($is_logged, $this->path) ?>
 	<main id='authContainer'>
 		<h1>Login</h1>
-		<p id='loginError'>Vazio</p>
-		<form id='form' onsubmit='login(); return false'>
-			<input class='inputField' type='email' name='email' placeholder='Type your email' required />
-			<input class='inputField' type='password' name='password' placeholder='Type your password' required />
+
+		<p id='loginError'></p>
+
+		<form id='form'
+			hx-post='/login' hx-trigger='submit'
+			hx-target='#loginError' hx-swap='innerHTML'
+		>
+			<input class='inputField'
+				type='email'
+				name='email'
+				placeholder='Type your email'
+				required
+			/>
+
+			<input class='inputField'
+				type='password'
+				name='password'
+				placeholder='Type your password'
+				required
+			/>
+
 			<input id='submitButton' type='submit' value='Authenticate' />
 		</form>
 	</main>

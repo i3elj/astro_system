@@ -18,18 +18,15 @@ h1 {
 
 #loginError {
 	text-align: center;
-	color: rgba(0, 0, 0, 0);
 	transform: translateY(-20px);
+	min-height: 21px;
 }
 
-form {
+#form {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
 }
-
-/* #000000 */
-/* #d0d0d0 */
 
 .inputField,
 #submitButton {
@@ -121,5 +118,5 @@ label[for='tos'] {
 }
 
 .fieldError {
-	border: 1px solid #e38585 !important;
+	outline: 1px solid #e38585 !important;
 }
