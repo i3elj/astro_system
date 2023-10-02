@@ -27,28 +27,27 @@ class Controller extends Model
 	 */
 	private function signup()
 	{
-		$cpf = $_POST['cpf'];
-		$nickname = $_POST['nickname'];
-		$real_name = $_POST['realname'];
-		$email = $_POST['email'];
-		$phone_number = $_POST['phonenumber'];
-		$pwd = $_POST['password'];
+		$cpf = POST('cpf');
+		$nickname = POST('nickname');
+		$real_name = POST('realname');
+		$email = POST('email');
+		$phone_number = POST('phonenumber');
+		$pwd = POST('password');
 
 		if ($this->user_exist($cpf)) {
-			echo json_encode([
-				'success' => false,
-				'field' => 'cpf',
-				'message' => 'cpf is already registered'
-			]);
+			$response = json_encode(['field' => 'cpf']);
+			header('HX-Trigger: {"onerror": ' . $response . '}');
+			echo 'O CPF informado já está cadastrado';
 			exit(0);
 		}
 
 		$date = date('m/d/Y h:i:s a', time());
-		$token = password_hash($cpf . $date, PASSWORD_ARGON2I);
+		$auth_token = password_hash($cpf . $date, PASSWORD_ARGON2I);
 		$pwd = password_hash($pwd . $email, PASSWORD_ARGON2I);
-		$this->register([$cpf, $nickname, $real_name, $email, $pwd, $token, $phone_number]);
+		$this->register([$cpf, $nickname, $real_name, $email, $pwd, $auth_token, $phone_number]);
 
-		echo json_encode(['success' => true, 'token' => $token]);
+		$response = json_encode(['token' => $auth_token]);
+		header('HX-Trigger: {"signup": ' . $response . '}');
 		exit(0);
 	}
 

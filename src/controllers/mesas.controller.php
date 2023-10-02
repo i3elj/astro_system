@@ -34,12 +34,15 @@ class Controller extends Model
         $token = $_COOKIE['authToken'] ?? null;
         $is_logged = $this->is_authenticated($token);
 
-        if ($is_logged) header('location: /login');
+        if (!$is_logged) {
+            header('location: /login');
+            exit(0);
+        }
 
-        $keywords = htmlspecialchars($_GET['keywords'] ?? '');
-        $sortBy = htmlspecialchars($_GET['sortBy'] ?? 'number');
-        $orderType = htmlspecialchars($_GET['orderType'] ?? 'ascending');
-        $itemsPerPage = htmlspecialchars($_GET['itemsPerPage'] ?? 10);
+        $keywords     = POST('keywords')     ?? '';
+        $sortBy       = POST('sortBy')       ?? 'number';
+        $orderType    = POST('orderType')    ?? 'ascending';
+        $itemsPerPage = POST('itemsPerPage') ?? 10;
 
         $table_list = $this->get_table_list(
             $keywords,

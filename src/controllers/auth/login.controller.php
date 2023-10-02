@@ -30,8 +30,8 @@ class Controller
 	 */
 	private function login()
 	{
-		$email = $_POST['email'];
-		$pwd = $_POST['password'];
+		$email = POST('email');
+		$pwd = POST('password');
 
 		if (!$this->check_email($email)) {
 			$response = json_encode(['field' => 'email']);
