@@ -15,8 +15,13 @@ require_once 'src/views/partials/navbar.php'
 	<?= \Tags\navbar(false, $this->path) ?>
 	<div id='authContainer'>
 		<h1>Sign Up</h1>
-		<p id='loginError'>Vazio</p>
-		<form id='form' method='POST' onsubmit='signup(); return false'>
+
+		<p id='loginError'></p>
+
+		<form id='form'
+			hx-post='/signup' hx-trigger='submit'
+			hx-target='#loginError' hx-swap='innerHTML'
+		>
 			<input
 				class='inputField'
 				type='text'
@@ -24,6 +29,7 @@ require_once 'src/views/partials/navbar.php'
 				placeholder='Choose a nickname'
 				required
 			/>
+
 			<input
 				class='inputField'
 				type='text'
@@ -31,6 +37,7 @@ require_once 'src/views/partials/navbar.php'
 				placeholder='Real (full) name'
 				required
 			/>
+
 			<div class='row'>
 				<input
 					class='inputField'
@@ -42,6 +49,7 @@ require_once 'src/views/partials/navbar.php'
 					onfocus='this.select()'
 					required
 				/>
+
 				<input
 					class='inputField'
 					type='tel'
@@ -52,6 +60,7 @@ require_once 'src/views/partials/navbar.php'
 					required
 				/>
 			</div>
+
 			<div class='row'>
 				<input
 					class='inputField'
@@ -60,6 +69,7 @@ require_once 'src/views/partials/navbar.php'
 					placeholder='Type your email'
 					required
 				/>
+
 				<input
 					class='inputField'
 					type='email'
@@ -67,6 +77,7 @@ require_once 'src/views/partials/navbar.php'
 					required
 				/>
 			</div>
+
 			<div class='row'>
 				<input
 					class='inputField'
@@ -75,6 +86,7 @@ require_once 'src/views/partials/navbar.php'
 					placeholder='Type your password'
 					required
 				/>
+
 				<input
 					class='inputField'
 					type='password'
