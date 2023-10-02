@@ -1,2 +1,2 @@
 #!/bin/env bash
-php -S localhost:3000
+php -S localhost:3000 index.php
