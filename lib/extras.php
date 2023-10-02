@@ -12,6 +12,11 @@ function logger(...$values)
 	}
 }
 
+function POST(string $varname)
+{
+	return htmlspecialchars($_POST[$varname]);
+}
+
 /**
  * Dump and die. Sends variables to the client and kills the connection.
  *
