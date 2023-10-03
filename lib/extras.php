@@ -8,13 +8,43 @@
 function logger(...$values)
 {
 	foreach ($values as $key => $value) {
-		error_log('\t\tLOGGER:: $key: $value', 4);
+		error_log("\t\tLOGGER:: $key: $value", 4);
 	}
 }
 
-function POST(string $varname)
+/**
+ * Does the same thing as $_POST, but with htmlspecialchars wrapped around it
+ *
+ * @param string $varname The name of the variable comming through a post
+ * request.
+ */
+function POST($varname)
 {
 	return htmlspecialchars($_POST[$varname]);
+}
+
+/**
+ * Return the current filetype given a string with an extension ending like
+ * `.css` or `.js`
+ */
+function get_current_filetype(string $path, string $filetypes): string
+{
+	preg_match("/$filetypes/", $path, $matches);
+	return match ($matches[1]) {
+		"js" => "javascript",
+		default => $matches[1],
+	};
+}
+
+/**
+ * Return a regular expression string containing all possible filetypes under
+ * `(file_type1|file_type2|file_type3...)`
+ *
+ * @param array $file_types Array containing every file type
+ */
+function get_filetype_regex(...$file_types)
+{
+	return "\.(" . join('|', $file_types) . ")";
 }
 
 /**

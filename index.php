@@ -7,6 +7,15 @@ require_once 'src/controllers/import.php';
 $parsed_uri = parse_url($_SERVER['REQUEST_URI']);
 $path = $parsed_uri['path'];
 
+$file_types = get_filetype_regex('css', 'js', 'png');
+$static_routes = [
+	"routes" => [
+		"/\/src\/views\/\w*\/\w+$file_types/",
+		"/\/public\/.*$file_types/",
+	],
+	"filetype_regex" => $file_types,
+];
+
 $api_routes = [
 	['path' => '/api/mesa', 'controller' => '\Mesas\Api'],
 	['path' => '/api/cardapio/item', 'controller' => '\Cardapio\Api'],
@@ -22,4 +31,4 @@ $routes = [
 	['path' => '/login', 'controller' => '\Login\Controller'],
 ];
 
-create_router($routes, $api_routes, $path);
+create_router($routes, $api_routes, $path, $static_routes, $file_types);
