@@ -8,7 +8,7 @@ require_once 'src/views/partials/navbar.php'
 
 <?= \Tags\head(
 	title: 'Astro System',
-	styles: ['/src/views/home/home.style.css']
+	styles: ['/src/views/home/home.css']
 ) ?>
 
 <body>
@@ -23,6 +23,6 @@ require_once 'src/views/partials/navbar.php'
 	</main>
 </body>
 
-<script type='text/javascript' src='/src/views/home/home.js'></script>
+<!-- <script type='text/javascript' src='/src/views/home/home.js'></script> -->
 
 </html>

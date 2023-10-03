@@ -8,7 +8,7 @@ require_once 'src/views/partials/navbar.php'
 
 <?= \Tags\head(
 	title: 'Astro System - Dashboard',
-	styles: ['/src/views/dashboard/dashboard.style.css']
+	styles: ['/src/views/dashboard/dashboard.css']
 ) ?>
 
 <body>

@@ -10,7 +10,7 @@ require_once 'src/views/partials/navbar.php';
 <?= \Tags\head(
 	title: 'Astro System - New Cardapio',
 	styles: [
-		'/src/views/cardapio/new/new.style.css',
+		'/src/views/cardapio/new/new.css',
 		'/src/views/partials/header.css',
 	]
 ) ?>

@@ -9,7 +9,7 @@ require_once 'src/views/partials/navbar.php';
 <?= \Tags\head(
 	title: 'Astro System - Mesas',
 	styles: [
-		'/src/views/mesas/mesas.style.css',
+		'/src/views/mesas/mesas.css',
 		'/src/views/partials/header.css',
 	]
 ) ?>

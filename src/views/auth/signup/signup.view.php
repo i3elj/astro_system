@@ -8,7 +8,7 @@ require_once 'src/views/partials/navbar.php'
 
 <?= \Tags\head(
 	title: 'Astro System - SignUp',
-	styles: ['/src/views/auth/auth.style.css']
+	styles: ['/src/views/auth/auth.css']
 ) ?>
 
 <body>

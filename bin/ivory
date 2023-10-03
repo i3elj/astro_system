@@ -113,7 +113,7 @@ class Ivory
 
 	<?= \Tags\head(
 		title: 'Astro System - $RouteName',
-		styles: ['/src/views/$routename/$routename.style.css']
+		styles: ['/src/views/$routename/$routename.css']
 	) ?>
 
 	<body>
@@ -128,7 +128,7 @@ class Ivory
 					fwrite($file, $content);
 					fclose($file);
 
-					$file = fopen("./src/views/$routename/$routename.style.css", "w");
+					$file = fopen("./src/views/$routename/$routename.css", "w");
 					fclose($file);
 
 					$file = fopen("./src/views/$routename/$routename.js", "w");
