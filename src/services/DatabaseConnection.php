@@ -6,7 +6,6 @@ use \PDO;
 
 trait Connection
 {
-
 	/**
 	 * Connects to a database
 	 *

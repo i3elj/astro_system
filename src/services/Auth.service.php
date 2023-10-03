@@ -74,11 +74,7 @@ trait Auth
 		);
 
 		$user_data = $rows[0];
-		$new_auth_token = $this->update_auth_token($user_data['cpf']);
-
-		return $this->check_password($pwd, $email)
-			? $new_auth_token
-			: 'Wrong Password!';
+		return $this->update_auth_token($user_data['cpf']);
 	}
 
 	/**
