@@ -61,15 +61,7 @@ class PostgresMigrations
 		];
 
 		foreach ($tables as $table_name => $table) {
-			$stmt = $this->connect()->prepare($table);
-			$succeeded = $stmt->execute();
-
-			if (!$succeeded) {
-				printf("Prepare statement error: " . $stmt);
-				$stmt = null;
-				exit(1);
-			}
-
+			$this->query($table);
 			printf("GENERATING $table_name TABLE...\n");
 		}
 	}
