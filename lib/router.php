@@ -43,15 +43,23 @@ function create_router($routes, $api_routes, $path, $static_routes)
 	}
 
 	if ($path == '/') {
-		header("location: /home");
+		$controller = new $routes[0]['controller']($path);
+		$controller->Handler();
 		exit(0);
 	}
 
 	$contains_api = strpos($path, 'api/') !== false;
 	$call_handler = function ($route, $path) {
+		if (is_array($route['path'])) {
+			foreach ($route['path'] as $possible_path)
+				if ($possible_path == $path) {
+					$controller = new $route['controller']($path);
+					$controller->Handler();
+				}
+		}
 		if ($route['path'] == $path) {
-			$view = new $route['controller']($path);
-			$view->Handler();
+			$controller = new $route['controller']($path);
+			$controller->Handler();
 		}
 	};
 

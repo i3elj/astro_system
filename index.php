@@ -22,7 +22,7 @@ $api_routes = [
 ];
 
 $routes = [
-	['path' => '/home', 'controller' => '\Home\Controller'],
+	['path' => ['/', '/home'], 'controller' => '\Home\Controller'],
 	['path' => '/mesas', 'controller' => '\Mesas\Controller'],
 	['path' => '/cardapio', 'controller' => '\Cardapio\Controller'],
 	['path' => '/cardapio/new', 'controller' => '\Cardapio\New\Controller'],
