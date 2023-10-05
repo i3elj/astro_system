@@ -10,7 +10,7 @@ $path = $parsed_uri['path'];
 $file_types = get_filetype_regex('css', 'js', 'png');
 $static_routes = [
 	"routes" => [
-		"/\/src\/views\/\w*\/\w+$file_types/",
+		"/\/src\/views\/.*$file_types/",
 		"/\/public\/.*$file_types/",
 	],
 	"filetype_regex" => $file_types,
