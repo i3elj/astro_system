@@ -28,15 +28,12 @@ function create_router($routes, $api_routes, $path, $static_routes)
 	$static_routes = $static_routes["routes"];
 
 	foreach ($static_routes as $route) {
-		$file_path = preg_grep($route, explode("\n", $path));
+		$file_path = preg_grep($route, explode("\n", $path))[0] ?: false;
 
 		if ($file_path) {
-			$file = file_get_contents(".$file_path[0]");
-
-			if (!$file) bad_request();
-
-			$current_ft = get_current_filetype($file_path[0], $filetype_regex);
-			header("content-type: text/$current_ft");
+			$file = file_get_contents(".$file_path") ?: _404();
+			$content_type = get_content_type($file_path, $filetype_regex);
+			header("content-type: $content_type");
 			echo $file;
 			exit(0);
 		}
@@ -57,6 +54,7 @@ function create_router($routes, $api_routes, $path, $static_routes)
 					$controller->Handler();
 				}
 		}
+
 		if ($route['path'] == $path) {
 			$controller = new $route['controller']($path);
 			$controller->Handler();

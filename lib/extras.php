@@ -27,11 +27,12 @@ function POST($varname)
  * Return the current filetype given a string with an extension ending like
  * `.css` or `.js`
  */
-function get_current_filetype(string $path, string $filetypes): string
+function get_content_type(string $path, string $filetypes): string
 {
 	preg_match("/$filetypes/", $path, $matches);
 	return match ($matches[1]) {
-		"js" => "javascript",
+		"js" => "text/javascript",
+		"css" => "text/css",
 		default => $matches[1],
 	};
 }
