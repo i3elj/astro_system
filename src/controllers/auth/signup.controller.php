@@ -6,7 +6,7 @@ require_once 'src/model/auth/signup.model.php';
 
 class Controller extends Model
 {
-	public function __construct(private string $path = '/\/signup/')
+	public function __construct(private string $path = '/signup')
 	{
 	}
 

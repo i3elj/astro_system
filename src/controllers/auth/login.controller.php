@@ -8,7 +8,7 @@ class Controller
 {
 	use \Services\Auth;
 
-	public function __construct(private string $path = '/\/login/')
+	public function __construct(private string $path = '/login')
 	{
 	}
 
@@ -21,7 +21,7 @@ class Controller
 		match ($_SERVER['REQUEST_METHOD']) {
 			'GET' => $this->build_view(),
 			'POST' => $this->login(),
-			default => bad_request()
+			default => _400(),
 		};
 	}
 

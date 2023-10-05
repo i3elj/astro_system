@@ -9,7 +9,7 @@ class Controller extends Model
 {
     use \Services\Auth;
 
-    public function __construct(private string $path = '/\/cardapio/')
+    public function __construct(private string $path = '/cardapio')
     {
     }
 
