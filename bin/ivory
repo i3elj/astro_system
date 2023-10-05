@@ -77,11 +77,10 @@ class Ivory
 		 */
 	    public function Handler(): void
 	    {
-	        if (\$_SERVER['REQUEST_METHOD'] == 'GET') {
-	            this->build_view();
-	        }
-
-	         bad_request();
+	        match (\$_SERVER['REQUEST_METHOD']) {
+	            'GET' => \$this->build_view(),
+	            default => _400(),
+	        };
 	    }
 
 		/**
