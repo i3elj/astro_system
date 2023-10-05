@@ -68,5 +68,5 @@ function create_router($routes, $api_routes, $path, $static_routes)
 	else
 		foreach ($routes as $route) $call_handler($route, $path);
 
-	notfound();
+	page_notfound();
 }

@@ -79,17 +79,28 @@ function require_script(string $file, string $args = '')
 /**
  * Returns a basic page with 404 'not found' status code.
  */
-function notfound()
+function page_notfound()
 {
 	http_response_code(404);
 	include 'src/views/notfound.html';
 	exit(0);
 }
 
+
+/**
+ * Returns a 404 'not found' status code.
+ */
+function _404()
+{
+	http_response_code(404);
+	logger("AAAAAAAAAAAAAAAAAA");
+	exit(0);
+}
+
 /**
  * Returns a 400 'bad request' status code.
  */
-function bad_request()
+function _400()
 {
 	http_response_code(400);
 	exit(0);

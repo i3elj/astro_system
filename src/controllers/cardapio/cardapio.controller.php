@@ -21,7 +21,7 @@ class Controller extends Model
     {
         match ($_SERVER['REQUEST_METHOD']) {
             'GET' => $this->build_view(),
-            default => bad_request(),
+            default => _400(),
         };
     }
 

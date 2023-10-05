@@ -18,7 +18,8 @@ class Controller extends Model
 	{
 		match ($_SERVER['REQUEST_METHOD']) {
 			'GET' => $this->build_view(),
-			'POST' => $this->signup()
+			'POST' => $this->signup(),
+			default => _400(),
 		};
 	}
 
