@@ -94,7 +94,6 @@ function page_notfound()
 function _404()
 {
 	http_response_code(404);
-	logger("AAAAAAAAAAAAAAAAAA");
 	exit(0);
 }
 
