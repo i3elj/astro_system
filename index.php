@@ -6,12 +6,12 @@ require_once 'src/controllers/import.php';
 
 $parsed_uri = parse_url($_SERVER['REQUEST_URI']);
 $path = $parsed_uri['path'];
-
 $file_types = get_filetype_regex('css', 'js', 'png');
+
 $static_routes = [
 	"routes" => [
-		"/\/src\/views\/.*$file_types/",
-		"/\/public\/.*$file_types/",
+		"/\/src\/views\/.*$file_types$/",
+		"/\/public\/.*$file_types$/",
 	],
 	"filetype_regex" => $file_types,
 ];
