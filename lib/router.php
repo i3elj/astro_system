@@ -27,22 +27,18 @@ function create_router($routes, $api_routes, $path, $static_routes)
 	$filetype_regex = $static_routes["filetype_regex"];
 	$static_routes = $static_routes["routes"];
 
-	foreach ($static_routes as $route) {
-		$file_path = preg_grep($route, explode("\n", $path))[0] ?: false;
+	if (str_contains($path, "/public") or str_contains($path, "/src/views")) {
+		foreach ($static_routes as $route) {
+			$file_path = preg_grep($route, explode("\n", $path))[0] ?: false;
 
-		if ($file_path) {
-			$file = file_get_contents(".$file_path") ?: _404();
-			$content_type = get_content_type($file_path, $filetype_regex);
-			header("content-type: $content_type");
-			echo $file;
-			exit(0);
+			if ($file_path) {
+				$file = file_get_contents(".$file_path") ?: _404();
+				$content_type = get_content_type($file_path, $filetype_regex);
+				header("content-type: $content_type");
+				echo $file;
+				exit(0);
+			}
 		}
-	}
-
-	if ($path == '/') {
-		$controller = new $routes[0]['controller']($path);
-		$controller->Handler();
-		exit(0);
 	}
 
 	$contains_api = strpos($path, 'api/') !== false;
