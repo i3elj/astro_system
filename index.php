@@ -21,7 +21,6 @@ $api_routes = [
 	['path' => '/api/cardapio/item', 'controller' => '\Cardapio\Api'],
 ];
 
-
 $routes = [
 	['path' => ['/', '/home'],  'controller' => '\Home\Controller'],
 	['path' => '/mesas',        'controller' => '\Mesas\Controller'],
