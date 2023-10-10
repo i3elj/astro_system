@@ -5,7 +5,7 @@ require_once 'lib/extras.php';
 
 class SQLiteMigrations
 {
-	use \Services\Database\Connection;
+	use \Services\DatabaseConnection;
 
 	public function InitDatabase()
 	{

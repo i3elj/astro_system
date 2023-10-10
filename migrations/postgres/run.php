@@ -5,7 +5,7 @@ require_once 'lib/extras.php';
 
 class PostgresMigrations
 {
-	use \Services\Database\Connection;
+	use \Services\DatabaseConnection;
 
 	public function InitDatabase()
 	{
@@ -61,7 +61,7 @@ class PostgresMigrations
 		];
 
 		foreach ($tables as $table_name => $table) {
-			$this->query($table);
+			\Services\DatabaseConnection::query($table);
 			printf("GENERATING $table_name TABLE...\n");
 		}
 	}

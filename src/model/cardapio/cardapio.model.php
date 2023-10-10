@@ -6,7 +6,7 @@ require_once 'src/services/DatabaseConnection.php';
 
 class Model
 {
-	use \Services\Database\Connection;
+	use \Services\DatabaseConnection;
 
 	/**
 	 * Get the Current User menu
@@ -16,7 +16,7 @@ class Model
 	 */
 	protected function get_menu($cpf)
 	{
-		$rows = $this->query_return(
+		$rows = \Services\DatabaseConnection::query_return(
 			'SELECT name, cost, ingredients FROM dishes WHERE fk_user = ?',
 			[$cpf]
 		);

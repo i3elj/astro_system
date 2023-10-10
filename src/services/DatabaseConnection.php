@@ -1,29 +1,29 @@
 <?php
 
-namespace Services\Database;
+namespace Services;
 
 use \PDO;
 
-trait Connection
+trait DatabaseConnection
 {
 	/**
 	 * Connects to a database
 	 *
 	 * @return PDO | PDOException
 	 */
-	protected function connect()
+	static private function connect()
 	{
 		$ENV = parse_ini_file('.env');
 
 		$DB = $ENV['DB'];
 		return match ($DB) {
-			"postgres" => $this->pgsql_connect($ENV),
-			"sqlite" => $this->sqlite_connect(),
+			"postgres" => Connection::pgsql_connect($ENV),
+			"sqlite" => Connection::sqlite_connect(),
 			default => null,
 		};
 	}
 
-	private function pgsql_connect($ENV)
+	static private function pgsql_connect($ENV)
 	{
 		$HOST = $ENV['DB_HOST'];
 		$PORT = $ENV['DB_PORT'];
@@ -40,7 +40,7 @@ trait Connection
 		return $pdo;
 	}
 
-	private function sqlite_connect()
+	static private function sqlite_connect()
 	{
 		$pdo = new \PDO("sqlite:database.sql");
 		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
@@ -56,9 +56,9 @@ trait Connection
 	 * @param array $values All the values the query needs
 	 * @return void
 	 */
-	protected function query($query_string, $values = [])
+	static protected function query($query_string, $values = [])
 	{
-		$stmt = $this->connect()->prepare($query_string);
+		$stmt = Connection::connect()->prepare($query_string);
 
 		$succeeded = $stmt->execute($values);
 
@@ -76,9 +76,9 @@ trait Connection
 	 * @param array $values All the values the query needs
 	 * @return array
 	 */
-	protected function query_return($query_string, $values = [])
+	static protected function query_return($query_string, $values = [])
 	{
-		$stmt = $this->connect()->prepare($query_string);
+		$stmt = Connection::connect()->prepare($query_string);
 
 		$succeeded = $stmt->execute($values);
 

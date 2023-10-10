@@ -49,7 +49,7 @@ class Ivory
 
 	class Model
 	{
-		use \Services\Database\Connection;
+		use \Services\DatabaseConnection;
 	}
 	";
 					fwrite($file, $content);

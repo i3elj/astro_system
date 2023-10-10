@@ -6,7 +6,7 @@ require_once 'src/services/DatabaseConnection.php';
 
 class Model
 {
-	use \Services\Database\Connection;
+	use \Services\DatabaseConnection;
 
 	/**
 	 * Check if the provided user exists or not, based on it's unique id.
@@ -16,7 +16,7 @@ class Model
 	 */
 	protected function user_exist($cpf)
 	{
-		$rows = $this->query_return(
+		$rows = \Services\DatabaseConnection::query_return(
 			'SELECT 1 FROM users WHERE cpf = ?;',
 			[$cpf]
 		);
@@ -36,7 +36,7 @@ class Model
 	 */
 	protected function register($user)
 	{
-		$this->query(
+		\Services\DatabaseConnection::query(
 			"INSERT INTO users(
 				cpf, nickname,
 				real_name, email,
