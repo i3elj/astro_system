@@ -1,9 +1,8 @@
 <?php
-
 require_once 'src/views/partials/head.php';
 require_once 'src/views/partials/navbar.php';
-
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,71 +21,77 @@ require_once 'src/views/partials/navbar.php';
 		<div class='header'>
 			<h1>Cardápio - <span>Adicionar Item</span></h1>
 		</div>
-		<div class='addItems'>
-			<a href="/cardapio" class="goBack">
+		<div id='main_container' class='container20'>
+			<a href='/cardapio' id='go_back'>
 				<?= \Icons\LeftArrow() ?>
 				Voltar
 			</a>
-			<div id='mainContent'>
-				<div id='newItemInfoContainer' class='newItemContainer'>
-					<div class='inputFieldWrapper'>
+			<div id='content_wrapper'>
+				<div id='new_item_container' class='flex'>
+					<div class='input_field_wrapper'>
 						<label>Nome do Item</label>
-						<input class='input inputFieldWrapper_input' type='text' name=''>
+						<input
+							class='input new_item_input'
+							type='text'
+							name=''
+						/>
 					</div>
-					<div class='inputFieldWrapper'>
+					<div class='input_field_wrapper'>
 						<label>Descrição</label>
-						<textarea class='input inputFieldWrapper_input'></textarea>
+						<textarea id='item_description' class='input'></textarea>
 					</div>
-					<button class='button inputFieldWrapper_input'>Adicionar Item</button>
+					<button class='button new_item_input'>
+						Salvar</button>
 				</div>
 
-				<div class='newItemContainer'>
+				<div id='ingredients_container' class='flex'>
 					<h2>Ingredientes</h2>
-					<div id='ingredientsTable' class='tableBorder'>
-						<div class='tableRow columnsName'>
-							<div class='tableCell'>
-								<p>Nome</p>
-							</div>
-							<div class='tableCell'>
-								<p>Quantidade</p>
-							</div>
-							<div class='tableCell'>
-								<p>Preço</p>
-							</div>
-							<div class='tableCell'>
-								<p>Opções</p>
-							</div>
+					<div id='ingredients_table' class='table_border'>
+						<div class='table_row columns_name'>
+							<div class='table_cell'><p>Nome</p></div>
+							<div class='table_cell'><p>Quantidade</p></div>
+							<div class='table_cell'><p>Preço</p></div>
+							<div class='table_cell'><p>Opções</p></div>
 						</div>
 
-						<div class='tableRow itemRow'>
-							<div class='tableCell'>
-								<p class="nameValue">Arroz</p>
-							</div>
-							<div class='tableCell'>
-								<p class="amountValue">1kg</p>
-							</div>
-							<div class='tableCell'>
-								<p>R$ </p>
-								<p class="priceValue">5.00</p>
-							</div>
-							<div class='tableCell'>
-								<button class='button' onclick="requestEdition(0)">Editar</button>
-								<button class='button'>Excluir</button>
-							</div>
+						<div class='table_row item_row'>
+							<div class='table_cell'>
+								<input class='name_value' value='Arroz'/></div>
+							<div class='table_cell'>
+								<input class='amount_value' value='1kg'/></div>
+							<div class='table_cell'>
+								<input class='price_value' value='5.00'/></div>
+							<div class='table_cell'>
+								<button class='button'>Excluir</button></div>
 						</div>
+					</div>
 
-					</div>
-					<div id='addInputWrapper' class='inputWrapper'>
-						<input class='input' type="text" name="name" placeholder='Ex: Arroz' />
-						<input class='input' type="text" name="amount" placeholder='Ex: 500ml' />
-						<input class='input' type="number" min="0" step=".01" name="price" placeholder='Ex: 15,00' />
-						<button class="button" onclick="addItem()">Adicionar</button>
-					</div>
-					<div disabled id='editInputWrapper' class='inputWrapper' style="display: none">
-						<input class='input' type="text" name="name" placeholder='Ex: Arroz' />
-						<input class='input' type="text" name="amount" placeholder='Ex: 500ml' />
-						<input class='input' type="number" min="0" step=".01" name="price" placeholder='Ex: 15,00' />
-						<button class="button saveButton">Salvar</button>
+					<div id='add_input_wrapper' class='input_wrapper'
+						hx-post='/api/cardapio/new' hx-trigger='submit'
+						hx-target='#ingredients_table' hx-swap='beforeend'
+					>
+						<input
+							class='input'
+							type='text'
+							name='name'
+							placeholder='Ex: Arroz'
+						/>
+						<input
+							class='input'
+							type='text'
+							name='amount'
+							placeholder='Ex: 500ml'
+						/>
+						<input
+							class='input'
+							type='number'
+							min='0'
+							step='.01'
+							name='price'
+							placeholder='Ex: 15,00'
+						/>
+						<button class='button add_button'
+							onclick='addItem()'>Adicionar</button>
 					</div>
 				</div>
 			</div>

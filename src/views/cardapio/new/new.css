@@ -9,25 +9,23 @@ h1 {
 	gap: 10px;
 }
 
-.addItems {
+#main_container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	flex: 1 0 0;
 	align-self: stretch;
 
 	border: 1px solid #8E8E8E;
 	background: white;
 }
 
-.goBack svg path,
-.goBack {
+#go_back {
 	display: flex;
 	flex-direction: row;
 	place-items: center;
+	align-self: stretch;
 	gap: 10px;
-	position: absolute;
 	top: 14rem;
 	left: 4rem;
 	font-size: 22px;
@@ -35,28 +33,52 @@ h1 {
 	transition: 200ms;
 }
 
-.goBack:hover svg path,
-.goBack:hover {
+.go-back:hover svg path,
+.go-back:hover {
 	color: #70bcff !important;
 	fill: #70bcff;
 	stroke: #70bcff;
 	transition: 200ms;
 }
 
-#mainContent {
+#content_wrapper {
 	display: flex;
-	place-content: center;
-	place-items: center;
+	justify-content: space-evenly;
+	align-items: center;
 	width: 100%;
-	padding: 44px;
-	gap: 110px;
 }
 
-#newItemInfoContainer {
+#new_item_container {
+	display: flex;
+	flex-direction: column;
 	gap: 38px;
 }
 
-.newItemContainer {
+.input_field_wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+}
+
+.new_item_input {
+	padding: 6px 20px;
+	width: 100%;
+	resize: vertical;
+}
+
+#item_description::-webkit-scrollbar {
+	display: none;
+}
+
+#item_description {
+	height: 200px;
+	padding: 10px;
+}
+
+#ingredients_container {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -64,7 +86,7 @@ h1 {
 	width: 640px;
 }
 
-.newItemContainer>h2 {
+#ingredients_container>h2 {
 	color: #000;
 	text-align: center;
 	font-family: Poppins;
@@ -74,40 +96,26 @@ h1 {
 	line-height: normal;
 }
 
-.inputFieldWrapper {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	width: 100%;
+#ingredients_table::-webkit-scrollbar {
+	display: none;
 }
 
-.inputFieldWrapper_input {
-	padding: 6px 20px;
-	width: 100%;
-	resize: vertical;
-}
-
-.inputFieldWrapper>textarea {
-	height: 200px;
-}
-
-#ingredientsTable {
+#ingredients_table {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	height: 32rem;
+	width: 100%;
 	overflow-y: scroll;
 }
 
-#ingredientsTable,
-.tableRow,
-.tableCell {
+#ingredients_table,
+.table_row,
+.table_cell {
 	outline: 1px solid #8E8E8E;
 }
 
-.tableRow {
+.table_row {
 	display: flex;
 	align-self: stretch;
 
@@ -115,7 +123,7 @@ h1 {
 }
 
 
-.tableCell {
+.table_cell {
 	display: flex;
 	flex-direction: row;
 	place-content: center;
@@ -125,30 +133,33 @@ h1 {
 	background-color: #FAFAFA;
 }
 
-.tableCell:nth-child(1) {
-	width: 13rem;
+.table_cell>input {
+	text-align: center;
+	border: none;
+	background: none;
+	width: 100%;
+	padding: 4px 12px;
+}
+
+.table_cell:nth-child(1) {
+	flex: 1;
 	place-content: start;
 }
 
-.tableCell:nth-child(2) {
-	width: 9rem;
-}
-
-.tableCell:nth-child(3) {
-	width: 5.5rem;
-	place-content: space-between;
-}
-
-.tableCell:nth-child(4) {
+.table_cell:nth-child(2) {
 	flex: 1;
 }
 
-.tableCell:last-child {
-	gap: 4px;
+.table_cell:nth-child(3) {
+	flex: 1;
+	place-content: space-between;
 }
 
-.tableCell>p,
-.tableCell>span {
+.table_cell:nth-child(4) {
+	flex: 1;
+}
+
+.table_cell>p {
 	color: #2B2B2B;
 	text-align: center;
 	font-family: Poppins;
@@ -156,29 +167,30 @@ h1 {
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
+	width: 100%;
 
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 }
 
-.columnsName {
+.columns_name {
 	display: flex;
 
 	background: linear-gradient(180deg, #FFF 0%, #F2F2F2 100%);
 }
 
-.columnsName>.tableCell {
+.columns_name>.table_cell {
 	outline: none;
 	background: none;
 }
 
-.columnsName>.tableCell>p {
+.columns_name>.table_cell>p {
 	font-weight: 500;
 	font-size: 16px;
 }
 
-.inputWrapper {
+.input_wrapper {
 	display: flex;
 	gap: 8px;
 }
