@@ -108,7 +108,17 @@ a {
 	padding-right: 20px;
 }
 
+.m20h {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
 /* FLEX RULES */
+.flex {
+	display: flex;
+	flex-direction: column;
+}
+
 .center {
 	align-items: center;
 }
