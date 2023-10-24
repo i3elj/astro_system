@@ -14,7 +14,7 @@ trait Auth
 	 */
 	protected function check_email($email)
 	{
-		$rows = \Services\DatabaseConnection::query_return(
+		$rows = $this->query_return(
 			'SELECT email FROM users WHERE email = ?;',
 			[$email]
 		);
@@ -31,7 +31,7 @@ trait Auth
 	 */
 	protected function check_password($pwd, $email)
 	{
-		$rows = \Services\DatabaseConnection::query_return(
+		$rows = $this->query_return(
 			'SELECT password FROM users WHERE email = ?;',
 			[$email]
 		);
@@ -50,7 +50,7 @@ trait Auth
 	{
 		if (!isset($token)) return false;
 
-		$rows = \Services\DatabaseConnection::query_return(
+		$rows = $this->query_return(
 			'SELECT auth_token FROM users WHERE auth_token = ?;',
 			[$token]
 		);
@@ -68,7 +68,7 @@ trait Auth
 	 */
 	protected function log_user($pwd, $email)
 	{
-		$rows = \Services\DatabaseConnection::query_return(
+		$rows = $this->query_return(
 			'SELECT cpf FROM users WHERE email = ?;',
 			[$email]
 		);
@@ -88,7 +88,7 @@ trait Auth
 		$date = date('m/d/Y h:i:s a', time());
 		$new_auth_token = password_hash($cpf . $date, PASSWORD_ARGON2I);
 
-		\Services\DatabaseConnection::query(
+		$this->query(
 			'UPDATE users SET auth_token = ? WHERE cpf = ?;',
 			[$new_auth_token, $cpf]
 		);
@@ -104,7 +104,7 @@ trait Auth
 	 */
 	protected function get_user_info($token)
 	{
-		$rows = \Services\DatabaseConnection::query_return(
+		$rows = $this->query_return(
 			'SELECT cpf, nickname, real_name, email,
 				phone_number, permissions, role
 			FROM users

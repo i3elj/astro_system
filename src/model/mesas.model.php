@@ -26,34 +26,34 @@ class Model
 		// TODO: use OFFSET clause to make some type of 'pagination'
 		if ($keywords != null) {
 			$rows = match ($sortBy) {
-				'number' => \Services\DatabaseConnection::query_return(
+				'number' => $this->query_return(
 					'SELECT * from tables WHERE id = ? LIMIT ?',
 					[(int)$keywords, $itemsPerPage]
 				),
-				'description' => \Services\DatabaseConnection::query_return(
+				'description' => $this->query_return(
 					'SELECT * from tables WHERE location = ? LIMIT ?',
 					[$keywords, $itemsPerPage]
 				),
-				'occupied' => \Services\DatabaseConnection::query_return(
+				'occupied' => $this->query_return(
 					'SELECT * from tables WHERE is_occupied = ? LIMIT ?',
 					[$keywords == 'Sim', $itemsPerPage]
 				),
-				'status' => \Services\DatabaseConnection::query_return(
+				'status' => $this->query_return(
 					'SELECT * from tables WHERE status = ? LIMIT ?',
 					[$keywords, $itemsPerPage]
 				),
-				'reserved' => \Services\DatabaseConnection::query_return(
+				'reserved' => $this->query_return(
 					'SELECT * from tables WHERE is_reserved = ? LIMIT ?',
 					[$keywords == 'Sim', $itemsPerPage]
 				),
-				'bill' => \Services\DatabaseConnection::query_return(
+				'bill' => $this->query_return(
 					'SELECT * from tables WHERE bill = ? LIMIT ?',
 					[(float)$keywords, $itemsPerPage]
 				),
 				default => null,
 			};
 		} else {
-			$rows = \Services\DatabaseConnection::query_return(
+			$rows = $this->query_return(
 				'SELECT * from tables LIMIT ?',
 				[$itemsPerPage]
 			);

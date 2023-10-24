@@ -16,7 +16,7 @@ class Model
 	 */
 	protected function user_exist($cpf)
 	{
-		$rows = \Services\DatabaseConnection::query_return(
+		$rows = $this->query_return(
 			'SELECT 1 FROM users WHERE cpf = ?;',
 			[$cpf]
 		);
@@ -36,7 +36,7 @@ class Model
 	 */
 	protected function register($user)
 	{
-		\Services\DatabaseConnection::query(
+		$this->query(
 			"INSERT INTO users(
 				cpf, nickname,
 				real_name, email,

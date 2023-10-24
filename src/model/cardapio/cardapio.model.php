@@ -16,7 +16,7 @@ class Model
 	 */
 	protected function get_menu($cpf)
 	{
-		$rows = \Services\DatabaseConnection::query_return(
+		$rows = $this->query_return(
 			'SELECT name, cost, ingredients FROM dishes WHERE fk_user = ?',
 			[$cpf]
 		);

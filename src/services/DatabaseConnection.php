@@ -11,19 +11,19 @@ trait DatabaseConnection
 	 *
 	 * @return PDO | PDOException
 	 */
-	static private function connect()
+	private function connect()
 	{
 		$ENV = parse_ini_file('.env');
 
 		$DB = $ENV['DB'];
 		return match ($DB) {
-			"postgres" => Connection::pgsql_connect($ENV),
-			"sqlite" => Connection::sqlite_connect(),
+			"postgres" => $this->pgsql_connect($ENV),
+			"sqlite" => $this->sqlite_connect(),
 			default => null,
 		};
 	}
 
-	static private function pgsql_connect($ENV)
+	private function pgsql_connect($ENV)
 	{
 		$HOST = $ENV['DB_HOST'];
 		$PORT = $ENV['DB_PORT'];
@@ -40,7 +40,8 @@ trait DatabaseConnection
 		return $pdo;
 	}
 
-	static private function sqlite_connect()
+
+	private function sqlite_connect()
 	{
 		$pdo = new \PDO("sqlite:database.sql");
 		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
@@ -56,9 +57,10 @@ trait DatabaseConnection
 	 * @param array $values All the values the query needs
 	 * @return void
 	 */
-	static protected function query($query_string, $values = [])
+
+	protected function query($query_string, $values = [])
 	{
-		$stmt = Connection::connect()->prepare($query_string);
+		$stmt = $this->connect()->prepare($query_string);
 
 		$succeeded = $stmt->execute($values);
 
@@ -76,9 +78,9 @@ trait DatabaseConnection
 	 * @param array $values All the values the query needs
 	 * @return array
 	 */
-	static protected function query_return($query_string, $values = [])
+	protected function query_return($query_string, $values = [])
 	{
-		$stmt = Connection::connect()->prepare($query_string);
+		$stmt = $this->connect()->prepare($query_string);
 
 		$succeeded = $stmt->execute($values);
 
