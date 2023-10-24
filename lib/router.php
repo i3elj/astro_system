@@ -15,14 +15,14 @@
  *
  *      - `[ 'path' => '/api/user', 'controller' => 'User', 'method' => 'GET' ]`
  *
- * @param array $static_route It's an array containing two fields, `routes`
+ * @param array $static_routes It's an array containing two fields, `routes`
  * wich holds an array containing the regular expression for each static file
  * route, and the `filetype_regex` field, which holds a regular expression for
  * containing a inclusive pattern matching for each filetype.
- * @param string $path The current path the client are on.
+ * @param string $path The current path the client are on
  * @return void
  */
-function create_router($routes, $api_routes, $path, $static_routes)
+function create_router($routes, $api_routes, $static_routes, $path)
 {
 	$filetype_regex = $static_routes["filetype_regex"];
 	$static_routes = $static_routes["routes"];
@@ -41,7 +41,7 @@ function create_router($routes, $api_routes, $path, $static_routes)
 		}
 	}
 
-	$contains_api = strpos($path, 'api/') !== false;
+	$contains_api = str_contains($path, 'api/');
 	$call_handler = function ($route, $path) {
 		if (is_array($route['path'])) {
 			foreach ($route['path'] as $possible_path)
