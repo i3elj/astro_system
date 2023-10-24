@@ -61,7 +61,7 @@ class PostgresMigrations
 		];
 
 		foreach ($tables as $table_name => $table) {
-			\Services\DatabaseConnection::query($table);
+			$this->query($table);
 			printf("GENERATING $table_name TABLE...\n");
 		}
 	}

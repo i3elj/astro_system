@@ -8,6 +8,7 @@ class Ivory
 		"--path          " => "Path to the new endpoint. Ex: --path=/login",
 		"--create-route  " => "Name of the controller to be in charge of the new endpoint. Ex: --create-route=Login",
 		"--create-service" => "Pass the name of the new service. Ex: --create-service=Navigation",
+		"--create-api    " => "Pass the name of the new api. Ex: --create-api=new",
 	];
 
 	private array $values = [];
@@ -135,7 +136,6 @@ class Ivory
 
 					break;
 
-
 				case '--create-service':
 					$ServiceName = $this->values['--create-service'];
 					$file = fopen("./src/services/$ServiceName.service.php", "w");
@@ -148,6 +148,23 @@ class Ivory
 	}";
 					fwrite($file, $content);
 					fclose($file);
+					break;
+
+				case '--create-api':
+					$routename = $this->camel_to_snake($value);
+
+					$ApiName = $this->values['--create-api'];
+					$file = fopen("./src/apis/$ApiName.api.php", "w");
+					$content = "<?php?>";
+					fwrite($file, $content);
+					fclose($file);
+
+					$file = fopen("./src/apis/import.php", "a");
+					$content = "require_once 'src/apis/$routename.api.php';\n";
+					fwrite($file, $content);
+					fclose($file);
+
+				default:
 			}
 		}
 	}
@@ -164,7 +181,8 @@ class Ivory
 
 	public function help()
 	{
-		if (sizeof($this->argv) == 1 || $this->argv[1] == '--help' || $this->argv[1] == '-h') {
+		if (sizeof($this->argv) == 1 && $this->argv[0] == '--help' ||
+			sizeof($this->argv) == 1 && $this->argv[0] == '-h') {
 			echo "ivory - A helper script to create new endpoints in this project. It's intent is to be used in the root folder:\n";
 
 			foreach ($this->options as $option => $description)
